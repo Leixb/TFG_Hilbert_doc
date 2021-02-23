@@ -3,3 +3,28 @@
 
 \section{Introduction}%
 \label{sec:intro}
+
+In 1900 David Hilbert posed a list of 23 problems in the field of mathematics
+which were unsolved at the time.  This problem consists of two separate
+problems, the first one regarding the relative positions of the branches of real
+algebraic curves and the second one about the upper limit of limit cycles on two
+dimensional vector fields and their relative positions. In this project we are
+going to study the second part of 16th problem.
+
+In particular, we will study the number of limit cycles for vector fields of
+polynomials of second degree in their reduced form:
+
+\begin{align}
+    \frac{dx}{dt} &= x^2 + xy + y^2 + x + y \\
+    \frac{dy}{dt} &= a_2x^2 + b_2xy + c_2y^2 + \alpha_2x + \beta_2y
+\end{align}
+
+There have been various studies on the number of limit cycles for these kinds of
+vector fields but so far the maximum number of cycles found is 4. The aim of
+this project is to search the parameter space for systems that have 4 or more
+cycles to gain more insight on the nature of these equations.
+
+To do so, we'll implement a parallel algorithm that solves ODE systems and
+detects limit cycles for a wide range of parameters and points in the plane.
+This code will be implemented in Julia programming language and will use CUDA
+to be able to run it in the GPUs at the Minotaur cluster from the BSC.

@@ -10,11 +10,13 @@
 % EXTRA PACKAGES / CONFIG
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{fancyhdr}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % METADATA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{High-performance simulation of the 16th Hilbert's problem}
-\author{Aleix Bon\'e}
+\author{Aleix Bon\'e Rib\'o}
 \date{\today}
 
 \begin{document}
@@ -48,6 +50,19 @@
     % Paragraph spacing (placed after ToC)
     \setlength{\parskip}{1em plus 0.5em minus 0.2em}
     %\setlength{\parindent}{0pt}
+
+    \pagestyle{fancy}
+    \fancyhf{}
+
+    \makeatletter
+        \fancyhead[L]{\@title}
+        \fancyfoot[L]{Chapter \thesection}
+        \fancyfoot[C]{\@author}
+        \fancyfoot[R]{\thepage}
+    \makeatother
+
+    \renewcommand{\headrulewidth}{1pt}
+    \renewcommand{\footrulewidth}{0.75pt}
 
     \include{030-intro}
 

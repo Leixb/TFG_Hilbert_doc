@@ -34,16 +34,25 @@ this project we are going to study the second part of this 16th problem.
 
 In particular, we study the number of limit cycles for vector fields of
 polynomials of second degree:
-\begin{align}
-    \frac{dx}{dt} &= a_1x^2 + b_1xy + c_1y^2 + \alpha_1x + \beta_1y \\
+\begin{align}\label{eq:system}
+    \frac{dx}{dt} &= a_1x^2 + b_1xy + c_1y^2 + \alpha_1x + \beta_1y \nonumber \\
     \frac{dy}{dt} &= a_2x^2 + b_2xy + c_2y^2 + \alpha_2x + \beta_2y
 \end{align}
 
+
+\pagebreak
 It is unknown whether there exists an upper limit on the number of limit cycles
 for systems with polynomials of degree greater than
-one\cite{ilyashenko_centennial_2002}.  For a moment, the largest number of limit
-cycles is equal to four and it is an open question if a larger number of limit
-cycles is possible.
+one\cite{ilyashenko_centennial_2002,llibre_16hilbert_nodate}.  Nowadays, the
+largest number of limit cycles found is equal to four and it is still an open
+question whether or not a larger number of limit cycles is possible. Therefore,
+finding a system with more than 4 limit cycles will be quite an important result
+for the academic community.
+
+To find interesting systems several combinations of the equation parameters
+must be tried and evaluated, since each of this systems can be computed
+independently from the rest they can all be run in parallel, making it an ideal
+problem to compute in massively parallel GPU nodes.
 
 \subsubsection{Context}
 
@@ -68,6 +77,7 @@ CUDA is a parallel computing platform developed by \emph{nvidia} that allows gen
 computing on their graphic processing units (GPUs). Using the CUDA programming
 model allows developers to run massively parallel programs on GPUs.
 
+\pagebreak
 \subsubsection{Problem to be solved}
 
 There have been various studies on the number of limit cycles for second degree
@@ -94,10 +104,61 @@ Julia programming language and will use CUDA framework in such a way that
 massive parallel calculation can be done on a dedicated CUDA server with several
 advanced GPU graphic cards.
 
-%\subsubsection{Stakeholders}
+\pagebreak
 
+\subsection{Computational complexity}
+
+In~\cref{eq:system} we have 5 parameters for $x$ and 5 for $y$ which makes a
+total of 10 distinct parameters. Adding the initial point to calculate the
+trajectories ($x$ and $y$ coordinates) it makes a total of 12 parameters.
+However we will only consider the reduced for of the system which only has 5
+parameters (parameters for $x$ are 1) as shown in~\cref{eq:system2}. This gives
+a total of 7 parameters.
+
+\begin{align}\label{eq:system2}
+    \frac{dx}{dt} &= x^2 + xy + y^2 + x + y \nonumber \\
+    \frac{dy}{dt} &= a_2x^2 + b_2xy + c_2y^2 + \alpha_2x + \beta_2y
+\end{align}
+
+
+If we consider $n$ different values for each of those parameters we have a total
+of $n^7$ different trajectories to calculate. If we were to compute the
+trajectories sequentially it would take a long time for moderately sized values
+of $n$. Calculating a trajectory on my machine takes 0.01 seconds. This means
+that for $n=10$ it would take approximately 28 hours to compute all the
+trajectories and taking $n=30$ the time increases to 7 years. If we use a GPU
+with 5000 CUDA cores (Tesla K90) it would only take 20 seconds (assuming perfect
+parallelization which is unrealistic). And for $n=30$ it would take 12 and a
+half hours. If we consider the usage of a super computer like the Mare nostrum
+with a cluster of 39 servers with 2 Tesla K90 GPUs the time for $n=30$ is a mere
+9 minutes. \footnote{All these calculations are based on a very rough estimate
+of the computing time needed to determine the limit cycle of a trajectory which
+may vary a lot depending on the system and the implementation of the code}
+
+\subsubsection{Stakeholders}
+
+The main stakeholder in this project is the director Grigori Astrakharchik who
+has a direct implication on the Thesis.
+
+\pagebreak
 \subsection{Justification}
 \subsubsection{Previous studies}
+
+In~\cite{kuznetsov_visualization_2013} there is a description of a task given by
+the academician A.N. Kolmogorov:
+
+\begin{quote}
+To estimate the number of limit cycles of square vector fields on plane, A.N. Kolmogorov had
+distributed several hundreds of such fields (with randomly chosen coefficients
+of quadratic expressions) among a few hundreds of students of Mech \& Math
+Faculty of Moscow State University as a mathematical practice. Each student had
+to find the number of limit cycles of a field. The result of this experiment was
+absolutely unexpected: not a single field had a limit cycle!
+\end{quote}
+
+This shows that the parallelizable nature of the problem and how difficult it is
+to find those cycles. Therefore it is important to implement a code that is both
+efficient on the calculation and have a big enough search space to find results.
 
 There have been a number of studies relying on numerical methods to find limit
 cycles in two dimensional vector fields
@@ -112,26 +173,43 @@ for which 4 limit cycles is provided.
 
 % todo
 
-There are various programming languages (C, C++, Fortran, Python and MATLAB) compatible with CUDA and which have libraries for CUDA programming.
+The CUDA framework has API for several programming languages (C, C++, Fortran,
+Python, MATLAB, \dots). The official programming toolkit is in C/C++ and offers
+the most customizability and low level configuration to adapt the code to the
+hardware. The two most notable alternatives are Python's pyCUDA and Julia's
+CUDA.jl libraries. These libraries bind to the C CUDA API and interface the data
+between the kernels and the programming language. As such, the performance of
+the kernels that run in the GPU should be equivalent in all cases but the data
+models and processing of different languages makes a difference when interfacing
+between the GPU code and the CPU code.
+
+However, languages such as Python and Julia allow for faster coding and easier
+visualization of the data. For this Thesis we will use Julia programming
+language since it's faster than Python, has many libraries and tools for
+numerical analysis and has type checking.  Nonetheless, this is not a strict
+constraint and the possibility of writing specific C CUDA code to tweak the
+performance to the maximum will be studied.
+
+% There are various programming languages (C, C++, Fortran, Python and MATLAB) compatible with CUDA and which have libraries for CUDA programming.
 %There are various programming languages with libraries for CUDA programming.
 %In GPU-accelerated applications, the sequential part of the workload runs on the CPU – which is optimized for single-threaded performance – while the compute intensive portion of the application runs on thousands of GPU cores in parallel. When using CUDA, developers program in popular languages such as C, C++, Fortran, Python and MATLAB and express parallelism through extensions in the form of a few basic keywords.
-The official CUDA programming model is in C/C++ and offers the most flexibility and performance. The other two most notable alternatives are Python's Numba and Julia's CUDA.jl.
-These are higher-level libraries and
-are more limited in the versatility
-%do not offer the same low level options
-but allow easier development and visualization of the data.
-Both Python and Julia use the official CUDA C interface under the hood so
-although the performance is not as good as with pure C, if an appropriate
-realization of the methods is done, the performance might be still good if the
-majority of the work is done in the CUDA kernels. Since Julia JIT compilation is
-faster than the python's one and provides similar advantages when visualizing
-data the initial idea is to program the whole project in Julia programming
-language.
+%The official CUDA programming model is in C/C++ and offers the most flexibility and performance. The other two most notable alternatives are Python's Numba and Julia's CUDA.jl.
+%These are higher-level libraries and
+%are more limited in the versatility
+%%do not offer the same low level options
+%but allow easier development and visualization of the data.
+%Both Python and Julia use the official CUDA C interface under the hood so
+%although the performance is not as good as with pure C, if an appropriate
+%realization of the methods is done, the performance might be still good if the
+%majority of the work is done in the CUDA kernels. Since Julia JIT compilation is
+%faster than the python's one and provides similar advantages when visualizing
+%data the initial idea is to program the whole project in Julia programming
+%language.
 
-This is not a strict constraint and the possibility of writing specific C CUDA code to tweak the performance to the maximum will be studied.
 
 % todo
 
+\pagebreak
 \subsection{Scope}
 \subsubsection{Objectives and sub-objectives}
 
@@ -139,7 +217,7 @@ The main objective of this Thesis is to develop a highly-efficient code capable
 of determining the possible existence of limit cycles for a system. This code
 must also be capable of being executed in parallel in a GPU cluster making full
 use of its computing power to simulate a wide variety of systems with different
-parameters. Furthermore the results must be processed to find interesting
+parameters. Furthermore, the results must be processed to find interesting
 systems to visualize and analyse in more detail. These objectives can be divided
 in sub-objectives:
 
@@ -163,7 +241,7 @@ find the ones that give the best performance.
     \item Implement the algorithms in an efficient code.
     \item Benchmark the performance and compare different approaches to achieve the best performance.
     \item Run the code on a dedicated GPU server.
-    \item Analyze the results and visualize them.
+    \item Analyse the results and visualize them.
     \item Present and discuss the obtained results in the Thesis.
 \end{itemize}
 
@@ -181,11 +259,11 @@ To ensure the quality of the Thesis a number of requirements must be fulfilled:
 
 \subsubsection{Potential obstacles and risks}
 
-There are several risks that may have to be dealt with during the development of this thesis.
+There are several risks that may have to be dealt with during the development of this Thesis.
 
 \begin{itemize}
     \item \textbf{Project deadlines}: There is a limited amount of time to do
-        the project. Therefore a proper planning of tasks and time must be made
+        the project. Therefore, a proper planning of tasks and time must be made
         and followed to ensure that the work can be done in the proper time
         frame.
     \item \textbf{Computational power}: This Thesis involves a lot of
@@ -199,6 +277,7 @@ There are several risks that may have to be dealt with during the development of
         dynamical systems.
 \end{itemize}
 
+\pagebreak
 \subsection{Methodology and rigor}
 
 \subsubsection{Methodology}

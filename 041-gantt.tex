@@ -1,0 +1,108 @@
+%! TEX root = **/010-main.tex
+% vim: spell spelllang=en:
+
+\newgeometry{top=0.5cm, bottom=0.5cm, left=0.5cm, right=0.5cm}
+\thispagestyle{empty}
+\begin{landscape}
+\subsection{Gantt chart}
+\resizebox{28cm}{!}{%
+\begin{ganttchart}[
+vgrid={*{6}{draw=none}, dotted},
+x unit=.40cm,
+y unit title=1cm,
+y unit chart=1cm,
+    time slot format=isodate
+    ]{2021-02-09}{2021-06-07}
+\gantttitlecalendar{month=name, day}
+\ganttnewline
+
+\ganttgroup{Project planning}{2021-02-09}{2021-03-22}
+\ganttnewline
+\ganttbar{Contextualization and scope}{2021-02-23}{2021-03-02}
+\ganttnewline
+\ganttbar{Time planning}{2021-03-02}{2021-03-09}
+\ganttnewline
+\ganttbar{Budget and sustainability}{2021-03-09}{2021-03-16}
+\ganttnewline
+\ganttbar{Integration into final document}{2021-03-16}{2021-03-22}
+\ganttnewline
+
+\ganttgroup{Research}{2021-02-09}{2021-04-18}
+\ganttnewline
+\ganttbar{ODE Solvers}{2021-02-09}{2021-03-02}
+\ganttnewline
+\ganttbar{Limit cycles}{2021-02-16}{2021-03-09}
+\ganttnewline
+\ganttbar{CUDA}{2021-03-09}{2021-03-22}
+\ganttnewline
+
+    % \texttt{R} & \textbf{Research} & \textbf{150} & \\
+    %     \texttt{R0} & - ODE solvers & 50 & \\
+    %     \texttt{R1} & - Limit cycles & 50 & \\
+    %     \texttt{R2} & - CUDA & 50 & \\
+
+\ganttgroup{Implementation}{2021-02-22}{2021-05-02}
+\ganttnewline
+\ganttbar{Find limit cycles}{2021-02-22}{2021-04-01}
+\ganttnewline
+\ganttbar{Adapt to CUDA}{2021-04-01}{2021-05-02}
+\ganttnewline
+\ganttbar{Tests}{2021-03-09}{2021-05-02}
+\ganttnewline
+
+    %     \addlinespace[0.5em]
+    % \texttt{I} & \textbf{Implementation} & \textbf{200} & \\
+    %     \texttt{I0} & - Different methods to find limit cycles & 100 & \texttt{R0,R1} \\
+    %     \texttt{I1} & - Adapt to CUDA & 50 & \texttt{I0,R2} \\
+    %     \texttt{I2} & - Tests & 50 & \\
+
+\ganttgroup{Experimentation (comparison)}{2021-04-05}{2021-05-16}
+\ganttnewline
+\ganttbar{Select search space}{2021-04-05}{2021-04-06}
+\ganttnewline
+\ganttbar{Select benchmarks}{2021-04-05}{2021-04-06}
+\ganttnewline
+\ganttbar{Further optimizations}{2021-04-07}{2021-05-01}
+\ganttnewline
+\ganttbar{Analyse results}{2021-05-01}{2021-05-16}
+\ganttnewline
+
+    %     \addlinespace[0.5em]
+    % \texttt{EC} & \textbf{Experimentation (comparison)} & \textbf{130} & \texttt{I} \\
+    %     \texttt{EC0} & Select search space & 5 & \\
+    %     \texttt{EC1} & Select benchmarks & 5 & \\
+    %     \texttt{EC2} & Further optimize the methods & 100 & \\
+    %     \texttt{EC3} & Analyse the results and decide the best method & 20 & \\
+
+\ganttgroup{Experimentation (final)}{2021-05-16}{2021-05-30}
+\ganttnewline
+\ganttbar{Select search space}{2021-05-16}{2021-05-17}
+\ganttnewline
+\ganttbar{Run experiment}{2021-05-17}{2021-05-25}
+\ganttnewline
+\ganttbar{Analyse results}{2021-05-25}{2021-05-30}
+\ganttnewline
+
+    % \addlinespace[0.5em]
+    % \texttt{EF} & \textbf{Experimentation (final)} & \textbf{25} & \texttt{EC} \\
+    %     \texttt{EF0} & Select search space & 5 & \\
+    %     \texttt{EF1} & Analyse the results & 20 & \\
+
+\ganttgroup{Project Documentation}{2021-02-09}{2021-06-07}
+\ganttnewline
+\ganttbar{Documentation}{2021-02-09}{2021-06-07}
+\ganttnewline
+\ganttbar{Conculsions}{2021-03-09}{2021-03-16}
+\ganttnewline
+\ganttbar{Oral exposition}{2021-03-09}{2021-03-16}
+\ganttnewline
+    % \addlinespace[0.5em]
+    %     \texttt{C} & \textbf{Conclusions} & \textbf{10} & \texttt{EC,EF} \\
+    %     \texttt{D} & \textbf{Documentation} & \textbf{60} & \\
+    %     \texttt{O} & \textbf{Oral exposition} & \textbf{10} & \\
+
+\end{ganttchart}
+}
+
+\end{landscape}
+\restoregeometry

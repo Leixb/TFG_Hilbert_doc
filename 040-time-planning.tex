@@ -1,0 +1,218 @@
+%! TEX root = **/010-main.tex
+% vim: spell spelllang=en:
+
+\section{Time planning}
+
+The work-to-begin date is on February 9th and the delivery date on June which
+gives around 18 weeks of time. I plan to work on the project approximately 35
+hours a week, this gives around 630 hours in total working on the project.
+
+\subsection{Description of the tasks}
+
+\subsubsection{Task definition}
+
+The definitions of the tasks that will be done throughout the project are
+divided into 4 categories: planning, research, implementation and experimentation.
+
+\paragraph{Project planning}\mbox{}\\
+
+\begin{itemize}
+    \item \textbf{Contextualization and project scope} Describe the project
+        scope and its context. Giving an overview of the objective, other past
+        studies on the topic and how this project is relevant.
+    \item \textbf{Time planning} Organize the work to be done in granular tasks
+        to estimate the time needed for each of them. With the time estimation
+        create a realistic planning for the tasks completions so that the
+        project can be finished in the appropriate time frame.
+    \item \textbf{Budget and sustainability} Analyze the economic and
+        environmental sustainability of the project.
+    \item \textbf{Meetings} Each week a meeting with the tutor will be scheduled
+        to ensure that the thesis is proceeding correctly and within the
+        expected deadlines.
+    \item \textbf{Integration into the final document} All these project
+        planning tasks must be integrated into the final thesis memoir.
+\end{itemize}
+
+\paragraph{Research}\mbox{}\\
+
+Given the nature of this thesis it is fundamental to have a solid understanding
+of modern numerical computation techniques applied to solving Ordinary
+Differential Equations and finding limit cycles. It is also primordial to know
+how these techniques can be applied to CUDA and how to benchmark the programs to
+detect bottlenecks and find whether or not the processing power of the GPU is
+being used in its full potential.
+
+\begin{itemize}
+    \item \textbf{Research ODE solvers} There are lots of algorithm to solve
+        ODEs which will have to be tried to find the ones that give the best
+        results in our case.
+    \item \textbf{Research how to find limit cycles} Find the best approach to
+        detect limit cycles
+    \item \textbf{Research CUDA} This task includes reading the official
+        documentation as well as other sources on numerical methods applied to
+        CUDA.
+\end{itemize}
+
+\paragraph{Practical Implementation}\mbox{}\\
+
+The different algorithms researched must be implemented in order to experiment
+with them and find the best ones to solve the problem.
+
+\begin{itemize}
+    \item \textbf{Program different methods to find limit cycles} As stated
+        before various different methods will have to be implemented. This
+        implementation can be initially without using CUDA (fully sequential).
+    \item \textbf{Adapt de code to be run with CUDA} Once the methods to find
+        limit cycles are properly implemented they must be adapted in order to
+        be run with CUDA.
+    \item \textbf{Test the program} In order to ensure that the code implemented
+        is correct and the errors introduced in the computation fall within a
+        reasonable distance of the real theoretical value some tests must be
+        implemented. This includes also the implementation of small programs to
+        visualize the results and interpret them.
+\end{itemize}
+
+\paragraph{Experimentation, analysis and conclusions}\mbox{}\\
+
+Once there is a working prototype of the code the experimentation can begin.
+There will be two major parts of the experimentation, the first one when the
+various methods are tested with a relatively small number of cases to find the
+best one (taking into account both the speed and accuracy of the calculations)
+and the final experiment when the best method is run with a much bigger search
+space and from which the results can be analysed.
+
+\begin{itemize}
+    \item \textbf{Comparison experiment}
+        \begin{itemize}
+            \item \textbf{Select search space} Decide how many different
+                parameters will be used on the experiment. It should be a big
+                enough search space so as to have variety on the systems but not
+                big enough that it takes too much time to benchmark and slows
+                down the development.
+            \item \textbf{Select benchmarks} The benchmarks must be run in
+                similar conditions and we must decide what metrics will be
+                considered (runtime, GFLOPS, accuracy, \dots).
+            \item \textbf{Further optimize the methods} When running the
+                benchmarks we may find some possible improvements on the
+                original implementations which can then be improved and tested
+                again.
+            \item \textbf{Analyse results and decide best method} With the
+                results of the experiments we can decide on which method is the
+                best and should therefore be used in the final experiment.
+        \end{itemize}
+    \item \textbf{Final experiment}
+        \begin{itemize}
+            \item \textbf{Select search space} Given the results of the previous
+                experiments, estimate the runtime as a function of the search
+                space and select a search space as big as possible given the
+                available computing time.
+            \item \textbf{Analyse results} Once the final experiment finishes
+                the results can be analysed in search of systems with
+                interesting number of limit cycles.
+        \end{itemize}
+    \item \textbf{Conclusions} Analyse the results of both experiments and
+        provide a conclusion.
+\end{itemize}
+
+\pagebreak
+\subsubsection{Summary of the tasks}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{llrc}
+        \toprule
+        \textbf{ID} & \textbf{Task} & \textbf{Time (h)} & \textbf{Dependencies} \\
+        \midrule
+    \texttt{P} & \textbf{Project planning} & \textbf{60} & \\
+        \texttt{P0} & - Contextualization and project scope & 10 & \\
+        \texttt{P1} & - Time planning & 10 & \\
+        \texttt{P2} & - Budget and sustainability & 10 & \\
+        \texttt{P3} & - Meetings & 18 & \\
+        \texttt{P4} & - Integration into final document & 12 & \\
+
+        \addlinespace[0.5em]
+    \texttt{R} & \textbf{Research} & \textbf{150} & \\
+        \texttt{R0} & - ODE solvers & 50 & \\
+        \texttt{R1} & - Limit cycles & 50 & \\
+        \texttt{R2} & - CUDA & 50 & \\
+
+        \addlinespace[0.5em]
+    \texttt{I} & \textbf{Implementation} & \textbf{200} & \\
+        \texttt{I0} & - Different methods to find limit cycles & 100 & \texttt{R0,R1} \\
+        \texttt{I1} & - Adapt to CUDA & 50 & \texttt{I0,R2} \\
+        \texttt{I2} & - Tests & 50 & \\
+
+        \addlinespace[0.5em]
+    \texttt{EC} & \textbf{Experimentation (comparison)} & \textbf{130} & \texttt{I} \\
+        \texttt{EC0} & Select search space & 5 & \\
+        \texttt{EC1} & Select benchmarks & 5 & \\
+        \texttt{EC2} & Further optimize the methods & 100 & \\
+        \texttt{EC3} & Analyse the results and decide the best method & 20 & \\
+
+    \addlinespace[0.5em]
+    \texttt{EF} & \textbf{Experimentation (final)} & \textbf{25} & \texttt{EC} \\
+        \texttt{EF0} & Select search space & 5 & \\
+        \texttt{EF1} & Analyse the results & 20 & \\
+
+    \addlinespace[0.5em]
+        \texttt{C} & \textbf{Conclusions} & \textbf{10} & \texttt{EC,EF} \\
+        \texttt{D} & \textbf{Documentation} & \textbf{60} & \\
+        \texttt{O} & \textbf{Oral exposition} & \textbf{10} & \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+% table
+
+\pagebreak
+\subsubsection{Resources}
+
+\paragraph{Human resources}\mbox{}\\
+
+The main human resource of the thesis is the researcher.  There is also the
+director Grigori Astrakharchik which mentors the researcher and the GEP Tutor
+Eguiguren Huerta Marcos in charge of correcting the project management part.
+
+\paragraph{Material resources}\mbox{}\\
+
+The main resources needed for this project are previous papers and books on the
+topics of ODEs, limit cycles and CUDA. For the implementation an execution of
+the code there following resources will be used:
+
+\begin{itemize}
+    \item \textbf{VCS}: \texttt{git} will be used as a version control
+        system~(VCS) and the code will be hosted on \emph{GitHub} for easy
+        collaboration with the director.
+    \item \textbf{\LaTeX}: To format the document \LaTeX will be used. The
+        document will be hosted on \emph{Overleaf} to allow easier collaboration
+        and due to the fact that it provides \emph{github} integration.
+    \item \textbf{Atenea}: To communicate with the GEP tutor.
+    \item \textbf{Computers}: My own personal computer with an \emph{RTX2060} will be
+        used to develop the code and test it. The final versions will will run
+        on a server from the department of physics at UPC with a \emph{Tesla K80} %todo check
+    \item \textbf{Julia}: The Julia programming language will be used to write
+        the code and visualize the results.
+\end{itemize}
+
+\input{041-gantt}
+
+\subsection{Risk Management}
+
+% todo link with intro section
+
+    \subsubsection{Project deadline}
+    There is the possibility that the initial estimation made of the time it takes to
+    complete each task was wrong due to unexpected difficulties. Therefore it's
+    crucial that there is enough time to accommodate possible delays and that
+    these setbacks are detected immediately and taken into account (Possibly
+    redoing the initial time planning).
+
+    \subsubsection{Computational power}
+    The program will be run in a server of the department of physics of UPC.
+    Although it should not be a problem in the event of not being able to use
+    that computing power the code can be run locally on my own GPU (this will
+    take much longer time).
+
+    \subsubsection{Inexperience on the field}
+    Sine I have limited experience with both CUDA and numerical computation of
+    ODEs there is a significant amount of hours dedicated to studying the
+    concepts and researching numerical methods.

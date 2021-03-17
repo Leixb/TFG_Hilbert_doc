@@ -1,0 +1,318 @@
+%! TEX root = **/010-main.tex
+% vim: spell spelllang=en:
+
+\section{Budget}%
+\label{sec:budget}
+
+\subsection{Staff costs}%
+\label{sub:staff}
+
+Although the tasks in the project are going to be performed by me and the tutors
+I will break them down into different roles in order to estimate the cost of the
+project. We will have a \textbf{Project manager} responsible of planning the
+project. A \textbf{Junior researcher} that will study the different
+computational methods and techniques needed to perform the calculations in the
+project. The \textbf{Junior developer} will implement the code according to the
+instructions given by the researcher and this code will be tested by a
+\textbf{Tester} to ensure that the implementation is correct. Finally a
+\textbf{Technical writer} will compile all the results obtained and write the
+final document.
+
+Using data from \url{https://www.payscale.com} we can estimate the cost of the
+different roles that take part in the project as shown in~\cref{tab:pay}. With
+these estimations we can calculate the overall cost of the staff in the project
+which is shown in~\cref{tab:cost}.
+
+\begin{table}[H]
+    \centering
+    \caption{Cost per hour of different roles}\label{tab:pay}
+    \begin{tabular}{cc}
+        \toprule
+        Role & Cost (€/h) \\
+        \midrule
+        Project manager & 23 \\
+        Junior developer & 15 \\
+        Junior researcher & 22 \\
+        Tester & 8 \\
+        Technical writer & 13 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Total cost of tasks}\label{tab:cost}
+    \begin{tabular}{lrcr}
+        \toprule
+        \textbf{Task} & \textbf{Time (h)} & \textbf{Role} & \textbf{Cost (€)} \\
+        \midrule
+    \textbf{Project planning} & \textbf{60} & PM & \textbf{1380} \\
+        % - Contextualization and project scope & 10 & \\
+        % - Time planning & 10 & \\
+        % - Budget and sustainability & 10 & \\
+        % - Meetings & 18 & \\
+        % - Integration into final document & 12 & \\
+
+        \addlinespace[0.5em]
+        \textbf{Research} & \textbf{150} & JR & \textbf{3300}\\
+        % - ODE solvers & 50 & \\
+        % - Limit cycles & 50 & \\
+        % - CUDA & 50 & \\
+
+        \addlinespace[0.5em]
+        \textbf{Implementation} & \textbf{200} & JD,T & \textbf{2650} \\
+        - Different methods to find limit cycles & 100 & JD & 1500 \\
+        - Adapt to CUDA & 50 & JD & 750 \\
+        - Tests & 50 & T & 400 \\
+
+        \addlinespace[0.5em]
+        \textbf{Experimentation (comparison)} & \textbf{130} & JR,JD & \textbf{2160} \\
+        - Select search space & 5 & JR & 110 \\
+        - Select benchmarks & 5 & JR & 110 \\
+        - Further optimize the methods & 100 & JD & 1500 \\
+        - Analyse the results and decide the best method & 20 & JR & 440 \\
+
+    \addlinespace[0.5em]
+        \textbf{Experimentation (final)} & \textbf{25} & JR & \textbf{550} \\
+        % Select search space & 5 & \\
+        % Analyse the results & 20 & \\
+
+    \addlinespace[0.5em]
+        \textbf{Conclusions} & \textbf{10} & W & \textbf{130} \\
+        \textbf{Documentation} & \textbf{60} & W & \textbf{780}\\
+        \textbf{Oral exposition} & \textbf{10} & W & \textbf{130} \\
+    \addlinespace[1em]
+        \textbf{Total} & & & \textbf{11080} \\
+
+        % 1380
+        % 3300
+        % 2650
+        % 2160
+        % 550
+        % 130
+        % 780
+        % 130
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% \begin{table}[H]
+%     \centering
+%     \caption{Total cost of the staff}
+%     \begin{tabular}{cc}
+%         \toprule
+%         Role & Cost (€) \\
+%         \midrule
+%         Project manager & 23 \\
+%         Junior developer & 15 \\
+%         Junior researcher & 22 \\
+%         Tester & 8 \\
+%         Technical writer & 13 \\
+%         Total & \\
+%         \bottomrule
+%     \end{tabular}
+% \end{table}
+
+
+\pagebreak
+\subsection{Generic costs}
+
+% Other than the staff costs, there are other cost that must be taken into
+% account.
+
+\subsubsection{Amortization of the resources}
+
+I will work approximately 3.7 hours per day during 130 days. Most of the time on
+my Lenovo laptop (80\%) and the rest on an HP laptop which is more lightweight
+and can be carried around easily. Using the formula to compute the
+amortization~(\cref{eq:amort}) we obtain the \cref{table:amort} which shows the
+amortization of the hardware used.
+
+\begin{equation}\label{eq:amort}
+    \text{Amortization} = \text{Price} \times \frac{1}{\text{Years of use}}
+    \times \frac{1}{\text{Days of work}} \times \frac{1}{\text{Hours per day}}
+    \times \text{hours used}
+\end{equation}
+
+\begin{table}[H]
+    \centering
+    \caption{Amortization of hardware}\label{table:amort}
+    \begin{tabular}{crrr}
+        \toprule
+        Hardware & Cost (€) & Life expectancy (years) & Amortization (€) \\
+        \midrule
+        Lenovo laptop & 1.400 & 6 & 211.89 \\
+        HP laptop & 600 & 4 & 28.38\\
+        \midrule
+        Total & 2.000 &   & 240.27 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{Indirect costs}
+
+A part from the hardware costs of the laptops there are more indirect costs that
+must be considered:
+
+\begin{itemize}
+    \item \textbf{Internet:} With an internet cost of 100€ per month during 5
+        months working 3.7 hours per day the total is: $100€ \cdot 5 \cdot
+        \dfrac{3.7}{24} = 77.08€$.
+    \item \textbf{Electricity} Given a cost of $0.1270€/kWh$ and the fact that
+        my Lenovo laptop consumes $230W$ at peak performance (which should
+        happen rarely) we can estimate the electricity cost as:
+        $0.1270€/kWh \cdot 0.230kW \cdot 0.5 \cdot 630h = 9.21€$.
+\end{itemize}
+
+In total there are $86.29€$ of indirect costs that added to the hardware
+amortization gives $326.56€$ of generic costs.
+
+\subsection{Contingency}
+
+During the development of the project unforeseen events may occur that may
+impact our budget. Therefore a 15\% increase on the total cost will be added as
+a contingency margin. Given that the CPA is $11,080€$ and the generic costs are
+$326.56€$ for a total of $11,406.56€$. The contingency budget is then $1710.99€$.
+
+\subsection{Incidental costs}
+
+The following table estimates the cost of the different incidents that may
+impact the project given their estimated cost and the risk that they happen.
+
+\begin{table}[H]
+    \centering
+    \caption{Incidental costs}\label{tab:inc}
+    \begin{tabular}{lrrr}
+        \toprule
+        Incident & Estimated Cost (€) & Risk (\%) & Cost (€) \\
+        \midrule
+        Project deadline & 500 & 25 & 125 \\
+        Computational power & 100 & 50 & 50 \\
+        Inexperience on the field & 300 & 25 & 75 \\
+        \addlinespace[0.5em]
+    \textbf{Total} & \textbf{900} & & \textbf{250} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\subsection{Final budget}
+
+\begin{table}[H]
+    \centering
+    \caption{Final budget}\label{tab:pay}
+    \begin{tabular}{lr}
+        \toprule
+        Activity & Cost (€) \\
+        \midrule
+        CPA & 11,080.00 \\
+        GC & 326.56 \\
+        Contingency & 1,710.98 \\
+        Incidental cost & 250.00 \\
+        \addlinespace[0.5em]
+        \textbf{Total} & \textbf{13,367.54} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\pagebreak
+\subsection{Management control}
+
+In the previous section there is an estimation of the budget and its potential risks and
+incidents along with their impact. We also need a model to detect the
+deviation on these initial budget estimations. Upon finishing a task $t$, we will
+calculate its deviation:
+
+\begin{equation}
+    d_t = E_t - R_t
+\end{equation}
+
+Where:
+
+\begin{itemize}
+    \item $E_t = $ \textbf{Estimated cost} of the task on the initial budget
+        plan
+    \item $R_t = $ \textbf{Real cost} of the task when finished. Here we have to
+        recalculate the $CPA$, $GC$, contingency and incidents for the task.
+    \item $d_t = $ \textbf{Deviation from initial cost:} this estimates how much
+        we have deviated from the original budget for each task.
+\end{itemize}
+
+If $d_t$ is negative I will reallocate the extra money for future incidents, if
+it's positive some of the funds for contingency will be used to cover the costs.
+If the contingency funds are not enough the whole budget planning will be
+readdressed.
+
+\pagebreak
+\section{Sustainability}%
+\label{sec:sustainability}
+
+\subsection{Self-assessment}
+
+Before starting the sustainability assessment I did not know how many indicators
+and factors must be taken into account when doing a sustainable project. I had
+not considered the impact that project a part from the immediate actors involved
+in it. Through this assessment I realized how the project can impact the
+environment, the society and the economy in ways I had not thought about before.
+
+\subsection{Environmental impact}
+
+\noindent\textbf{Regarding PPP, Have you estimated the environmental impact of
+undertaking the project? Have you considered how to minimise the impact, for
+example by reusing resources?}
+
+The main impact of this project on the environment is the use of computer
+resources and therefore electric power to do the complex calculations needed.
+The aim of the project is not only to develop a program that works but that it
+also uses the least amount of resources so that it does not waste computing
+power. In order to avoid wasting resources, only the final version will be run
+on a big search space and during development the tests will be on a much reduced
+search space.
+
+\noindent\textbf{Regarding the life expectancy, How is the problem that you wish
+to address resolved currently (state of the art)? In what ways will your
+solution environmentally improve existing solutions?}
+
+Currently there is not much work on the research of the number of limit cycles
+in second degree ODEs and the current approaches rely on heady computations in
+order to calculate the cycles. With this new approach the aim is to search with
+a faster implementation although less accurate which will hopefully find
+interesting systems that can then be analyzed in more detail.
+
+
+\pagebreak
+\subsection{Economy}
+
+\noindent\textbf{Regarding PPP, Have you estimated the cost of undertaking the
+project (human and material resources)?}
+
+In~\cref{sec:budget} there is a description of the cost of the project taking
+into account human and material resources as well as potential risks and
+contingencies.
+
+\noindent\textbf{Regarding the life expectancy, How is the problem that you wish
+to address resolved currently (state of the art)? In what ways will your
+solution economically improve existing solutions?}
+
+As stated on the Sustainability section, if a faster more efficient method to
+identify limit cycles is implemented it will reduce the amount of computational
+power needed and therefore the resources.
+
+
+\subsection{Social}
+
+\noindent\textbf{Regarding PPP, What do you think undertaking the project has
+contributed to you personally?}
+
+The project enables me to research on various topics that interest me and has
+given me a new view on the applications of GPUs for scientific research.
+
+\noindent\textbf{Regarding the life expectancy, How is the problem that you wish
+to address resolved currently (state of the art)? In what ways will your
+solution socially improve (quality of life) existing Is there a real need for
+the project?}
+
+The nature of this project as a research project on the field of dynamical
+systems does not have a direct impact on the society as a whole. However if
+interesting results are obtained it could bring some insight into Hilbert 16th
+problem which has remained unsolved for more than a century.

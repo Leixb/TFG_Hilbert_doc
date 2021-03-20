@@ -26,9 +26,9 @@ which is shown in~\cref{tab:cost}.
 \begin{table}[H]
     \centering
     \caption{Cost per hour of different roles}\label{tab:pay}
-    \begin{tabular}{cc}
+    \begin{tabular}{lr}
         \toprule
-        Role & Cost (€/h) \\
+        \thead{Role} & \thead{Cost (€/h)} \\
         \midrule
         Project manager & 23 \\
         Junior developer & 15 \\
@@ -44,9 +44,9 @@ which is shown in~\cref{tab:cost}.
     \caption{Total cost of tasks}\label{tab:cost}
     \begin{tabular}{lrcr}
         \toprule
-        \textbf{Task} & \textbf{Time (h)} & \textbf{Role} & \textbf{Cost (€)} \\
+    \thead{Task} & \thead{Time \\ (h)} & \thead{Role\footnotemark} & \thead{Cost \\ (€)} \\
         \midrule
-    \textbf{Project planning} & \textbf{60} & PM & \textbf{1380} \\
+    \textbf{Project planning} & \textbf{60} & PM & \textbf{1,380} \\
         % - Contextualization and project scope & 10 & \\
         % - Time planning & 10 & \\
         % - Budget and sustainability & 10 & \\
@@ -54,19 +54,19 @@ which is shown in~\cref{tab:cost}.
         % - Integration into final document & 12 & \\
 
         \addlinespace[0.5em]
-        \textbf{Research} & \textbf{150} & JR & \textbf{3300}\\
+        \textbf{Research} & \textbf{150} & JR & \textbf{3,300}\\
         % - ODE solvers & 50 & \\
         % - Limit cycles & 50 & \\
         % - CUDA & 50 & \\
 
         \addlinespace[0.5em]
-        \textbf{Implementation} & \textbf{200} & JD,T & \textbf{2650} \\
+        \textbf{Implementation} & \textbf{200} & JD,T & \textbf{2,650} \\
         - Different methods to find limit cycles & 100 & JD & 1500 \\
         - Adapt to CUDA & 50 & JD & 750 \\
         - Tests & 50 & T & 400 \\
 
         \addlinespace[0.5em]
-        \textbf{Experimentation (comparison)} & \textbf{130} & JR,JD & \textbf{2160} \\
+        \textbf{Experimentation (comparison)} & \textbf{130} & JR,JD & \textbf{2,160} \\
         - Select search space & 5 & JR & 110 \\
         - Select benchmarks & 5 & JR & 110 \\
         - Further optimize the methods & 100 & JD & 1500 \\
@@ -82,7 +82,7 @@ which is shown in~\cref{tab:cost}.
         \textbf{Documentation} & \textbf{60} & W & \textbf{780}\\
         \textbf{Oral exposition} & \textbf{10} & W & \textbf{130} \\
     \addlinespace[1em]
-        \textbf{Total} & & & \textbf{11080} \\
+        \textbf{Total} & & & \textbf{11,080} \\
 
         % 1380
         % 3300
@@ -95,6 +95,9 @@ which is shown in~\cref{tab:cost}.
         \bottomrule
     \end{tabular}
 \end{table}
+
+\footnotetext{PM = Project Manager, JR = Junior Researcher, JD = Junior
+Developer,\\ W = Technical Writer}
 
 % \begin{table}[H]
 %     \centering
@@ -137,14 +140,15 @@ amortization of the hardware used.
 \begin{table}[H]
     \centering
     \caption{Amortization of hardware}\label{table:amort}
-    \begin{tabular}{crrr}
+    \begin{tabular}{lrcr}
         \toprule
-        Hardware & Cost (€) & Life expectancy (years) & Amortization (€) \\
+        \thead{Hardware} & \thead{Cost \\ (€)} & \thead{Life expectancy \\
+        (years)} & \thead{Amortization \\ (€)} \\
         \midrule
-        Lenovo laptop & 1.400 & 6 & 211.89 \\
+        Lenovo laptop & 1,400 & 6 & 211.89 \\
         HP laptop & 600 & 4 & 28.38\\
-        \midrule
-        Total & 2.000 &   & 240.27 \\
+        \addlinespace[0.5em]
+        \textbf{Total} & \textbf{2,000} &   & \textbf{240.27} \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -157,11 +161,11 @@ must be considered:
 \begin{itemize}
     \item \textbf{Internet:} With an internet cost of 100€ per month during 5
         months working 3.7 hours per day the total is: $100€ \cdot 5 \cdot
-        \dfrac{3.7}{24} = 77.08€$.
-    \item \textbf{Electricity} Given a cost of $0.1270€/kWh$ and the fact that
-        my Lenovo laptop consumes $230W$ at peak performance (which should
+        \nicefrac{3.7}{24} = 77.08€$.
+\item \textbf{Electricity} Given a cost of \SI{0.1270}{€\per\kWh} and the fact that
+    my Lenovo laptop consumes \SI{230}{\watt} at peak performance (which should
         happen rarely) we can estimate the electricity cost as:
-        $0.1270€/kWh \cdot 0.230kW \cdot 0.5 \cdot 630h = 9.21€$.
+    $\SI{0.1270}{€\per\kWh} \cdot \SI{0.230}{\kW} \cdot 0.5 \cdot \SI{630}{\hour} = 9.21€$.
 \end{itemize}
 
 In total there are $86.29€$ of indirect costs that added to the hardware
@@ -184,7 +188,7 @@ impact the project given their estimated cost and the risk that they happen.
     \caption{Incidental costs}\label{tab:inc}
     \begin{tabular}{lrrr}
         \toprule
-        Incident & Estimated Cost (€) & Risk (\%) & Cost (€) \\
+        \thead{Incident} & \thead{Estimated Cost (€)} & \thead{Risk (\%)} & \thead{Cost (€)} \\
         \midrule
         Project deadline & 500 & 25 & 125 \\
         Computational power & 100 & 50 & 50 \\
@@ -200,10 +204,10 @@ impact the project given their estimated cost and the risk that they happen.
 
 \begin{table}[H]
     \centering
-    \caption{Final budget}\label{tab:pay}
+    \caption{Final budget}\label{tab:final}
     \begin{tabular}{lr}
         \toprule
-        Activity & Cost (€) \\
+        \thead{Activity} & \thead{Cost (€)} \\
         \midrule
         CPA & 11,080.00 \\
         GC & 326.56 \\
@@ -257,7 +261,7 @@ environment, the society and the economy in ways I had not thought about before.
 
 \subsection{Environmental impact}
 
-\noindent\textbf{Regarding PPP, Have you estimated the environmental impact of
+\subsubsection*{Regarding PPP, Have you estimated the environmental impact of
 undertaking the project? Have you considered how to minimise the impact, for
 example by reusing resources?}
 
@@ -269,7 +273,7 @@ power. In order to avoid wasting resources, only the final version will be run
 on a big search space and during development the tests will be on a much reduced
 search space.
 
-\noindent\textbf{Regarding the life expectancy, How is the problem that you wish
+\subsubsection*{Regarding the life expectancy, How is the problem that you wish
 to address resolved currently (state of the art)? In what ways will your
 solution environmentally improve existing solutions?}
 
@@ -283,14 +287,14 @@ interesting systems that can then be analyzed in more detail.
 \pagebreak
 \subsection{Economy}
 
-\noindent\textbf{Regarding PPP, Have you estimated the cost of undertaking the
+\subsubsection*{Regarding PPP, Have you estimated the cost of undertaking the
 project (human and material resources)?}
 
 In~\cref{sec:budget} there is a description of the cost of the project taking
 into account human and material resources as well as potential risks and
 contingencies.
 
-\noindent\textbf{Regarding the life expectancy, How is the problem that you wish
+\subsubsection*{Regarding the life expectancy, How is the problem that you wish
 to address resolved currently (state of the art)? In what ways will your
 solution economically improve existing solutions?}
 
@@ -301,13 +305,13 @@ power needed and therefore the resources.
 
 \subsection{Social}
 
-\noindent\textbf{Regarding PPP, What do you think undertaking the project has
+\subsubsection*{Regarding PPP, What do you think undertaking the project has
 contributed to you personally?}
 
 The project enables me to research on various topics that interest me and has
 given me a new view on the applications of GPUs for scientific research.
 
-\noindent\textbf{Regarding the life expectancy, How is the problem that you wish
+\subsubsection*{Regarding the life expectancy, How is the problem that you wish
 to address resolved currently (state of the art)? In what ways will your
 solution socially improve (quality of life) existing Is there a real need for
 the project?}

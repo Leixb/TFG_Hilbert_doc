@@ -6,6 +6,7 @@
 \documentclass[12pt, oneside]{article}
 % \usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 \usepackage[a4paper]{geometry}
+% \usepackage[a4paper,showframe]{geometry}
 
 \setlength{\headheight}{24pt}
 
@@ -68,7 +69,7 @@
 \usepackage{amstext}    % Text inside mathenv
 
 %\usepackage{relsize}    % Bigger math with mathlarger{___}
-%\usepackage{nicefrac}   % nice fractions in one line
+\usepackage{nicefrac}   % nice fractions in one line
 
 %\usepackage{IEEEtrantools} % Complex equation arrays
 
@@ -138,13 +139,13 @@
 %% SIUNITX
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\usepackage[alsoload=hep]{siunitx}          % SI units and uncertainties
+\usepackage{siunitx}                        % SI units and uncertainties
 %\sisetup{locale = FR}                       % Commas and so on for spanish
 %\sisetup{separate-uncertainty=true}
-%\sisetup{
-  %per-mode=fraction,
-  %fraction-function=\nicefrac
-%}
+\sisetup{
+  per-mode=fraction,
+  fraction-function=\nicefrac
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TIKZ

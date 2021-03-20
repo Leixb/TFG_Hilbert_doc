@@ -13,7 +13,18 @@
 \usepackage{fancyhdr}
 \usepackage{pgfgantt}
 \usepackage{pdflscape}
-\usepackage{adjustbox}
+\usepackage{titlesec}
+
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+
+% paragraph in newline
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
+% bold \thead (table headers)
+\renewcommand\theadfont{\bfseries}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % METADATA
@@ -41,10 +52,10 @@
     \pagenumbering{Roman}
 
     %\setcounter{tocdepth}{2}
-    \tableofcontents \pagebreak
+    \tableofcontents% \pagebreak
 
-    %\listoffigures \pagebreak
-    %\listoftables \clearpage
+    \listoffigures %\pagebreak
+    \listoftables \clearpage
 
     \pagenumbering{arabic}
 
@@ -69,8 +80,8 @@
     \renewcommand{\headrulewidth}{1pt}
     \renewcommand{\footrulewidth}{0.75pt}
 
-    % \include{030-intro}
-    % \include{040-time-planning}
+    \include{030-intro}
+    \include{040-time-planning}
     \include{050-budget}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -83,7 +94,7 @@
 % \cite{llibre_16hilbert_nodate}
 %https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=Jaume+Llibre+hilbert&btnG=
 
-    % \printbibliography[heading=bibintoc]
+    \printbibliography[heading=bibintoc]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % APPENDIX

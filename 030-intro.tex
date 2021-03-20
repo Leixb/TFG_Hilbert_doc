@@ -18,8 +18,7 @@ compute in realistic time frames can now be computed even on average consumer
 hardware GPUs. Moreover, projects like
 \emph{GPUGRID}\footnote{\url{www.gpugrid.net}} allow researches to run
 distributed programs through a grid of GPUs from volunteers all over the world
-reaching supercomputing level performance \cite{antaviana_nvidia_nodate}.
-
+reaching supercomputing level performance \cite{antaviana_nvidia_2008}.
 
 In 1900 David Hilbert posed a list of 23 problems in the field of mathematics
 which were unsolved at the time \cite{hilbert_mathematische_1900}.  Those
@@ -43,7 +42,7 @@ polynomials of second degree:
 \pagebreak
 It is unknown whether there exists an upper limit on the number of limit cycles
 for systems with polynomials of degree greater than
-one\cite{ilyashenko_centennial_2002,llibre_16hilbert_nodate}.  Nowadays, the
+one\cite{ilyashenko_centennial_2002,llibre_sobre_2015}.  Nowadays, the
 largest number of limit cycles found is equal to four and it is still an open
 question whether or not a larger number of limit cycles is possible. Therefore,
 finding a system with more than 4 limit cycles will be quite an important result
@@ -65,14 +64,13 @@ is directed by Grigori Astrakharchik.
 
 Below are some concepts needed to understand the project.
 
-\newcommand{\concept}[1]{\textbf{#1}\\}
+\paragraph{Limit cycles}
 
-\concept{Limit cycles}
 A limit cycle is a closed trajectory with the property that at least one other
 trajectory spirals into it as time approaches infinity. They are important in
 various applications in the field of dynamical systems.
 
-\concept{CUDA}
+\paragraph{CUDA}
 CUDA is a parallel computing platform developed by \emph{nvidia} that allows general
 computing on their graphic processing units (GPUs). Using the CUDA programming
 model allows developers to run massively parallel programs on GPUs.
@@ -137,8 +135,11 @@ may vary a lot depending on the system and the implementation of the code}
 
 \subsubsection{Stakeholders}
 
-The main stakeholder in this project is the director Grigori Astrakharchik who
-has a direct implication on the Thesis.
+The main stakeholders in this project are the researcher (me) and the director
+Grigori Astrakharchik who have a direct implication on the Thesis. If we manage
+to obtain interesting results other parties may benefit from them: other
+researchers on the fields of numerical analysis and dynamic systems may build on
+these results.
 
 % todo
 
@@ -169,7 +170,7 @@ efficient on the calculation and have a big enough search space to find results.
 
 There have been a number of studies relying on numerical methods to find limit
 cycles in two dimensional vector fields
-\cite{leonov_hidden_2013,van_der_hoff_numerical_2013,casades_computation_2013,gasull_effective_nodate}.
+\cite{leonov_hidden_2013,van_der_hoff_numerical_2013,casades_computation_2013,gasull_effective_2015}.
 Papadimitriou and Vishnoi showed that the computation of a limit cycle is
 % todo
 % PSPACE??
@@ -219,9 +220,11 @@ the best approach to the problem.
     \item Research how these methods can be applied to run in a CUDA system efficiently.
 \end{itemize}
 
-\paragraph{Practical part} Having done the background research, the code must be
-developed, implemented and tested.  Different methods will be tried in order to
-find the ones that give the best performance.
+\paragraph{Practical part}
+
+Having done the background research, the code must be developed, implemented and
+tested.  Different methods will be tried in order to find the ones that give the
+best performance.
 
 \begin{itemize}
     \item Implement the algorithms in an efficient code.

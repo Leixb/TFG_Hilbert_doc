@@ -91,7 +91,8 @@ space and from which the results can be analysed.
                 down the development.
             \item \textbf{Select benchmarks} The benchmarks must be run in
                 similar conditions and we must decide what metrics will be
-                considered (runtime, GFLOPS, accuracy, \dots).
+                considered (execution time, FLOPS\footnote{Floating Point Operations
+                Per Second}, accuracy, memory usage, \dots).
             \item \textbf{Further optimize the methods} When running the
                 benchmarks we may find some possible improvements on the
                 original implementations which can then be improved and tested
@@ -114,12 +115,46 @@ space and from which the results can be analysed.
         provide a conclusion.
 \end{itemize}
 
-\pagebreak
+\subsubsection{Estimation of the number of hours per task}
+
+It is quite difficult to estimate the time needed for each of the proposed tasks
+since there is no clear reference of how long they can potentially take. To
+account for possible delays I will take an upper bound on the ours needed for
+each task.
+
+The \textbf{project planning} should be fairly quick so I estimate around 30
+hours of work for the first tasks. There will be 18 meetings of 1 hour and the
+integration into the final document should take around 12 hours taking into
+account all changes and corrections that may arise.
+
+As explained in \cref{ssub:inexp} a fair amount of time will be devoted to
+\textbf{research}. For each of the 3 main topics I will research around 50 hours
+to ensure I can get a deep understanding of the topic.
+
+The \textbf{implementation} is the part that should take most time given that
+there are multiple different methods to try and test. The implementation of the
+methods should take around a month ($\sim100$ hours) and the adaptation to CUDA 2
+weeks ($\sim 50$ hours). While doing the different methods testing should be performed
+which should add up to around 50 hours of testing.
+
+Regarding the \textbf{comparison experimentation} the optimization of methods
+should take between 50 and 100 hours given that the initial implementation may
+require a lot of tweaking and fine tuning to adapt to the hardware. The analysis
+of results should be fairly quick if the code produces proper metrics. In the
+\textbf{final experimentation} most of the time will be spent on the computing
+and the work should be around 20 hours of monitoring the execution and analyzing
+the results.
+
+\Cref{tab:summary_tasks} shows the summary of the tasks with their time estimate
+and dependencies. The Gantt chart is shown in~\cref{fig:gantt}. It must be noted
+that this time estimates are subject to change.
+
 \subsubsection{Summary of the tasks}
 
 \begin{table}[H]
     \centering
-    \caption{Summary of tasks}
+    \caption{Summary of tasks}%
+    \label{tab:summary_tasks}
     \begin{tabular}{llrc}
         \toprule
         \thead{ID} & \thead[l]{Task} & \thead{Time (h)} & \thead{Depend.} \\
@@ -200,21 +235,39 @@ the code there following resources will be used:
 \subsection{Risk Management}
 
 % todo link with intro section
+As explained in~\cref{ssub:intro_risks} there are several potential risks that
+may occur during the development of the project. In this section we plan how
+this risks will be mitigated and the steps that will be taken if they happen.
 
     \subsubsection{Project deadline}
-    There is the possibility that the initial estimation made of the time it takes to
-    complete each task was wrong due to unexpected difficulties. Therefore it's
-    crucial that there is enough time to accommodate possible delays and that
-    these setbacks are detected immediately and taken into account (Possibly
-    redoing the initial time planning).
+    There is the possibility that the initial estimation made of the time it
+    takes to complete each task was wrong due to unexpected difficulties. These
+    delays may add up over time making it impossible to finish the project on
+    time.
+
+    \textbf{Plan:} Detect any delays from the initial time planning immediately
+    and remedy them by reevaluating the time planning and allocating more ours
+    to a task. It's also crucial that there is enough time to accommodate the
+    possible delays that may occur when planning the time for the tasks.
 
     \subsubsection{Computational power}
-    The program will be run in a server of the department of physics of UPC.
-    Although it should not be a problem in the event of not being able to use
-    that computing power the code can be run locally on my own GPU (this will
-    take much longer time).
+    \textbf{Plan:} The program will be run in a server of the department of
+    physics of UPC.  The server has 2 graphics cards that add up to 27 TFLOPS.
+    It is important that the final version of the program is finished with
+    enough time to be run in the server so that any potential problems with the
+    server can be dealt with.
 
-    \subsubsection{Inexperience on the field}
-    Sine I have limited experience with both CUDA and numerical computation of
-    ODEs there is a significant amount of hours dedicated to studying the
-    concepts and researching numerical methods.
+    \textbf{Alternative:} Although it should not be a problem, in the event of
+    not being able to use the computing power of the server, the code can be run
+    locally on my own GPU (7 TFLOPS), it will take more time to compute but its
+    feasible. There is also the possibility of investing on a GPU to do the
+    calculations.
+
+    \subsubsection{Inexperience on the field}%
+    \label{ssub:inexp}
+    \textbf{Plan:} Since I have limited experience with both CUDA and numerical
+    computation of ODEs there is a significant amount of hours dedicated to
+    studying the concepts and researching numerical methods. Devoting more hours
+    on researching this topics will be potentially more productive than rushing
+    into writing code without proper knowledge and will avoid mistakes in the
+    implementation.

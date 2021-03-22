@@ -10,18 +10,19 @@
 Since its release in 2007, Compute Unified Device Architecture (CUDA) has
 revolutionized the usage of graphic processing units for scientific
 computations, allowing developers to implement programs that take full advantage
-of the parallelization capabilities of GPUs for general purpose programming.
-This paired with the exponential growth of computing power that GPUs have
-experienced in the last decade has made GPU numerical analysis essential on
-modern science research. Highly complex problems that where once impossible to
-compute in realistic time frames can now be computed even on average consumer
-hardware GPUs. Moreover, projects like
+of the parallelization capabilities of Graphics Processing Units (GPUs) for
+general purpose programming.  This paired with the exponential growth of
+computing power that GPUs have experienced in the last decade has made GPU
+numerical analysis essential on modern science research. Highly complex problems
+that where once impossible to compute in realistic time frames can now be
+computed even on average consumer hardware GPUs. Moreover, projects like
 \emph{GPUGRID}\footnote{\url{www.gpugrid.net}} allow researches to run
 distributed programs through a grid of GPUs from volunteers all over the world
 reaching supercomputing level performance \cite{antaviana_nvidia_2008}.
 
 In 1900 David Hilbert posed a list of 23 problems in the field of mathematics
-which were unsolved at the time \cite{hilbert_mathematische_1900}.  Those
+which were unsolved at the time
+\cite{hilbert_mathematische_1900,hilbert_mathematical_1902}.  Those
 problems have been vastly studied since then and most of them are solved or
 partially solved. There are however some which are still unsolved to this day.
 
@@ -42,11 +43,11 @@ polynomials of second degree:
 \pagebreak
 It is unknown whether there exists an upper limit on the number of limit cycles
 for systems with polynomials of degree greater than
-one\cite{ilyashenko_centennial_2002,llibre_sobre_2015}.  Nowadays, the
-largest number of limit cycles found is equal to four and it is still an open
-question whether or not a larger number of limit cycles is possible. Therefore,
-finding a system with more than 4 limit cycles will be quite an important result
-for the academic community.
+one~\cite{christopher_hilberts_2007,ilyashenko_centennial_2002,llibre_sobre_2015}.
+Nowadays, the largest number of limit cycles found is equal to four and it is
+still an open question whether or not a larger number of limit cycles is
+possible. Therefore, finding a system with 4 limit cycles or more will be quite
+an important result for the academic community.
 
 To find interesting systems several combinations of the equation parameters
 must be tried and evaluated, since each of this systems can be computed
@@ -135,38 +136,32 @@ may vary a lot depending on the system and the implementation of the code}
 
 \subsubsection{Stakeholders}
 
-The main stakeholders in this project are the researcher (me) and the director
-Grigori Astrakharchik who have a direct implication on the Thesis. If we manage
+The main stakeholders in this project are the researcher (me) and the director,
+Grigori Astrakharchik, that have a direct implication on the Thesis. If we manage
 to obtain interesting results other parties may benefit from them: other
 researchers on the fields of numerical analysis and dynamic systems may build on
 these results.
 
-% todo
-
-% Me as stakeholder and other companies and researches that may benefit from it
-
 \pagebreak
 \subsection{Justification}
-\subsubsection{Previous studies}
-
-% todo
-% More information comparing my approach to others
 
 In~\cite{kuznetsov_visualization_2013} there is a description of a task given by
-the academician A.N. Kolmogorov:
+the academician A.N.~Kolmogorov:
 
 \begin{quote}
-To estimate the number of limit cycles of square vector fields on plane, A.N. Kolmogorov had
-distributed several hundreds of such fields (with randomly chosen coefficients
-of quadratic expressions) among a few hundreds of students of Mech \& Math
-Faculty of Moscow State University as a mathematical practice. Each student had
-to find the number of limit cycles of a field. The result of this experiment was
-absolutely unexpected: not a single field had a limit cycle!
+To estimate the number of limit cycles of square vector fields on plane,
+A.N.~Kolmogorov had distributed several hundreds of such fields (with randomly
+chosen coefficients of quadratic expressions) among a few hundreds of students
+of Mech \& Math Faculty of Moscow State University as a mathematical practice.
+Each student had to find the number of limit cycles of a field. The result of
+this experiment was absolutely unexpected: not a single field had a limit cycle!
 \end{quote}
 
 This shows that the parallelizable nature of the problem and how difficult it is
 to find those cycles. Therefore it is important to implement a code that is both
 efficient on the calculation and have a big enough search space to find results.
+
+\subsubsection{Previous studies}
 
 There have been a number of studies relying on numerical methods to find limit
 cycles in two dimensional vector fields
@@ -174,27 +169,46 @@ cycles in two dimensional vector fields
 Papadimitriou and Vishnoi showed that the computation of a limit cycle is
 % todo
 % PSPACE??
-\textbf{PSPACE}-complete~\cite{papadimitriou_computational_2015}.
+PSPACE-complete~\cite{papadimitriou_computational_2015}.
 The maximal known number of limit cycles is reported in Kuznetsov et
 al.~\cite{kuznetsov_visualization_2013} where an example of specific conditions
-for which 4 limit cycles is provided.
+for which \textbf{4 limit cycles} is provided.
+
+All the previous studies have relied on standard analytical methods to calculate
+trajectories and find limit cycles, there has not been a research on developing
+efficient parallel code to solve ODE trajectories on GPUs with the aim of
+finding limit cycles. This projects aims to develop a highly efficient method to
+aid the search of limit cycles using modern computational capabilities. At best,
+we will be able to find systems with 4 or more limit cycles on our search, at
+worst the developed code will still be useful to quickly analyze systems in
+search of limit cycles.
+
+\pagebreak
+\subsubsection{CUDA and Julia}
 
 The CUDA framework has API for several programming languages (C, C++, Fortran,
-Python, MATLAB, \dots). The official programming toolkit is in C/C++ and offers
-the most customizability and low level configuration to adapt the code to the
-hardware. The two most notable alternatives are Python's pyCUDA and Julia's
-CUDA.jl libraries. These libraries bind to the C CUDA API and interface the data
-between the kernels and the programming language. As such, the performance of
-the kernels that run in the GPU should be equivalent in all cases but the data
-models and processing of different languages makes a difference when interfacing
-between the GPU code and the CPU code.
+Python, MATLAB, \dots). The official programming toolkit~\cite{nvidia_cuda_2021}
+is in C/C++ and offers the most customizability and low level configuration to
+adapt the code to the hardware. The two most notable alternatives are Python's
+\emph{pyCUDA}~\cite{klockner_pycuda_2012} and Julia's
+\emph{CUDA.jl}~\cite{besard_effective_2019} libraries. These libraries bind to
+the C CUDA API and interface the data between the kernels and the programming
+language. As such, the performance of the kernels that run in the GPU should be
+equivalent in all cases but the data models and processing of different
+languages makes a difference when interfacing between the GPU code and the CPU
+code.
 
-However, languages such as Python and Julia allow for faster coding and easier
-visualization of the data. For this Thesis we will use Julia programming
-language since it's faster than Python, has many libraries and tools for
-numerical analysis and has type checking.  Nonetheless, this is not a strict
-constraint and the possibility of writing specific C CUDA code to tweak the
-performance to the maximum will be studied.
+However, languages such as Python and Julia allow for faster development of the
+code and easier visualization of the data. For this Thesis we will use Julia
+programming language since it's faster than Python, has many libraries and tools
+for numerical analysis and has type checking. The performance of Julia CUDA
+library has a 0.50\% impact on performance compared to C according to the
+literature~\cite{besard_effective_2019}. Moreover, the
+\emph{DifferentialEquations.jl} Julia
+library~\cite{rackauckas_differentialequationsjl_2017} has been shown to
+outperform C implementations of ODE solvers and currently is the most feature
+complete and efficient suite for differential equation
+solving~\cite{rackauckas_comparison_2017}.
 
 \pagebreak
 \subsection{Scope}
@@ -246,7 +260,8 @@ To ensure the quality of the Thesis a number of requirements must be fulfilled:
     \item Make the developed code publicly available.
 \end{itemize}
 
-\subsubsection{Potential obstacles and risks}
+\subsubsection{Potential obstacles and risks}%
+\label{ssub:intro_risks}
 
 There are several risks that may have to be dealt with during the development of this Thesis.
 
@@ -269,9 +284,6 @@ There are several risks that may have to be dealt with during the development of
 \pagebreak
 \subsection{Methodology and rigor}
 
-% todo
-% more info on the methods used
-
 \subsubsection{Methodology}
 
 Since the Thesis must be completed in a relatively short period of time we will
@@ -283,10 +295,31 @@ methods and adapt them to be able to run in CUDA on the GPU.
 
 \subsubsection{Monitoring tools and validation}
 
-To manage the different iterations of the code \texttt{git} will be used. The
-repository will be hosted on \emph{GitHub} and access will be granted to the
-project tutor allowing him to follow and monitor the work and results at any
-time.
+To manage the different iterations of the code \texttt{git} will be used,
+this will allow to have a complete history of the different changes to the code
+made during the project. Different branches will be used during the development
+of the code: a \emph{master} branch with the current working code, a
+\emph{development} branch in which newest features are added. When the work done
+in the \emph{development} branch is properly tested and proved to be working the
+changes will merge into the \emph{master} branch. Additionally some
+other branches may be created with experimental changes.
+
+The \texttt{git} repository will be hosted on \href{github.com}{GitHub} and
+access will be granted to the project tutor allowing him to follow and monitor
+the work and results at any time. To control the bugs and features added to the
+code \emph{GitHub}'s issue system will be used, this issues will be classified
+with labels and managed through \emph{GitHub}'s project system (using kanban style
+project boards) following \emph{GitHub}'s guidelines on project management with
+their platform~\cite{github_managing_2021}.  Every time a milestone is reached a
+new signed label will be added to the repository to keep track of the most
+relevant points in the development of the program. The repository will be
+private during the development of the thesis but will be made publicly available
+to the community once it's finished.
+
+The thesis' document will also be tracked with \texttt{git} and hosted on
+\emph{GitHub} similarly to how the code is monitored. However, the document
+repository will also be synced to \href{overleaf.com}{Overleaf} allowing online
+edition of the document.
 
 A weekly meeting with the tutor will be arranged to discuss the progress and
 which tasks should be worked on.

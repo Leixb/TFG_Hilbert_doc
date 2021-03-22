@@ -1,6 +1,8 @@
 %! TEX root = **/010-main.tex
 % vim: spell spelllang=en:
 
+% \addtocontents{toc}{\protect\pagebreak}
+
 \section{Budget}%
 \label{sec:budget}
 
@@ -168,15 +170,16 @@ must be considered:
     $\SI{0.1270}{€\per\kWh} \cdot \SI{0.230}{\kW} \cdot 0.5 \cdot \SI{630}{\hour} = 9.21€$.
 \end{itemize}
 
-In total there are $86.29€$ of indirect costs that added to the hardware
-amortization gives $326.56€$ of generic costs.
+In total there are $86.29€$ of indirect costs which, added to the hardware
+amortization, result in $326.56€$ of generic costs.
 
 \subsection{Contingency}
 
 During the development of the project unforeseen events may occur that may
 impact our budget. Therefore a 15\% increase on the total cost will be added as
-a contingency margin. Given that the CPA is $11,080€$ and the generic costs are
-$326.56€$ for a total of $11,406.56€$. The contingency budget is then $1710.99€$.
+a contingency margin. Given that the Cost per Action ($CPA$) is $11,080€$
+and the Generic Costs ($GC$) are $326.56€$ for a total of $11,406.56€$. The contingency
+budget is then $1710.99€$.
 
 \subsection{Incidental costs}
 
@@ -209,8 +212,8 @@ impact the project given their estimated cost and the risk that they happen.
         \toprule
         \thead{Activity} & \thead{Cost (€)} \\
         \midrule
-        CPA & 11,080.00 \\
-        GC & 326.56 \\
+        $CPA$ & 11,080.00 \\
+        $GC$ & 326.56 \\
         Contingency & 1,710.98 \\
         Incidental cost & 250.00 \\
         \addlinespace[0.5em]
@@ -237,7 +240,7 @@ Where:
     \item $E_t = $ \textbf{Estimated cost} of the task on the initial budget
         plan
     \item $R_t = $ \textbf{Real cost} of the task when finished. Here we have to
-        recalculate the $CPA$, $GC$, contingency and incidents for the task.
+        recalculate the $CPA$, $GC$, Contingency and Incidents for the task.
     \item $d_t = $ \textbf{Deviation from initial cost:} this estimates how much
         we have deviated from the original budget for each task.
 \end{itemize}
@@ -246,6 +249,13 @@ If $d_t$ is negative I will reallocate the extra money for future incidents, if
 it's positive some of the funds for contingency will be used to cover the costs.
 If the contingency funds are not enough the whole budget planning will be
 readdressed.
+
+To keep track of this deviances from the budget a budget spreadsheet will be
+used. This spreadsheet will contain all the information on the tasks, their
+estimated cost, the real cost and the deviation calculations. All this budget
+data will be kept up to date and updated every time a task is finished. When the
+data is updated the deviation will immediately be apparent and the
+aforementioned steps will be taken.
 
 \pagebreak
 \section{Sustainability}%

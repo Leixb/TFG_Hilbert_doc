@@ -1,0 +1,134 @@
+\begin{tikzpicture}[/tikz/background rectangle/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, draw opacity={1.0}}, show background rectangle]
+\begin{axis}[point meta max={nan}, point meta min={nan}, legend cell align={left}, title={}, title style={at={{(0.5,1)}}, anchor={south}, font={{\fontsize{14 pt}{18.2 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, legend style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid, fill={rgb,1:red,1.0;green,1.0;blue,1.0}, fill opacity={1.0}, text opacity={1.0}, font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, text={rgb,1:red,0.0;green,0.0;blue,0.0}, at={(1.02, 0.5)}, anchor={west}}, axis background/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, opacity={1.0}}, anchor={north west}, xshift={1.0mm}, yshift={-1.0mm}, width={145.4mm}, height={99.6mm}, scaled x ticks={false}, xlabel={$\Delta t$ (log)}, x tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, x tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, xlabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{11 pt}{14.3 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, xmode={log}, log basis x={10}, xmajorgrids={true}, xmin={4.448154550722143e-7}, xmax={0.0887523514621322}, xtick={{0.06283185307179587,0.006283185307179587,0.0006283185307179586,6.283185307179586e-5,6.283185307179587e-6,6.283185307179586e-7}}, xticklabels={{$2\pi/10^{2}$,$2\pi/10^{3}$,$2\pi/10^{4}$,$2\pi/10^{5}$,$2\pi/10^{6}$,$2\pi/10^{7}$}}, xtick align={inside}, xticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, x grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, extra x ticks={{}}, extra x tick labels={}, extra x tick style={grid={major}, x grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.05}, line width={0.5}, solid}, major tick length={0}}, axis x line*={left}, x axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}, scaled y ticks={false}, ylabel={Error (log)}, y tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, y tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, ylabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{11 pt}{14.3 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, ymode={log}, log basis y={10}, ymajorgrids={true}, ymin={1.0e-15}, ymax={1}, ytick={{1.0e-15,1.0e-10,1.0e-5,1.0}}, yticklabels={{$10^{-15}$,$10^{-10}$,$10^{-5}$,$10^{0}$}}, ytick align={inside}, yticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, y grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, extra y ticks={{2.0000800000000002e-11,4.00006e-11,6.000040000000001e-11,8.000020000000002e-11,2.00008e-6,4.00006e-6,6.00004e-6,8.000020000000001e-6,0.20000800000000002,0.40000600000000003,0.600004,0.8000020000000001}}, extra y tick labels={}, extra y tick style={grid={major}, y grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.05}, line width={0.5}, solid}, major tick length={0}}, axis y line*={left}, y axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}]
+    \addplot[color={rgb,1:red,0.0;green,0.6056;blue,0.9787}, name path={9a3579b9-e385-4fc3-a9be-fa765932d5c8}, only marks, draw opacity={1.0}, line width={0}, solid, mark={*}, mark size={3.0 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.0;green,0.6056;blue,0.9787}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            0.06283185307179587  0.21793845064445141  \\
+            0.006283185307179587  0.019935092674738794  \\
+            0.0006283185307179586  0.0019758701274593237  \\
+            6.283185307179586e-5  0.00019741157090871818  \\
+            6.283185307179587e-6  1.9739403610059645e-5  \\
+            6.283185307179586e-7  1.973922716169895e-6  \\
+        }
+        ;
+    \addlegendentry {Euler}
+    \addplot[color={rgb,1:red,0.8889;green,0.4356;blue,0.2781}, name path={76d68997-3d78-4b95-b16e-6f74c4a84bca}, only marks, draw opacity={1.0}, line width={0}, solid, mark={*}, mark size={3.0 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.8889;green,0.4356;blue,0.2781}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            0.06283185307179587  0.0041342599533195894  \\
+            0.006283185307179587  4.134167565827029e-5  \\
+            0.0006283185307179586  4.1341702204861503e-7  \\
+            6.283185307179586e-5  4.134153894997819e-9  \\
+            6.283185307179587e-6  4.131363911161736e-11  \\
+            6.283185307179586e-7  4.33056128029899e-13  \\
+        }
+        ;
+    \addlegendentry {Midpoint}
+    \addplot[color={rgb,1:red,0.2422;green,0.6433;blue,0.3044}, name path={af9cff2f-26d6-45cf-ad67-a09cc14f865c}, only marks, draw opacity={1.0}, line width={0}, solid, mark={*}, mark size={3.0 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.2422;green,0.6433;blue,0.3044}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            0.06283185307179587  6.493389128448556e-5  \\
+            0.006283185307179587  6.493935681568592e-8  \\
+            0.0006283185307179586  6.49421711813527e-11  \\
+            6.283185307179586e-5  6.794299516364394e-14  \\
+            6.283185307179587e-6  1.5694363315369583e-14  \\
+            6.283185307179586e-7  1.6010402725113822e-14  \\
+        }
+        ;
+    \addlegendentry {Rk3}
+    \addplot[color={rgb,1:red,0.7644;green,0.4441;blue,0.8243}, name path={45b951c5-be81-43be-863b-2941c86dbe14}, only marks, draw opacity={1.0}, line width={0}, solid, mark={*}, mark size={3.0 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.7644;green,0.4441;blue,0.8243}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            0.06283185307179587  8.160205150270255e-7  \\
+            0.006283185307179587  8.160613350706051e-11  \\
+            0.0006283185307179586  7.030278937067787e-15  \\
+            6.283185307179586e-5  1.6312875649503176e-14  \\
+            6.283185307179587e-6  1.5871093297727075e-14  \\
+            6.283185307179586e-7  1.6756310398774856e-14  \\
+        }
+        ;
+    \addlegendentry {Rk4}
+    \addplot[color={rgb,1:red,0.6755;green,0.5557;blue,0.0942}, name path={dd4abf2b-b193-46c2-86ba-bd0b88d25ef8}, only marks, draw opacity={1.0}, line width={0}, solid, mark={*}, mark size={3.0 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.6755;green,0.5557;blue,0.0942}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            0.06283185307179587  5.587484113614489e-9  \\
+            0.006283185307179587  5.718820244166411e-14  \\
+            0.0006283185307179586  1.0756836645500714e-14  \\
+            6.283185307179586e-5  7.520758735715105e-14  \\
+            6.283185307179587e-6  2.289856006398843e-13  \\
+            6.283185307179586e-7  1.0456440178785643e-12  \\
+        }
+        ;
+    \addlegendentry {Rkf45}
+    \addplot[color={rgb,1:red,0.0;green,0.6658;blue,0.681}, name path={625adf73-aa7a-445a-a012-3503c6a4fa54}, draw opacity={1.0}, line width={1}, solid]
+        table[row sep={\\}]
+        {
+            \\
+            0.06283185307179587  0.06283185307179587  \\
+            0.006283185307179587  0.006283185307179587  \\
+            0.0006283185307179586  0.0006283185307179586  \\
+            6.283185307179586e-5  6.283185307179586e-5  \\
+            6.283185307179587e-6  6.283185307179587e-6  \\
+            6.283185307179586e-7  6.283185307179586e-7  \\
+        }
+        ;
+    \addlegendentry {$y = \Delta t^1$}
+    \addplot[color={rgb,1:red,0.9308;green,0.3675;blue,0.5758}, name path={6c67f8d4-3673-4bd9-8b52-b200408ca78d}, draw opacity={1.0}, line width={1}, solid]
+        table[row sep={\\}]
+        {
+            \\
+            0.06283185307179587  0.0039478417604357436  \\
+            0.006283185307179587  3.9478417604357436e-5  \\
+            0.0006283185307179586  3.947841760435743e-7  \\
+            6.283185307179586e-5  3.947841760435742e-9  \\
+            6.283185307179587e-6  3.947841760435744e-11  \\
+            6.283185307179586e-7  3.947841760435743e-13  \\
+        }
+        ;
+    \addlegendentry {$y = \Delta t^2$}
+    \addplot[color={rgb,1:red,0.777;green,0.5097;blue,0.1464}, name path={cb5a700b-62ff-48c7-ae7a-4641f52f2596}, draw opacity={1.0}, line width={1}, solid]
+        table[row sep={\\}]
+        {
+            \\
+            0.06283185307179587  0.00024805021344239856  \\
+            0.006283185307179587  2.4805021344239856e-7  \\
+            0.0006283185307179586  2.480502134423985e-10  \\
+            6.283185307179586e-5  2.4805021344239844e-13  \\
+            6.283185307179587e-6  2.480502134423986e-16  \\
+            6.283185307179586e-7  2.4805021344239856e-19  \\
+        }
+        ;
+    \addlegendentry {$y = \Delta t^3$}
+    \addplot[color={rgb,1:red,0.0;green,0.6643;blue,0.553}, name path={5010b0bd-8fd1-4c17-9c88-d5758d54f217}, draw opacity={1.0}, line width={1}, solid]
+        table[row sep={\\}]
+        {
+            \\
+            0.06283185307179587  1.558545456544039e-5  \\
+            0.006283185307179587  1.5585454565440392e-9  \\
+            0.0006283185307179586  1.5585454565440386e-13  \\
+            6.283185307179586e-5  1.5585454565440378e-17  \\
+            6.283185307179587e-6  1.5585454565440393e-21  \\
+            6.283185307179586e-7  1.5585454565440388e-25  \\
+        }
+        ;
+    \addlegendentry {$y = \Delta t^4$}
+    \addplot[color={rgb,1:red,0.5585;green,0.5935;blue,0.1175}, name path={cba64d95-b5f0-45c0-98de-f6d8e3efba23}, draw opacity={1.0}, line width={1}, solid]
+        table[row sep={\\}]
+        {
+            \\
+            0.06283185307179587  9.79262991312901e-7  \\
+            0.006283185307179587  9.792629913129008e-12  \\
+            0.0006283185307179586  9.792629913129005e-17  \\
+            6.283185307179586e-5  9.792629913129e-22  \\
+            6.283185307179587e-6  9.792629913129008e-27  \\
+            6.283185307179586e-7  9.792629913129007e-32  \\
+        }
+        ;
+    \addlegendentry {$y = \Delta t^5$}
+\end{axis}
+\end{tikzpicture}

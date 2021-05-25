@@ -1,8 +1,50 @@
 %! TEX root = **/010-main.tex
 % vim: spell spelllang=en:
 
+\section{Initial implementation}%
+\label{sec:initial_implementation}
+
+Before implementing the program in CUDA we first need to implement a sequential
+version of the program. This sequential code allows easier debugging of the
+implementation and provides a basis to compare the speedup obtained with CUDA.
+
+As discussed previously, several different Runge Kutta based methods of different order
+are going to be implemented and tested.
+
+% Julia -> C
+
+% Sample code
+
 \section{Convergence analysis}%
 \label{sec:convergence}
+
+Once the initial sequential code is implemented we must analyze the results
+obtained to verify the correctness of the program. Therefore a convergence
+analysis was performed in which we compared the results obtained with our
+implementation to the theoretical results of a well known ODE.
+
+We used the system shown in \cref{eq:circle} for which all trajectories are
+circles with center $(0,0)$ and period $2\pi$. For each method we computed the
+error after one loop with different time steps ($\Delta t$)
+
+In \cref{fig:error_cycle} we can observe how the error of all the methods
+in relation to $\Delta t$ correlate to the numerical order of the method.
+Additionally, for the higher order methods there is a point in which the
+numerical error of the method is irrelevant since its less than the precision of
+\texttt{double}, therefore there is no need for $\Delta t < \dfrac{2\pi}{10^4}$
+for the Runge-Kutta of order 4.
+
+In \cref{fig:error_pi} we computed the error using values of $\Delta t$ non commensurate
+with the period of the circle and interpolated the period using a second degree
+polynomial. The results are quite different to \cref{fig:error_cycle} since
+Euler and Midpoint methods appear to have order 2 and RK3, RK4, RKF45 order 3.
+This is probably due to the polynomial interpolation used and other
+interpolation methods should be considered to obtain better results.
+
+\begin{align}\label{eq:circle}
+    \frac{dx}{dt} &= -y \nonumber \\
+    \frac{dy}{dt} &= x
+\end{align}
 
 \begin{figure}[H]
     \centering

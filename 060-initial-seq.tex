@@ -1,0 +1,99 @@
+%! TEX root = **/010-main.tex
+% vim: spell spelllang=en:
+
+\section{Initial implementation}%
+\label{sec:initial_implementation}
+
+Before implementing the program in CUDA we first need to implement a sequential
+version of the program. This sequential code allows easier debugging of the
+implementation and provides a basis to compare the speedup obtained with CUDA.
+
+As discussed previously, several different Runge Kutta based methods of different order
+are going to be implemented and tested.
+
+There is no need to save all the trajectory to detect the cycles since the
+relevant metrics can be computed as the integration step is happening.
+This reduces not only the amount of memory needed to compute and store the
+results but also allows the early termination of a trajectory computation if
+we detect that it is a cycle, point or it goes out of bounds before the last
+step is reached. These metrics are:
+
+\begin{itemize}
+    \item \textbf{Diameter} difference between maximum and minimum values in the
+        trajectory loop
+    \item \textbf{Period} time it takes for a trajectory to \emph{loop}.
+        Computed by calculating the time it crosses each axis.
+    \item \textbf{Inflection points} points in which the trajectory changes
+        behaviour (minima and maxima)
+    \item \textbf{Axis intersections} points in which the trajectory intersects an
+        axis.
+\end{itemize}
+
+To mitigate the effects of the discrete time step on the estimation of the
+values polynomial interpolation of second order was performed to estimate them
+with more precision.
+
+\pagebreak
+\subsection{C implementation}
+
+The initial implementation of the
+methods was performed in \emph{Julia}, however the methods were later translated
+to \emph{C} since the \emph{CUDA} \emph{Julia} library was quite difficult to
+debug and it was easier to develop the \emph{CUDA} kernels directly in \emph{C}
+and ensure that they worked properly. In \cref{lst:julia_rk4,lst:c_rk4} we can
+see the main RK4 routine implemented in \emph{Julia} and the corresponding
+\emph{C} translation.
+
+% Julia -> C
+
+
+\begin{listing}[H]
+    \caption{Julia version of RK4 step}
+    \label{lst:julia_rk4}
+\begin{minted}{julia}
+function RK4(f::Function, x, y, h)
+    xk1, yk1 = h.*f(x, y)
+    xk2, yk2 = h.*f(x + xk1/2, y + yk1/2)
+    xk3, yk3 = h.*f(x + xk2/2, y + yk2/2)
+    xk4, yk4 = h.*f(x + xk3, y + yk3)
+
+    x = x + (xk1 + 2xk2 + 2xk3 + xk4)/6
+    y = y + (yk1 + 2yk2 + 2yk3 + yk4)/6
+
+    x, y
+end
+\end{minted}
+\end{listing}
+
+\begin{listing}[H]
+    \caption{C version of RK4}
+    \label{lst:c_rk4}
+\begin{minted}{c}
+void rk4_step(const double x0, const double y0, double *const x1, double *const y1, const double h, double *const cache) {
+    // xk1, yk1 = h.*f(x, y)
+    f(x0, y0, h, &cache[0*2 + 0], &cache[0*2 + 1]);
+
+    // xk2, yk2 = h.*f(x + xk1/2, y + yk1/2)
+    *x1 = x0 + cache[0*2 + 0]/2.0;
+    *y1 = y0 + cache[0*2 + 1]/2.0;
+    f(*x1, *y1, h, &cache[1*2 + 0], &cache[1*2 + 1]);
+
+    // xk3, yk3 = h.*f(x + xk2/2, y + yk2/2)
+    *x1 = x0 + cache[1*2 + 0]/2.0;
+    *y1 = y0 + cache[1*2 + 1]/2.0;
+    f(*x1, *y1, h, &cache[2*2 + 0], &cache[2*2 + 1]);
+
+    // xk4, yk4 = h.*f(x + xk3, y + yk3)
+    *x1 = x0 + cache[2*2 + 0];
+    *y1 = y0 + cache[2*2 + 1];
+    f(*x1, *y1, h, &cache[3*2 + 0], &cache[3*2 + 1]);
+
+    // x = x + (xk1 + 2xk2 + 2xk3 + xk4)/6
+    // y = y + (yk1 + 2yk2 + 2yk3 + yk4)/6
+    *x1 = x0 + (cache[0*2 + 0] + 2*cache[1*2 + 0] + 2*cache[2*2 + 0] + cache[3*2 + 0])/6.0;
+    *y1 = y0 + (cache[0*2 + 1] + 2*cache[1*2 + 1] + 2*cache[2*2 + 1] + cache[3*2 + 1])/6.0;
+}
+\end{minted}
+\end{listing}
+
+% Sample code

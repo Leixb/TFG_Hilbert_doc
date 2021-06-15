@@ -10,10 +10,10 @@
 % EXTRA PACKAGES / CONFIG
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\includeonly{
-    060-convergence-analysis,
-    070-initial-cuda
-}
+% \includeonly{
+%     060-convergence-analysis,
+%     070-initial-cuda
+% }
 
 \usepackage{fancyhdr}
 \usepackage{pgfgantt}
@@ -55,10 +55,12 @@
     \pagenumbering{Roman}
 
     %\setcounter{tocdepth}{2}
-    \tableofcontents% \pagebreak
+    \tableofcontents \pagebreak
 
     \listoffigures %\pagebreak
-    \listoftables \clearpage
+    \listoftables
+    \listoflistings
+    \clearpage
 
     \pagenumbering{arabic}
 
@@ -87,16 +89,18 @@
     \include{030-intro}
     \include{040-time-planning}
     \include{050-budget}
-    
-    \section{Study of convergence of the integration method}
-    \begin{itemize}
-        \item Figure error as a function of the commensurate timestep, $\Delta t = T/n$ for different integration schemes: Euler, RK2, RK4, RK5 
-        \item Figure error as a function of a non-commensurate timestep and using interpolation for finding the period
-    \end{itemize}
-    
 
+    %\section{Study of convergence of the integration method}
+    %\begin{itemize}
+    %    \item Figure error as a function of the commensurate timestep, $\Delta t = T/n$ for different integration schemes: Euler, RK2, RK4, RK5
+    %    \item Figure error as a function of a non-commensurate timestep and using interpolation for finding the period
+    %\end{itemize}
+
+
+    \include{060-initial-seq}
     \include{060-convergence-analysis}
     \include{070-initial-cuda}
+    \include{080-performance-analysis}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BIBLIO

@@ -1,0 +1,42 @@
+\begin{tikzpicture}[/tikz/background rectangle/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, draw opacity={1.0}}, show background rectangle]
+\begin{axis}[point meta max={nan}, point meta min={nan}, legend cell align={left}, title={}, title style={at={{(0.5,1)}}, anchor={south}, font={{\fontsize{14 pt}{18.2 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, legend style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid, fill={rgb,1:red,1.0;green,1.0;blue,1.0}, fill opacity={1.0}, text opacity={1.0}, font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, text={rgb,1:red,0.0;green,0.0;blue,0.0}, at={(0.02, 0.98)}, anchor={north west}}, axis background/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, opacity={1.0}}, anchor={north west}, xshift={1.0mm}, yshift={-1.0mm}, width={150.4mm}, height={99.6mm}, scaled x ticks={false}, xlabel={Number of different trajectories}, x tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, x tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, xlabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{11 pt}{14.3 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, xmode={log}, log basis x={2}, xmajorgrids={true}, xmin={0.63287829698514}, xmax={6.627346869027621e6}, xtick={{1.0,4.0,16.0,64.0,256.0,1024.0,4096.0,16384.0,65536.0,262144.0,1.048576e6,4.194304e6}}, xticklabels={{$2^{0}$,$2^{2}$,$2^{4}$,$2^{6}$,$2^{8}$,$2^{10}$,$2^{12}$,$2^{14}$,$2^{16}$,$2^{18}$,$2^{20}$,$2^{22}$}}, xtick align={inside}, xticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, x grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, extra x ticks={{0.7,0.85,1.6,2.2,2.8,3.4,6.4,8.8,11.2,13.6,25.6,35.2,44.8,54.4,102.4,140.8,179.2,217.6,409.6,563.2,716.8,870.4,1638.4,2252.8,2867.2,3481.6,6553.6,9011.2,11468.8,13926.4,26214.4,36044.8,45875.2,55705.6,104857.6,144179.2,183500.8,222822.4,419430.4,576716.8,734003.2,891289.6,1.6777216e6,2.3068672e6,2.9360128e6,3.5651584e6}}, extra x tick labels={}, extra x tick style={grid={major}, x grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.05}, line width={0.5}, solid}, major tick length={0}}, axis x line*={left}, x axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}, scaled y ticks={false}, ylabel={Execution time (ms)}, y tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, y tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, ylabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{11 pt}{14.3 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, ymode={log}, log basis y={10}, ymajorgrids={true}, ymin={0.3862782574372192}, ymax={4.0450115167404884e6}, ytick={{1.0,10.0,100.0,1000.0,10000.0,100000.0,1.0e6}}, yticklabels={{$10^{0}$,$10^{1}$,$10^{2}$,$10^{3}$,$10^{4}$,$10^{5}$,$10^{6}$}}, ytick align={inside}, yticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, y grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, extra y ticks={{0.45999999999999996,0.6399999999999999,0.8200000000000001,2.8,4.6,6.4,8.2,28.0,46.0,64.0,82.0,280.0,460.0,640.0,820.0,2800.0,4600.0,6400.0,8200.0,28000.0,46000.0,64000.0,82000.0,280000.0,460000.0,640000.0,820000.0,2.8e6}}, extra y tick labels={}, extra y tick style={grid={major}, y grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.05}, line width={0.5}, solid}, major tick length={0}}, axis y line*={left}, y axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}]
+    \addplot[color={rgb,1:red,0.0;green,0.6056;blue,0.9787}, name path={f474d40c-aa01-4b3e-99f6-12f706299476}, only marks, draw opacity={1.0}, line width={0}, solid, mark={*}, mark size={3.0 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.0;green,0.6056;blue,0.9787}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            1.0  29.551008  \\
+            4.0  29.389856  \\
+            16.0  29.395456  \\
+            64.0  27.354689  \\
+            256.0  26.865376  \\
+            1024.0  32.568928  \\
+            4096.0  32.655361  \\
+            16384.0  32.808353  \\
+            65536.0  100.538017  \\
+            262144.0  280.4599  \\
+            1.048576e6  1084.036133  \\
+            4.194304e6  4284.366211  \\
+        }
+        ;
+    \addlegendentry {CUDA}
+    \addplot[color={rgb,1:red,0.8889;green,0.4356;blue,0.2781}, name path={c779480c-6a41-4d68-a77e-a35e9f05b88e}, draw opacity={1.0}, line width={1}, solid]
+        table[row sep={\\}]
+        {
+            \\
+            1.0  0.6103515625  \\
+            4.0  2.44140625  \\
+            16.0  9.765625  \\
+            64.0  39.0625  \\
+            256.0  156.25  \\
+            1024.0  625.0  \\
+            4096.0  2500.0  \\
+            16384.0  10000.0  \\
+            65536.0  40000.0  \\
+            262144.0  160000.0  \\
+            1.048576e6  640000.0  \\
+            4.194304e6  2.56e6  \\
+        }
+        ;
+    \addlegendentry {sequential}
+\end{axis}
+\end{tikzpicture}

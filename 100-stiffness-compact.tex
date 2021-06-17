@@ -35,9 +35,21 @@ cycles should appear around the origin. There may be more nodes
 depending on the parameters of the system, but we know that the area around the
 origin is a good candidate.
 
-\paragraph{Stiffness}
+\paragraph{Stiffness} %
+\label{sub:stiffness}
+
 Another problem when numerically integrating ODE systems are the so called
 \emph{stiff} systems where traditional \emph{Runge-Kutta} integration methods
-struggle due to the numerical instability of the system.
+struggle due to the numerical instability of the system. In particular, the
+higher the order of the \emph{Runge Kutta} method, the less stability it has
+\cite{skvortsov_accuracy_2003}.
+The only solution to be able to integrate stiff systems (or stiff sections of a
+system) is to have specialized methods for stiff integration, detect when a
+trajectory is stiff and use these methods instead
+\cite{shampine_detecting_1977}.
+
+There are various stiff integration methods, but their implementation in
+\emph{CUDA} is non trivial since they all involve some sort of equation solving
+at each step \cite{butcher_numerical_2008}.
 
 %TODO

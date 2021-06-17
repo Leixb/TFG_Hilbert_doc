@@ -90,17 +90,28 @@
     \include{040-time-planning}
     \include{050-budget}
 
-    %\section{Study of convergence of the integration method}
-    %\begin{itemize}
-    %    \item Figure error as a function of the commensurate timestep, $\Delta t = T/n$ for different integration schemes: Euler, RK2, RK4, RK5
-    %    \item Figure error as a function of a non-commensurate timestep and using interpolation for finding the period
-    %\end{itemize}
-
-
     \include{060-initial-seq}
     \include{060-convergence-analysis}
+    \include{090-metrics}
     \include{070-initial-cuda}
+    \include{075-results}
+
+
     \include{080-performance-analysis}
+
+
+    \include{100-stiffness-compact}
+
+    \include{110-julia}
+
+    \include{120-final-benchmarks}
+
+    \include{130-conclusions}
+
+    \include{140-further-work}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BIBLIO
@@ -113,10 +124,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     % uncomment to add appendix section prefix to numbering
-    %\appendixpagenumbering
+    \appendixpagenumbering
 
-    % \appendix
+    \appendix
 
-    % \include{990-appendix}
+    \include{990-appendix}
 
 \end{document}

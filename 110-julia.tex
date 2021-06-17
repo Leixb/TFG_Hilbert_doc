@@ -1,0 +1,20 @@
+%! TEX root = **/010-main.tex
+% vim: spell spelllang=en:
+
+\section{Julia ABI}%
+\label{sec:abi}
+
+\paragraph{CUDA limitations}
+
+One of the main problems with the current implementation is that changing the system
+involves creating a new \emph{CUDA} function and recompiling the library, this makes
+using the program as a library quite challenging since the use must know how to
+program the function and compile it. Without using \emph{CUDA} we could simply
+use function pointers so that any arbitrary function can be passed and no need
+for recompilation is needed. However, function pointers are extremely slow in \emph{CUDA}
+since the function cannot be \emph{inlined} and we introduce massive overhead by
+adding function calls to the stack.
+
+One option is to implement a program to parse ODE systems with a strict syntax,
+produces the \emph{CUDA} kernel compiles it and dynamically links it to the
+program. It should be possible to do from \emph{Julia}.

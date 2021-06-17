@@ -1,0 +1,43 @@
+%! TEX root = **/010-main.tex
+% vim: spell spelllang=en:
+
+\section{Compactification and Stiffness}%
+\label{sec:compact-stiff}
+
+One problem that arises when trying to find limit cycles is where to look for
+them in the space. Since the $\mathcal{R}^2$ plane is infinite we must decide
+what boundaries of the plane to evaluate. There are 2 methods to solve this
+issue: compactification (compacting the infinite field into a finite one through
+mathematical constructs) and analytical analysis of singular points interest.
+
+\paragraph{Compactification}
+There are various methods of compactification that can be used to study
+limit cycles, one of these is the Poincaré, Bendixon or
+Poincaré Lyupanov compactification
+\cite{poincare_sur_1891,bendixson_sur_1901,dumortier_poincare_2006,noauthor_fig_nodate}
+among others.  These methods reduce the infinite field into an semi-sphere that
+that can be projected onto a plane for easier visualization. For simplicity, we
+compactified the plane using the tangent function: a point $x$ in the infinite
+space can be mapped to $\alpha \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$
+such that: $x = \tan(\alpha)$. This produces great distortion on the plane
+making all trajectories seem squares and values of $x$ greater than
+
+\paragraph{Singular points}
+Performing analytical analysis to find points of interest is quite complex and
+requires vast knowledge on the field of ODEs and limit cycles. Moreover, to
+perform analytical computation special software to handle symbolic maths is
+required (like Maple \cite{noauthor_maple_nodate}). Ideally these points could
+be computed beforehand using normal CPU computation and use them to decide the
+areas that need analysis using our program. However it is known that all limit
+cycles in a quadratic system contain a node \cite{cherkas_quadratic_2003}. And
+in the system we are analysing $(0,0)$ will always be a node, therefore limit
+cycles should appear around the origin. There may be more nodes
+depending on the parameters of the system, but we know that the area around the
+origin is a good candidate.
+
+\paragraph{Stiffness}
+Another problem when numerically integrating ODE systems are the so called
+\emph{stiff} systems where traditional \emph{Runge-Kutta} integration methods
+struggle due to the numerical instability of the system.
+
+%TODO

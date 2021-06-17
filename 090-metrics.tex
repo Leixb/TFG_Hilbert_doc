@@ -1,0 +1,117 @@
+%! TEX root = **/010-main.tex
+% vim: spell spelllang=en:
+
+\section{Metrics}%
+\label{sec:metrics}
+
+As discussed in previous sections, there is no need to save the full trajectory
+in order to detect limit cycle candidates; we can evaluate the trajectory's
+characteristics in-place.
+
+To do so we have to detect special points in the trajectory that we can use to
+detect if we are in a cycle. These points must be easy to identify
+(computationally cheap) and should be present in all trajectories. By comparing
+the values of these points at each loop of the cycle we can estimate the
+behaviour of the trajectory.
+
+\paragraph{Zero crossings:} can be computed by detecting the change of sign
+during the computation. Although they are really cheap and are commonly used on
+complex ODE systems, there is no guarantee that cycles will cross axis.
+
+\paragraph{Inflection points:} these correspond to the points where the ratio of
+change of the function changes sign (maxima, minima or stationary points). Given
+that the integration methods used compute the result as the previous value plus
+a change, we can easily detect changes in sign with almost no overhead.
+Moreover, all cycles will have at least a four local extrema.
+
+\paragraph{Interpolation:} although we can detect if we passed an inflection
+point with almost no overhead, we must perform some kind of interpolation to
+obtain an accurate value within our tolerances. To do so, we can perform
+interpolation using 3 neighbouring points or perform additional integration steps
+to find the inflection point numerically. Applying polynomial interpolation
+requires saving at least 3 point for each trajectory, interpolating them and
+computing the vertex. The second option (root finding) is potentially more
+costly since it involves additional integration steps but should produce better
+results.
+
+\pagebreak
+
+\subsection{Rate of change of extrema}
+
+Comparing the value of the initial 4 local extrema with the local extrema of the
+second loop of the cycle we can obtain a rate of change of the trajectory. For
+instance, given the values of the 4 local extrema on obtained on the first loop:
+$x_{\min}, x_{\max}, y_{\min}, y_{\max}$ and their counterparts obtained on the second
+loop: $x'_{\min}, x'_{\max}, y'_{\min}, y'_{\max}$ we can compute the ratio
+between each of them to obtain their rate of change. If the ratio is less than
+1, the trajectory is \emph{decreasing}, if it is greater than 1 it is
+\emph{increasing} and if it is 1 (within an adequate tolerance) the trajectory
+is a cycle.
+
+There is one small caveat with this approach which is that the ratios between
+the 4 different extrema are not comparable, that is, in some cases the maxima or
+minima are various orders of magnitude apart. This has to be taken into
+consideration when evaluating the values used for the tolerance when searching
+the points with ratio 1.
+
+Traditionally with CPU computation one point is taken and evaluated through many
+steps until it reaches an stable cycle, with GPU computation, we can take a
+massive amount of points, evaluate only the very few first steps (until we have
+completed 2 loops) and quickly find limit cycle candidates.
+
+\subsection{Other metrics}
+
+A part from the rate of change in local extrema, an evaluation of the rate of
+change in the loop period was also attempted but it did not give satisfying
+results.
+
+\subsection{Distinguishing different cycles}
+
+The rate of change of extrema allows us to find areas in the function with
+trajectories with ratio 1, which are candidates to be limit cycles. Now the
+problem is how we can classify this areas into different limit cycle
+trajectories. Two approaches were tested:
+
+\paragraph{Computer vision techniques}
+The final result of our computation is a matrix with ones and zeros indicating
+the coordinates close to trajectories with rate of change 1. A priori it should
+be easy to run this matrix through some form of \emph{BFS} able to find the
+different groups. However, this presents 2 difficulties: there may be areas
+where there is not enough \emph{resolution} and the line can be partially
+broken. Additionally some trajectories may pass really close to each other and
+be classified as the same group.
+
+\paragraph{Clustering}
+Given that we are computing the ratio of 4 local extrema points, we can use
+these same extrema values to analyse the characteristics of the trajectory. To
+do so, a part from returning the ratio of the extrema points, the 4 extrema
+points themselves will also be returned. With this information we have 4 points
+defining a cycle which we can classify using any clustering technique. Three
+different clustering methods where tested:
+
+\paragraph{Hierarchical clustering}
+
+Using hierarchical clustering we obtained correct clusters with the system of
+\cite{kuznetsov_visualization_2013}. However, the this algorithm does not scale
+well when lots of points are used. ($\mathcal{O}(n^2)$).
+
+
+\paragraph{Kmeans clustering}
+
+As with hierarchical clustering, with \emph{Kmeans} we can use the 4 values of
+local extrema when computing the clustering.  With \emph{Kmeans} we must specify
+the number of clusters the search, since the number of possible limit cycles is
+small (at most 5) we can compute the 5 possible number of clusters and evaluate
+which method gives better results. The runtime complexity of \emph{Kmeans} is
+$\mathcal{O}(n)$.
+
+Some tests where done with hierarchical clustering but the
+results where similar to the ones obtained using \emph{Kmeans}
+
+\paragraph{Jenks natural breaks optimization}
+
+This algorithm is equivalent to \emph{Kmeans} but using only one variable.
+We computed the method with different number of clusters (1 to 5) and determined
+for each of the 4 variables which number of clusters gave the bests results.
+Most of the times all 4 variables gave the same number of results, indicating
+that one could suffice.

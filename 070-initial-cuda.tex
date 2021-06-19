@@ -3,31 +3,13 @@
 
 \section{Initial CUDA implementation}
 
-The C implementation was adapted to be run by CUDA. Each CUDA thread will run a
-full trajectory to completion and they can all be run in parallel as long as we
-don't exceed the GPU threads. For the initial version we implemented the program
-to run in a single GPU with a total of 10240 CUDA cores and 12Gb of memory
+The C implementation was adapted to be run by CUDA. Each CUDA thread computes a full trajectory to completion and threads run in parallel as long as we don't
+{\bf ??? don't use informal style, -> do not}
+exceed the GPU threads. For the initial version we implemented the program to run in a single GPU with a total of 10240 CUDA cores and 12Gb of memory 
 \footnote{Details on the GPU hardware can be found in~\cref{lst:gpu_info} in the appendix}
 
-Given the results of the convergence analysis from~\cref{sec:convergence}, each
-trajectory was computed using RK4 with a step of $\Delta t=10^{-3}$ performing
-$10^4$ steps. To save the full trajectory we need $10^4\cdot 8$ bytes (80kb). To
-compute 10240 trajectories the total amount of memory needed is around 800Mb
-which is feasible. However, we can compute the different metrics to find limit
-cycles in place during the integration steps so there is no need to save the
-full trajectory (we can just save 8 to 100 bytes of data for each trajectory
-depending on the metrics we compute).
+Given the results of the convergence analysis from~\cref{sec:convergence}, each trajectory was computed using RK4 with a step of $\Delta t=10^{-3}$ performing $10^4$ steps. To save the full trajectory we need $10^4\cdot 8$ bytes (80kb). To compute 10240 trajectories the total amount of memory needed is around 800Mb which is feasible. However, we can compute the different metrics to find limit cycles in place during the integration steps so there is no need to save the full trajectory (we can just save 8 to 100 bytes of data for each trajectory depending on the metrics we compute).
 
-Given a pair of axis (delimited $x$ and $y$ ranges) the different points in the
-grid were separated into blocks of 32 by 32 points (1024 threads) and ran using
-a CUDA kernel that computed the different values wanted for each trajectory. For
-this initial version, the divisions on each axis were multiples of 2 and equal
-for $x$ and $y$ ($1024\times 1024$, $64\times 64$ \dots ).
+Given a pair of axis (delimited $x$ and $y$ ranges) the different points in the grid were separated into blocks of 32 by 32 points (1024 threads) and ran using a CUDA kernel that computed the different values wanted for each trajectory. For this initial version, the divisions on each axis were multiples of 2 and equal for $x$ and $y$ ($1024\times 1024$, $64\times 64$ \dots ).
 
-Although we have no problems on the amount of memory needed to save the
-information needed, there are limitations in the number of register variables
-available to each thread. In this initial version a cache was used to compute
-intermediate values which occupied 32 bytes per trajectory. This cache may not
-be needed and using registers may give better performance, but the goal of this
-initial implementation is to be as close as possible to the original $C$ version
-and serve as a baseline of the minimum performance gain using CUDA.
+Although we have no problems on the amount of memory needed to save the information needed, there are limitations in the number of register variables available to each thread. In this initial version a cache was used to compute intermediate values which occupied 32 bytes per trajectory. This cache may not be needed and using registers may give better performance, but the goal of this initial implementation is to be as close as possible to the original $C$ version and serve as a baseline of the minimum performance gain using CUDA.

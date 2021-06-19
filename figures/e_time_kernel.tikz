@@ -1,0 +1,46 @@
+\begin{tikzpicture}[/tikz/background rectangle/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, draw opacity={1.0}}, show background rectangle]
+\begin{axis}[point meta max={nan}, point meta min={nan}, legend cell align={left}, title={}, title style={at={{(0.5,1)}}, anchor={south}, font={{\fontsize{14 pt}{18.2 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, legend style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid, fill={rgb,1:red,1.0;green,1.0;blue,1.0}, fill opacity={1.0}, text opacity={1.0}, font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, text={rgb,1:red,0.0;green,0.0;blue,0.0}, at={(0.02, 0.98)}, anchor={north west}}, axis background/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, opacity={1.0}}, anchor={north west}, xshift={1.0mm}, yshift={-1.0mm}, width={150.4mm}, height={99.6mm}, scaled x ticks={false}, xlabel={Grid size}, x tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, x tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, xlabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{11 pt}{14.3 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, xmode={log}, log basis x={2}, xmajorgrids={true}, xmin={1}, xmax={8192}, xtick={{1,2,4,8,16,32,64,128,256,512,1024,2048,4096,8192}}, xticklabels={{$2^{0}$,$2^{2}$,$2^{4}$,$2^{6}$,$2^{8}$,$2^{10}$,$2^{12}$,$2^{14}$,$2^{16}$,$2^{18}$,$2^{20}$,$2^{22}$,$2^{24}$,$2^{26}$}}, xtick align={inside}, xticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, x grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, axis x line*={left}, x axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}, scaled y ticks={false}, ylabel={Time (ms)}, y tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, y tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, ylabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{11 pt}{14.3 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, ymode={log}, log basis y={10}, ymajorgrids={true}, ymin={0.26730139969582506}, ymax={4209.886678126183}, ytick={{1.0,10.0,100.0,1000.0}}, yticklabels={{$10^{0}$,$10^{1}$,$10^{2}$,$10^{3}$}}, ytick align={inside}, yticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, y grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, axis y line*={left}, y axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}]
+    \addplot[color={rgb,1:red,0.0;green,0.6056;blue,0.9787}, name path={54596464-4046-41c8-b8f8-bbb20548ba43}, only marks, draw opacity={1.0}, line width={0}, solid, mark={*}, mark size={3.0 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.0;green,0.6056;blue,0.9787}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            1.0  0.351392  \\
+            2.0  0.713696  \\
+            4.0  0.84496  \\
+            8.0  0.856544  \\
+            16.0  1.157216  \\
+            32.0  1.166976  \\
+            64.0  1.235232  \\
+            128.0  1.472512  \\
+            256.0  3.963904  \\
+            512.0  13.661536  \\
+            1024.0  51.26125  \\
+            2048.0  194.488678  \\
+            4096.0  723.709534  \\
+            8192.0  2887.775635  \\
+        }
+        ;
+    \addlegendentry {Kernel only}
+    \addplot[color={rgb,1:red,0.8889;green,0.4356;blue,0.2781}, name path={582f78b7-9bef-40f0-a4ab-18bde89e135d}, only marks, draw opacity={1.0}, line width={0}, solid, mark={*}, mark size={3.0 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.8889;green,0.4356;blue,0.2781}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            1.0  1.1272  \\
+            2.0  1.49056  \\
+            4.0  1.548384  \\
+            8.0  1.56288  \\
+            16.0  1.872608  \\
+            32.0  1.877632  \\
+            64.0  1.941376  \\
+            128.0  2.204736  \\
+            256.0  4.740416  \\
+            512.0  15.359328  \\
+            1024.0  56.678177  \\
+            2048.0  215.084122  \\
+            4096.0  803.822205  \\
+            8192.0  3202.430908  \\
+        }
+        ;
+    \addlegendentry {Total time (kernel + IO)}
+\end{axis}
+\end{tikzpicture}

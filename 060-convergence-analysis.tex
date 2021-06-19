@@ -6,17 +6,23 @@
 
 Once the sequential code is implemented we must analyze the results obtained to verify the correctness of the program. Therefore a convergence analysis was performed in which we compared the results obtained with our implementation to the theoretical results of a well known ODE.
 
-We used the test system \cref{eq:circle} for which all trajectories are known to have a circular shape with center $(0,0)$ and a period of $T=2\pi$. For each method we found the numerical trajectory 
+\begin{align}\label{eq:circle}
+    \frac{dx}{dt} &= -y \nonumber \\
+    \frac{dy}{dt} &= x
+\end{align}
+%{\bf what is this???}
+
+We used the test system \cref{eq:circle} for which all trajectories are known to have a circular shape with center $(0,0)$ and a period of $T=2\pi$. For each method we found the numerical trajectory
 ${\bf r}(t)$ which depends on the specific method used and the timestep.
-%computed the error after one loop with different time steps ($\Delta t$). 
+%computed the error after one loop with different time steps ($\Delta t$).
 The error is calculated as the absolute value of the displacement after one period $T$,
 \begin{equation}
-\varepsilon = |{\bf r}(T)-{\bf r}(0)|    
+\varepsilon = |{\bf r}(T)-{\bf r}(0)|
 \label{Eq:epsilon:T}
 \end{equation}
-{\bf correct???}
+%{\bf correct???} yes
 
-In \cref{fig:error_cycle} we show how the error depends on the timestep $\Delta t$ and on the specific integration scheme. 
+In \cref{fig:error_cycle} we show how the error depends on the timestep $\Delta t$ and on the specific integration scheme.
 This allows to verify the consistency in the order of the integration scheme. For order $p$ of accuracy, the error scales as
 \begin{equation}
 \varepsilon = {\cal O}((\Delta t)^p)
@@ -24,35 +30,29 @@ This allows to verify the consistency in the order of the integration scheme. Fo
 As expected, the higher-order methods have higher order of accuracy.
 %of all the methods in relation to  correlate to the numerical order of the method.
 Additionally, for the higher order methods there is a point in which the numerical error of the method becomes irrelevant since it is less than the {\em machine epsilon}.
-The specific value of the machine epsilon depends on the type of variable, CPU architecture and compiler. 
+The specific value of the machine epsilon depends on the type of variable, CPU architecture and compiler.
 In our case using the precision of \texttt{double} we find that for the Runge-Kutta of order 4 the smallest useful timestep is $\Delta t \approx \dfrac{2\pi}{10^4}$.
 A further decrease in the timestep actually worsens the accuracy as this implies a summation of a larger number of values, thus increasing the importance of the rounding error.
 
-The error~(\ref{Eq:epsilon:T}) was calculated by taking into account the exact value of the period $T$. In a more general situation, the period might not be known. Thus we perform a different study in which the error is estimated as the difference in the maximal $x^{max}$ position between two consequent periods, $x^{max}_i$ and $x^{max}_{i+1}$
+The error~(\cref{Eq:epsilon:T}) was calculated by taking into account the exact value of the period $T$. In a more general situation, the period might not be known. Thus we perform a different study in which the error is estimated as the difference in the maximal $x^{\max}$ position between two consequent periods, $x^{\max}_i$ and $x^{\max}_{i+1}$
 \begin{equation}
-\varepsilon = |x^{max}_{i+1} - x^{max}_{i}|
+\varepsilon = |x^{\max}_{i+1} - x^{\max}_{i}|
 \label{Eq:epsilon:max}
 \end{equation}
-{\bf check if you  agree ???}
-We computed the error using values of $\Delta t$ non commensurate with the period of the circle and interpolated the period using a second degree polynomial. The results are shown in \cref{fig:error_pi} and are quite different to \cref{fig:error_cycle} since Euler and Midpoint methods appear to have order 2 and RK3, RK4, RKF45 order 3. This is probably due to the polynomial interpolation used and other interpolation methods should be considered to obtain better results. 
+%{\bf check if you  agree ???}
+We computed the error using values of $\Delta t$ non commensurate with the period of the circle and interpolated the period using a second degree polynomial. The results are shown in \cref{fig:error_pi} and are quite different to \cref{fig:error_cycle} since Euler and Midpoint methods appear to have order 2 and RK3, RK4, RKF45 order 3. This is probably due to the polynomial interpolation used and other interpolation methods should be considered to obtain better results.
 
-\begin{align}\label{eq:circle}
-    \frac{dx}{dt} &= -y \nonumber \\
-    \frac{dy}{dt} &= x
-\end{align}
-{\bf what is this???}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/plots/error_analysis/error_cycle.tikz}
-    \caption{Integration error after one period with commensurate $\Delta t$, estimated according to Eq.~\ref{Eq:epsilon:T}.}
+    \caption{Integration error after one period with commensurate $\Delta t$, estimated according to \cref{Eq:epsilon:T}.}
     \label{fig:error_cycle}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/plots/error_analysis/error_pi.tikz}
-    \caption{Error on the period estimation using interpolation, estimated according to Eq.~\ref{Eq:epsilon:max}}
+    \caption{Error on the period estimation using interpolation, estimated according to \cref{Eq:epsilon:max}}
     \label{fig:error_pi}
 \end{figure}
-

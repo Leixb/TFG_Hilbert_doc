@@ -1,0 +1,52 @@
+\begin{tikzpicture}[/tikz/background rectangle/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, draw opacity={1.0}}, show background rectangle]
+\begin{axis}[point meta max={nan}, point meta min={nan}, legend cell align={left}, title={}, title style={at={{(0.5,1)}}, anchor={south}, font={{\fontsize{14 pt}{18.2 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, legend style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid, fill={rgb,1:red,1.0;green,1.0;blue,1.0}, fill opacity={1.0}, text opacity={1.0}, font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, text={rgb,1:red,0.0;green,0.0;blue,0.0}, at={(0.98, 0.02)}, anchor={south east}}, axis background/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, opacity={1.0}}, anchor={north west}, xshift={1.0mm}, yshift={-1.0mm}, width={150.4mm}, height={99.6mm}, scaled x ticks={false}, xlabel={Grid size}, x tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, x tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, xlabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{11 pt}{14.3 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, xmode={log}, log basis x={2}, xmajorgrids={true}, xmin={0.7631296044802796}, xmax={10734.742764407716}, xtick={{1.0,2.0,4.0,8.0,16.0,32.0,64.0,128.0,256.0,512.0,1024.0,2048.0,4096.0,8192.0}}, xticklabels={{$2^{0}$,$2^{2}$,$2^{4}$,$2^{6}$,$2^{8}$,$2^{10}$,$2^{12}$,$2^{14}$,$2^{16}$,$2^{18}$,$2^{20}$,$2^{22}$,$2^{24}$,$2^{26}$}}, xtick align={inside}, xticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, x grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, axis x line*={left}, x axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}, scaled y ticks={false}, ylabel={Speedup}, y tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, y tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, ylabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{11 pt}{14.3 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, ymode={log}, log basis y={10}, ymajorgrids={true}, ymin={0.09133408259244709}, ymax={14367.381993757375}, ytick={{0.1,1.0,10.0,100.0,1000.0,10000.0}}, yticklabels={{$10^{-1}$,$10^{0}$,$10^{1}$,$10^{2}$,$10^{3}$,$10^{4}$}}, ytick align={inside}, yticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, y grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, axis y line*={left}, y axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}]
+    \addplot[color={rgb,1:red,0.0;green,0.6056;blue,0.9787}, name path={fb6b8062-6c9d-4ceb-beed-96868748519b}, only marks, draw opacity={1.0}, line width={0}, solid, mark={*}, mark size={3.0 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.0;green,0.6056;blue,0.9787}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            1.0  0.12814762242725336  \\
+            2.0  0.6070631172176899  \\
+            4.0  2.6256019178705023  \\
+            8.0  10.665109925266174  \\
+            16.0  35.636425242229016  \\
+            32.0  142.7328278384689  \\
+            64.0  555.364853073284  \\
+            128.0  1956.6122551634298  \\
+            256.0  3644.8047228344517  \\
+            512.0  4266.853341500358  \\
+            1024.0  4625.131115279167  \\
+            2048.0  4875.19018256494  \\
+            4096.0  5217.949907218599  \\
+            8192.0  5238.900223604762  \\
+        }
+        ;
+    \addlegendentry {Speedup}
+    \addplot[color={rgb,1:red,0.8889;green,0.4356;blue,0.2781}, name path={2f224ba5-5c32-4720-bc92-e44f1a7ca44a}, draw opacity={1.0}, line width={1}, solid]
+        table[row sep={\\}]
+        {
+            \\
+            5.425065192667048e-5  10239.999999999993  \\
+            1.5100279368205497e8  10239.999999999993  \\
+        }
+        ;
+    \addlegendentry {Maximum Theoretical Speedup (10240)}
+    \addplot[color={rgb,1:red,0.2422;green,0.6433;blue,0.3044}, name path={62c1ae70-b6c8-4153-b2e4-adc8b09a55e2}, draw opacity={1.0}, line width={1}, solid]
+        table[row sep={\\}]
+        {
+            \\
+            5.425065192667048e-5  1.0  \\
+            1.5100279368205497e8  1.0  \\
+        }
+        ;
+    \addlegendentry {Speedup == 1}
+    \addplot[color={rgb,1:red,0.7644;green,0.4441;blue,0.8243}, name path={ae5e820d-7b4f-4b18-ba9d-e6656358a664}, draw opacity={1.0}, line width={1}, dotted]
+        table[row sep={\\}]
+        {
+            \\
+            5.425065192667048e-5  5238.999999999998  \\
+            1.5100279368205497e8  5238.999999999998  \\
+        }
+        ;
+    \addlegendentry {Achieved speedup: 5239}
+\end{axis}
+\end{tikzpicture}

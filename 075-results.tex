@@ -7,13 +7,13 @@
 
 To analyze the performance of the program and verify it correctness the parameters found by Kutznetsov et al. \cite{kuznetsov_visualization_2013} are used. \footnote{This system is the same that was previously discussed in~\cref{sec:context} (\cref{fig:kuznetsov})}
 
-Specifically, the following system of equations is studied, 
-%\Cref{eq:kuznetsov} reports the coefficients used 
+Specifically, the following system of equations is studied,
+%\Cref{eq:kuznetsov} reports the coefficients used
 \begin{equation}%
     \label{eq:kuznetsov}
     \begin{split}
         \frac{dx}{dt} &= x^2 + xy + y^2 + x + y\\
-        \frac{dy}{dt} &= ax^2 + bxy * cy^2 + \alpha x \beta y
+        \frac{dy}{dt} &= ax^2 + bxy * cy^2 + \alpha x + \beta y
     \end{split}
     \qquad \qquad
     \begin{split}
@@ -25,7 +25,8 @@ Specifically, the following system of equations is studied,
     \end{split}
 \end{equation}
 
-This specific choice of the coefficients is known to result in four limit cycles, as shown in Fig.~\cref{fig:kuznetsov2}.
+This specific choice of the coefficients is known to result in four limit
+cycles, as shown in \cref{fig:kuznetsov2}.
 
 \begin{figure}[H]
     \centering
@@ -36,26 +37,32 @@ This specific choice of the coefficients is known to result in four limit cycles
 \end{figure}
 
 \pagebreak
-\Cref{fig:kuznetsov_cuda} shows a visualization of the points we obtain which a ratio equal to one 
+\Cref{fig:kuznetsov_cuda} shows a visualization of the points we obtain which a ratio equal to one
 {\bf which ratio?}
-with tolerance $10^{-6}$. 
-The coefficients are chosen to be equal to these of Ref.~\cite{kuznetsov_visualization_2013} and their results are reproduced. The computation of this data took 250ms on a grid of $1024 \times 1024$ (i.e. approximately one million of trajectories) using \emph{Runge Kutta} of third order with a step size of $10^{-3}$. Notice that some points left of $x = 0$ are not found. 
-{\bf ??? not clear, rephrase}
+with tolerance $10^{-6}$.
+The coefficients are chosen to be equal to these of Ref.~\cite{kuznetsov_visualization_2013} and their results are reproduced. The computation of this data took 250ms on a grid of $1024 \times 1024$ (i.e. approximately one million of trajectories) using \emph{Runge Kutta} of third order with a step size of $10^{-3}$.
+Notice that some of the points from the left part ($x < 0$) of biggest cycle are not found.
+% {\bf ??? not clear, rephrase}
 Nevertheless, three limit cycles are clearly identified. Notice that the
 4th limit cycle which is expected to be present in the left of our plot cannot be found by the program due to the stiffness of the system on that area. This problem is discussed in more detail in~\cref{sub:stiffness}. For the rest of the analysis we will only consider these 3 limit cycles.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{kutznetsov_cuda}
     \caption{Limit cycles found in the reference case, Eq.~\ref{eq:kuznetsov}, discretizing the phase space by $1024\times 1024$ grid.
-    } 
+    }
     \label{fig:kuznetsov_cuda}
 \end{figure}
 
-Using a bigger grid size ($5000\times5000$ initial points), we obtain clearer results and the execution time grows to 1200ms=1.2s. 
+Using a bigger grid size ($5000\times5000$ initial points), we obtain clearer results and the execution time grows to 1200ms=1.2s.
 %There is not much benefit in this instance since the cycles are clear and we are searching inside a well delimited plane, but when the search space is greater it does offer a benefit.
-The increase of the resolution does not lead to drastic change in the picture as the limit cycles were clearly separated on a grid with a smaller resolution. 
-Nevertheless, it might be expected that having high resolution can be crucial in some other cases.
-{\bf ??? check last two sentences, did I get it correct?}
+The increase of the resolution does not lead to drastic change in the picture as
+the limit cycles were clearly separated on a grid with a smaller resolution.
+In~\cref{fig:detail1kvs5k} we can appreciate how having 5 times more resolution on each dimension
+gives more detail which could be crucial
+%Nevertheless, it might be expected that having high resolution can be crucial
+in some other cases in which the limit cycles are not so clearly visible with the specified window.
+In~\cref{sub:window_range} there are some examples of some possible situations where resolution is crucial to obtain good results.
+%{\bf ??? check last two sentences, did I get it correct?}
 
 \begin{figure}[H]
 \centering
@@ -66,10 +73,18 @@ Black areas correspond to points from which trajectories have a rate of 1 {\bf ?
 \label{fig:kuznetsov_cuda_5k}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{detail_1000_vs_5000}
+\caption{Detail of the same region from \cref{fig:kuznetsov_cuda} (left) and \cref{fig:kuznetsov_cuda_5k} (right)
+}
+\label{fig:detail1kvs5k}
+\end{figure}
+
 \paragraph{Clustering}
 
-\Cref{fig:histograms} shows the histogram of the positions of the four local extrema, that is the maximal and minimal positions of the $x$ and $y$ coordinates. 
-%4 different local extrema values associated with all points with rate of change equal to 1 (with tolerance $10^{-6}$), 
+\Cref{fig:histograms} shows the histogram of the positions of the four local extrema, that is the maximal and minimal positions of the $x$ and $y$ coordinates.
+%4 different local extrema values associated with all points with rate of change equal to 1 (with tolerance $10^{-6}$),
 One can clearly see that there 3 groups in each one of the local extrema associated with 3 different limit cycles.
 Thus this type of the histogram allows to count the number of the limit cycles if they are present.
 
@@ -108,9 +123,9 @@ If we compute the \emph{K-means} for 3 clusters we obtain the cluster centers sh
 \end{figure}
 
 \pagebreak
-\subsection{Applying slight modifications}
-{\bf Improved method???}
-{\bf Scanning the values of the coefficients???}
+\subsection{Scanning the values of the coefficients}
+% {\bf Improved method???}
+% {\bf Scanning the values of the coefficients???}
 
 \Cref{fig:bounding_a10_1} shows the phase portrait used for finding limit cycles in the same system used in the previous examples (\cref{eq:kuznetsov}) but with a slight modification of parameter $a$ from 10 to 10.1. We can see that the cycles are slightly more similar in size. Changing to 10.2 only one cycle remains. With $a = 9.9$ there are only two cycles. Other slight modifications of the other parameters also reduce the number of cycles.
 
@@ -123,7 +138,9 @@ If we compute the \emph{K-means} for 3 clusters we obtain the cluster centers sh
 \end{figure}
 
 \pagebreak
-\subsection{Changing window range}
+\subsection{Changing window range}%
+\label{sub:window_range}
+
 One of the important issue is a possible dependence of the number of the limit cycles on the size of the area which is used for searching them. The previous figures were obtained by searching for limit cycles inside a rectangle bound by $x \in (-5, 20), y \in (-60, 40)$. In the following section an analysis on the capacity of the program to find the cycles with different windows will be performed.
 
 \paragraph{Bigger area}
@@ -137,9 +154,10 @@ One of the important issue is a possible dependence of the number of the limit c
     \label{fig:bounding_100x100}
 \end{figure}
 
-As shown in~\cref{fig:bounding_100x100}, with a window of $x,y \in (-100,100)$ we obtain the clusters without problem. Increasing the window further to $(-1000, 1000)$ does only find the two bigger limit cycles. 
-{\bf report also the grid size}
-A possible optimization could be to make two pases {\bf steps ???}, one to find the bigger limit cycles and a second one using as a window the bounding box of the limits found.
+As shown in~\cref{fig:bounding_100x100}, with a window of $x,y \in (-100,100)$ we obtain the clusters without problem. Increasing the window further to $(-1000, 1000)$ while maintaining the same
+grid size does only find the two bigger limit cycles.
+% {\bf report also the grid size}
+A possible optimization could be to make two steps: one to find the biggest limit cycles and a second one using as a window the bounding box of the limit found.
 
 \pagebreak
 \paragraph{Partial occlusion}
@@ -161,8 +179,20 @@ since there are not many points. As long as the window contains enough part of t
 
 Since the $(x,y)$ plane in $\mathcal{R}^2$ is infinite it is not possible to cover it with a finite regular grid. A possible way out is
 %in order to visualize limit cycles without restricting portions of the plan a compactification should be performed.
-to do a compactification so that the infinitely large plane is mapped to a finite-size box. In \cref{sec:compact-stiff} there is a more in depth explanation of how this can be done. A simple way to perform the compactificaction $(x,y)\to(x',y')$ is to use mapping $x' = \arctan x$, $y' = \arctan y$ where $x\in(-\infty, \infty)$ to $x'\in(-\pi/2, \pi/2)$. This compactification is not ideal as it significantly deforms the plane and does not preserve the angles, but still it allows to perform the search of cycles in essentially infinite phase space. Although it does not help if they are big since they get \emph{squished} on the borders
-{\bf ??? and what, why it is a problem, rephrase}. The result of applying the tangent compactification and running the program is shown
+to do a compactification so that the infinitely large plane is mapped to a finite-size box. In \cref{sec:compact-stiff} there is a more in depth explanation of how this can be done. A simple way to perform the compactificaction $(x,y)\to(x',y')$ is to use mapping $x' = \arctan x$, $y' = \arctan y$ where $x\in(-\infty, \infty)$ to $x'\in(-\pi/2, \pi/2)$. This compactification is not ideal as it significantly deforms the plane and does not preserve the angles, but still it allows to perform the search of cycles in essentially infinite phase space.
+
+However, this compactification does not help if they are big since they get
+\emph{squished} on the borders meaning that without a very high resolution it is
+not possible to find them. For instance, if we divide the range $(-\pi/2,
+\pi/2)$ in 4096 parts, in the outermost point before $+\infty$: correspond to
+$\tan\left(\pi/2 - \pi/4096\right) \approx 1304$ which is approximately 1304, the
+immediately previous value is $\tan\left(\pi/2 - 2\pi/4096\right) \approx 652$. If
+our limit cycle does pass between these values it will not be found.
+
+% I'm not sure if it is clear now.
+% {\bf ??? and what, why it is a problem, rephrase}.
+
+The result of applying the tangent compactification and running the program is shown
 in~\cref{fig:bounding_compact}. The biggest cycle is almost non visible despite the fact that it is not particularly big ($y_{\min} \approx -60, y_{\max} \approx 30$).
 
 \begin{figure}[H]

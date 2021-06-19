@@ -17,7 +17,8 @@ during the computation. Although they are really cheap and are commonly used on 
 
 \pagebreak
 
-\subsection{Rate of change of extrema}
+\subsection{Rate of change of extrema}%
+\label{sub:roc}
 
 Comparing the value of the initial 4 local extrema with the local extrema of the second loop of the cycle we can obtain a rate of change of the trajectory. For instance, given the values of the 4 local extrema on obtained on the first loop: $x_{\min}, x_{\max}, y_{\min}, y_{\max}$ and their counterparts obtained on the second loop: $x'_{\min}, x'_{\max}, y'_{\min}, y'_{\max}$ we can compute the ratio between each of them to obtain their rate of change. If the ratio is less than 1, the trajectory is \emph{decreasing}, if it is greater than 1 it is \emph{increasing} and if it is 1 (within an adequate tolerance) the trajectory is a cycle.
 
@@ -27,36 +28,82 @@ Traditionally with CPU computation one initial point is taken and evaluated thro
 
 \subsection{Other metrics}
 
-A part from the rate of change in local extrema, an evaluation of the rate of change in the loop period was also attempted but it did not give satisfying results.
+A part from the rate of change in local extrema, an evaluation of the rate of
+change in the loop period was also attempted but it did not give satisfying
+results.
 
 \subsection{Distinguishing different cycles}
 
-The rate of change of extrema allows us to find areas in the function with trajectories with ratio 1, 
-{\bf not clear which ratio is meant, a way out is to introduce an equation with the definition of the ratio ???}
-which are candidates to be limit cycles. Now the problem is how we can classify this areas into different limit cycle trajectories. Two approaches were tested:
+The rate of change of extrema allows us to find areas in the function with
+trajectories with a rate of change of their extrema of 1 (\cref{sub:roc}),
+% {\bf not clear which ratio is meant, a way out is to introduce an equation with the definition of the ratio ???}
+which are candidates to be limit cycles. Now the problem is how we can classify
+this areas into different limit cycle trajectories. The following approaches
+were tested:
 
-\paragraph{Computer vision techniques}
+\paragraph{Connected component labelling}
 
-{\bf the title is not clear in its relation to the text??? change the title or explain better}
-The final result of our computation is a matrix with ones and zeros indicating the coordinates close to trajectories with rate of change 1. A priori it should be easy to run this matrix through some form of \emph{BFS} able to find the different groups. However, this presents 2 difficulties: there may be areas where there is not enough \emph{resolution} and the line can be partially broken. Additionally some trajectories may pass really close to each other and be classified as the same group.
+% {\bf the title is not clear in its relation to the text??? change the title or explain better}
+
+Connected component labelling is an technique often used in the field of computer
+vision. It consists on finding connected components in a graph and labeling each pixel
+according to the component in which they belong \cite{shapiro_connected_1996}.
+
+Since the final result of our computation is a matrix with ones and zeros
+indicating the coordinates close to trajectories with rate of change 1, we have
+a binary image in which we can apply this technique. Ideally the connected
+components found will match the limit cycles, but there are 2 main caveats:
+there may be areas where there is not enough resolution (the discretization of
+the section was too big to and the points sampled missed the trajectory) and the
+line can be partially broken, thus splitting a cycle into two or more parts.
+Additionally some cycles may pass really close to each other and be classified
+as the same group. Therefore, this technique requires very small discretization
+of the area studied which requires computing lots of points.
 
 \paragraph{Clustering}
-Given that we are computing the ratio of 4 local extrema points, we can use these same extrema values to analyse the characteristics of the trajectory. To do so, a part from returning the ratio of the extrema points, the 4 extrema points themselves will also be returned. With this information we have 4 points defining a cycle which we can classify using any clustering technique. Three different clustering methods where tested:
+Given that we are computing the ratio of 4 local extrema points, we can use
+these same extrema values to analyse the characteristics of the trajectory. To
+do so, a part from returning the ratio of the extrema points, the 4 extrema
+points themselves will also be returned. With this information we have 4 points
+defining a cycle which we can classify using any clustering technique. Three
+different clustering methods where tested:
 
 \paragraph{Hierarchical clustering}
 
-Using hierarchical clustering we obtained correct clusters with the system of \cite{kuznetsov_visualization_2013}. However, the this algorithm does not scale well when lots of points are used. ($\mathcal{O}(n^2)$).
+Using hierarchical clustering we obtained correct clusters with the system of
+\cite{kuznetsov_visualization_2013}. However, the this algorithm does not scale
+well when lots of points are used. It has a runtime complexity of
+($\mathcal{O}(n^3)$) where $n$ is the number of points analyzed, this makes it
+impractical for moderate to larger cases.
 
 \paragraph{Kmeans clustering}
 
-As with hierarchical clustering, with \emph{Kmeans} we can use the 4 values of local extrema when computing the clustering. 
-{\bf provide an equation and refer to it later ???}
-With \emph{Kmeans} we must specify the number of clusters the search, since the number of possible limit cycles is small (at most 5) we can compute the 5 possible number of clusters and evaluate which method gives better results. The runtime complexity of \emph{Kmeans} is $\mathcal{O}(n)$.
+As with hierarchical clustering, with \emph{Kmeans} we can use the 4 values of
+local extrema when computing the clustering. It minimizes the square distance of
+the points in the clusters with their centers as shown in \cref{eq:kmeans}
+where $k$ is the number of clusters, $n$ the number of points,
+$x^{(j)}$ is a point belonging to cluster $j$, $c_j$ is the center of
+cluster $j$ and $|| ||$ the normal of a vector.
 
-Some tests where done with hierarchical clustering but the results where similar to the ones obtained using \emph{Kmeans}
+\begin{equation}\label{eq:kmeans}
+    J = \sum_{j=1}^k \sum_{j=1}^n || x_i^{(j)} - c_j ||^2
+\end{equation}
 
-\paragraph{Jenks natural breaks optimization}
+% {\bf provide an equation and refer to it later ???}
 
-This algorithm is equivalent to \emph{Kmeans} but using only one variable.
-{\bf provide an equation to introduce the quantity more formally}
-We computed the method with different number of clusters (1 to 5) and determined for each of the 4 variables which number of clusters gave the bests results. Most of the times all 4 variables gave the same number of results, indicating that one could suffice.
+The
+runtime complexity of \emph{Kmeans} method of $n$ points with $k$ clusters and
+$d$ dimensions is $\mathcal{O}(knd)$ as shown in
+ref.~\cite{arthur_k-means_2009}.  It is exponential in the worst case, but since
+we know that if there are limit cycles the algorithm should converge quickly
+(the clusters will be clear), we can limit the number of iterations to small
+values.
+
+With \emph{Kmeans} we must specify the number of clusters the search, it does not
+say how many clusters there are in the data. To do so we must compute the algorithm
+with 2, 3, 4 and 5 clusters and use a metric that indicates which partition is better.
+
+We will use the silhouette metric, defined in~\cref{eq:silhouette}:
+
+\begin{equation}\label{eq:silhouette}
+\end{equation}

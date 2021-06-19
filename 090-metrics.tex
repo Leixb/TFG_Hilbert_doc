@@ -41,7 +41,7 @@ which are candidates to be limit cycles. Now the problem is how we can classify
 this areas into different limit cycle trajectories. The following approaches
 were tested:
 
-\paragraph{Connected component labelling}
+\subsubsection*{Connected component labelling}
 
 % {\bf the title is not clear in its relation to the text??? change the title or explain better}
 
@@ -60,7 +60,7 @@ Additionally some cycles may pass really close to each other and be classified
 as the same group. Therefore, this technique requires very small discretization
 of the area studied which requires computing lots of points.
 
-\paragraph{Clustering}
+\subsubsection*{Clustering}
 Given that we are computing the ratio of 4 local extrema points, we can use
 these same extrema values to analyse the characteristics of the trajectory. To
 do so, a part from returning the ratio of the extrema points, the 4 extrema
@@ -83,10 +83,10 @@ local extrema when computing the clustering. It minimizes the square distance of
 the points in the clusters with their centers as shown in \cref{eq:kmeans}
 where $k$ is the number of clusters, $n$ the number of points,
 $x^{(j)}$ is a point belonging to cluster $j$, $c_j$ is the center of
-cluster $j$ and $|| ||$ the normal of a vector.
+cluster $j$ and $\| \|$ the normal of a vector.
 
 \begin{equation}\label{eq:kmeans}
-    J = \sum_{j=1}^k \sum_{j=1}^n || x_i^{(j)} - c_j ||^2
+    J = \sum_{j=1}^k \sum_{j=1}^n \| x_i^{(j)} - c_j \|^2
 \end{equation}
 
 % {\bf provide an equation and refer to it later ???}
@@ -103,7 +103,21 @@ With \emph{Kmeans} we must specify the number of clusters the search, it does no
 say how many clusters there are in the data. To do so we must compute the algorithm
 with 2, 3, 4 and 5 clusters and use a metric that indicates which partition is better.
 
-We will use the silhouette metric, defined in~\cref{eq:silhouette}:
+We will use the silhouette metric, defined in~\cref{eq:silhouette}. $s(i)$ is
+the silhouette coefficient of the point $p_i$. It is calculated from $a(i)$ which
+is the average distance from $p_i$ to all the points in the cluster in which $p_i$ belongs
+and $b(i)$ which is the minimum average distance to all the clusters in which $p_i$ does
+not belong. A value of $s(i) = 1$ which indicates that the point $p_i$ is close to
+all the points in his cluster and far away from the others. The worst value is $-1$.
+We can compare the mean of the silhouette coefficient for the different number of clusters
+and find which gives the best result.
 
-\begin{equation}\label{eq:silhouette}
-\end{equation}
+\begin{align}\label{eq:silhouette}
+    a(i) &= \frac{1}{|C_i| - 1} \sum_{j \in C_i, i \neq j} d(i, j) \nonumber \\
+    b(i) &= \min_{k \neq i} \frac{1}{|C_k|} \sum_{j \in C_k} d(i, j) \nonumber \\
+    s(i) &= \begin{cases}
+          1-a(i)/b(i), & \mbox{if } a(i) < b(i) \\
+          0,  & \mbox{if } a(i) = b(i) \\
+          b(i)/a(i)-1, & \mbox{if } a(i) > b(i) \\
+        \end{cases}
+\end{align}

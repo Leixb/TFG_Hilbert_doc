@@ -1,0 +1,88 @@
+\begin{tikzpicture}[/tikz/background rectangle/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, draw opacity={1.0}}, show background rectangle]
+\begin{axis}[point meta max={nan}, point meta min={nan}, legend cell align={left}, title={}, title style={at={{(0.5,1)}}, anchor={south}, font={{\fontsize{14 pt}{18.2 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, legend style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid, fill={rgb,1:red,1.0;green,1.0;blue,1.0}, fill opacity={1.0}, text opacity={1.0}, font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, text={rgb,1:red,0.0;green,0.0;blue,0.0}, at={(0.98, 0.02)}, anchor={south east}}, axis background/.style={fill={rgb,1:red,1.0;green,1.0;blue,1.0}, opacity={1.0}}, anchor={north west}, xshift={1.0mm}, yshift={-1.0mm}, width={150.4mm}, height={99.6mm}, scaled x ticks={false}, xlabel={Grid size}, x tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, x tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, xlabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{11 pt}{14.3 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, xmode={log}, log basis x={2}, xmajorgrids={true}, xmin={0.7631296044802796}, xmax={10734.742764407716}, xtick={{2.0,4.0,8.0,16.0,32.0,64.0,128.0,256.0,512.0,1024.0,2048.0,4096.0,8192.0}}, xticklabels={{$2^{2}$,$2^{4}$,$2^{6}$,$2^{8}$,$2^{10}$,$2^{12}$,$2^{14}$,$2^{16}$,$2^{18}$,$2^{20}$,$2^{22}$,$2^{24}$,$2^{26}$}}, xtick align={inside}, xticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, x grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, axis x line*={left}, x axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}, scaled y ticks={false}, ylabel={Speedup}, y tick style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}}, y tick label style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, opacity={1.0}, rotate={0}}, ylabel style={at={(ticklabel cs:0.5)}, anchor=near ticklabel, font={{\fontsize{11 pt}{14.3 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, ymode={log}, log basis y={10}, ymajorgrids={true}, ymin={0.002852264874384711}, ymax={17941.8778388799}, ytick={{0.01,0.1,1.0,10.0,100.0,1000.0,10000.0}}, yticklabels={{$10^{-2}$,$10^{-1}$,$10^{0}$,$10^{1}$,$10^{2}$,$10^{3}$,$10^{4}$}}, ytick align={inside}, yticklabel style={font={{\fontsize{8 pt}{10.4 pt}\selectfont}}, color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, rotate={0.0}}, y grid style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={0.1}, line width={0.5}, solid}, axis y line*={left}, y axis line style={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, line width={1}, solid}]
+    \addplot[color={rgb,1:red,0.0;green,0.6056;blue,0.9787}, name path={fe0239d1-b0b4-403e-a9b3-ee09f8096aae}, only marks, draw opacity={1.0}, line width={0}, solid, mark={*}, mark size={3.0 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.0;green,0.6056;blue,0.9787}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            1.0  0.18028360774902216  \\
+            2.0  0.5274706726306018  \\
+            4.0  1.6888354466294222  \\
+            8.0  7.157222711299107  \\
+            16.0  23.63060636135923  \\
+            32.0  89.95283098425263  \\
+            64.0  341.01868675835095  \\
+            128.0  588.1433967119108  \\
+            256.0  681.8425179332198  \\
+            512.0  708.5152974156641  \\
+            1024.0  723.9362703610788  \\
+            2048.0  730.7205149219752  \\
+            4096.0  736.9298062782796  \\
+        }
+        ;
+    \addlegendentry {Total time (1 GPU - boada)}
+    \addplot[color={rgb,1:red,0.8889;green,0.4356;blue,0.2781}, name path={10df6704-4c95-42a1-a402-3cfa8fae030d}, only marks, draw opacity={1.0}, line width={0}, solid, mark={*}, mark size={3.0 pt}, mark repeat={1}, mark options={color={rgb,1:red,0.0;green,0.0;blue,0.0}, draw opacity={1.0}, fill={rgb,1:red,0.8889;green,0.4356;blue,0.2781}, fill opacity={1.0}, line width={0.75}, rotate={0}, solid}]
+        table[row sep={\\}]
+        {
+            \\
+            2.0  0.004442273258709954  \\
+            4.0  0.01787699989439162  \\
+            8.0  0.07192306982586054  \\
+            16.0  0.28754845654827754  \\
+            32.0  1.123106845201317  \\
+            64.0  4.4956514461374715  \\
+            128.0  17.993626794450236  \\
+            256.0  72.55606498788816  \\
+            512.0  263.71403522182294  \\
+            1024.0  831.5769496414118  \\
+            2048.0  1824.7357874241557  \\
+            4096.0  2632.761081626404  \\
+            8192.0  2967.365413521849  \\
+        }
+        ;
+    \addlegendentry {Total time (4 GPU - boada)}
+    \addplot[color={rgb,1:red,0.2422;green,0.6433;blue,0.3044}, name path={9a4a01d2-db19-481e-9060-c104d0ad5598}, draw opacity={1.0}, line width={1}, solid]
+        table[row sep={\\}]
+        {
+            \\
+            5.425065192667048e-5  2880.0000000000014  \\
+            1.5100279368205497e8  2880.0000000000014  \\
+        }
+        ;
+    \addlegendentry {Theoretical maximum 1 GPU in boada (2880)}
+    \addplot[color={rgb,1:red,0.7644;green,0.4441;blue,0.8243}, name path={929a65c6-2470-4d96-be58-26b6fa063fe0}, draw opacity={1.0}, line width={1}, solid]
+        table[row sep={\\}]
+        {
+            \\
+            5.425065192667048e-5  11519.999999999996  \\
+            1.5100279368205497e8  11519.999999999996  \\
+        }
+        ;
+    \addlegendentry {Theoretical maximum 4 GPU in boada (11520)}
+    \addplot[color={rgb,1:red,0.6755;green,0.5557;blue,0.0942}, name path={6c5557cd-27f3-4c5c-89f1-e6d356b44058}, draw opacity={1.0}, line width={1}, dotted]
+        table[row sep={\\}]
+        {
+            \\
+            5.425065192667048e-5  750.0000000000001  \\
+            1.5100279368205497e8  750.0000000000001  \\
+        }
+        ;
+    \addlegendentry {Achieved speedup in boada 1 GPU: 750}
+    \addplot[color={rgb,1:red,0.0;green,0.6658;blue,0.681}, name path={d6dbe5ac-361f-4d3b-bc68-dd392ca96bb3}, draw opacity={1.0}, line width={1}, dotted]
+        table[row sep={\\}]
+        {
+            \\
+            5.425065192667048e-5  3000.0000000000014  \\
+            1.5100279368205497e8  3000.0000000000014  \\
+        }
+        ;
+    \addlegendentry {Achieved speedup in boada 4 GPU: 2981}
+    \addplot[color={rgb,1:red,0.0;green,0.0;blue,0.0}, name path={427a5144-e2b1-4a3b-bfb5-3487a7a2f280}, draw opacity={1.0}, line width={1}, solid, forget plot]
+        table[row sep={\\}]
+        {
+            \\
+            5.425065192667048e-5  1.0  \\
+            1.5100279368205497e8  1.0  \\
+        }
+        ;
+\end{axis}
+\end{tikzpicture}

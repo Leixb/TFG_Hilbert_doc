@@ -37,9 +37,8 @@ cycles, as shown in \cref{fig:kuznetsov2}.
 \end{figure}
 
 \pagebreak
-\Cref{fig:kuznetsov_cuda} shows a visualization of the points we obtain which a ratio equal to one
-{\bf which ratio?}
-with tolerance $10^{-6}$.
+\Cref{fig:kuznetsov_cuda} shows a visualization of the points we obtain with a
+rate of change of extrema equal to 1 ($\pm 10^{-6}$).
 The coefficients are chosen to be equal to these of Ref.~\cite{kuznetsov_visualization_2013} and their results are reproduced. The computation of this data took 250ms on a grid of $1024 \times 1024$ (i.e. approximately one million of trajectories) using \emph{Runge Kutta} of third order with a step size of $10^{-3}$.
 Notice that some of the points from the left part ($x < 0$) of biggest cycle are not found.
 % {\bf ??? not clear, rephrase}
@@ -67,8 +66,7 @@ In~\cref{sub:window_range} there are some examples of some possible situations w
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{kutznetsov_cuda_5k}
-\caption{Limit cycles found using the developed program ($5000\times 5000$ grid)\\
-Black areas correspond to points from which trajectories have a rate of 1 {\bf ??? what is that}  (tolerance $10^{-6}$)
+\caption{Limit cycles found in the reference case, Eq.~\ref{eq:kuznetsov}, discretizing the phase space by $5000\times 5000$ grid.
 }
 \label{fig:kuznetsov_cuda_5k}
 \end{figure}
@@ -177,7 +175,7 @@ since there are not many points. As long as the window contains enough part of t
 \pagebreak
 \paragraph{Compactified plane}
 
-Since the $(x,y)$ plane in $\mathcal{R}^2$ is infinite it is not possible to cover it with a finite regular grid. A possible way out is
+Since the $(x,y)$ plane in $\mathbb{R}^2$ is infinite it is not possible to cover it with a finite regular grid. A possible way out is
 %in order to visualize limit cycles without restricting portions of the plan a compactification should be performed.
 to do a compactification so that the infinitely large plane is mapped to a finite-size box. In \cref{sec:compact-stiff} there is a more in depth explanation of how this can be done. A simple way to perform the compactificaction $(x,y)\to(x',y')$ is to use mapping $x' = \arctan x$, $y' = \arctan y$ where $x\in(-\infty, \infty)$ to $x'\in(-\pi/2, \pi/2)$. This compactification is not ideal as it significantly deforms the plane and does not preserve the angles, but still it allows to perform the search of cycles in essentially infinite phase space.
 

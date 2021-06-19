@@ -1,7 +1,8 @@
 %! TEX root = **/010-main.tex
 % vim: spell spelllang=en:
 
-\section{Program structure}
+\section{Program structure}%
+\label{sec:structure}
 
 Initially, all the program was to be implemented in pure \emph{Julia} since there are libraries to interface with \emph{CUDA} \cite{noauthor_juliagpu_nodate} that should be able to handle the tasks needed. However there were some complications with the \emph{Nvidia} drivers and compiling the \emph{Julia} \emph{CUDA} kernels and some features are not yet available in \emph{CUDA.jl}.
 
@@ -89,29 +90,31 @@ end
     \caption{C version of RK4}
     \label{lst:c_rk4}
 \begin{minted}{c}
-void rk4_step(const double x0, const double y0, double *const x1, double *const y1, const double h, double *const cache) {
+__device__ void rk4_step(const double x0, const double y0, double *const x1, double *const y1, const double h, const double P[PARAMS]) {
+    double cache[4][2];
+
     // xk1, yk1 = h.*f(x, y)
-    f(x0, y0, h, &cache[0*2 + 0], &cache[0*2 + 1]);
+    f(x0, y0, h, &cache[0][0], &cache[0][1], P);
 
     // xk2, yk2 = h.*f(x + xk1/2, y + yk1/2)
-    *x1 = x0 + cache[0*2 + 0]/2.0;
-    *y1 = y0 + cache[0*2 + 1]/2.0;
-    f(*x1, *y1, h, &cache[1*2 + 0], &cache[1*2 + 1]);
+    *x1 = x0 + cache[0][0]/2.0;
+    *y1 = y0 + cache[0][1]/2.0;
+    f(*x1, *y1, h, &cache[1][0], &cache[1][1], P);
 
     // xk3, yk3 = h.*f(x + xk2/2, y + yk2/2)
-    *x1 = x0 + cache[1*2 + 0]/2.0;
-    *y1 = y0 + cache[1*2 + 1]/2.0;
-    f(*x1, *y1, h, &cache[2*2 + 0], &cache[2*2 + 1]);
+    *x1 = x0 + cache[1][0]/2.0;
+    *y1 = y0 + cache[1][1]/2.0;
+    f(*x1, *y1, h, &cache[2][0], &cache[2][1], P);
 
     // xk4, yk4 = h.*f(x + xk3, y + yk3)
-    *x1 = x0 + cache[2*2 + 0];
-    *y1 = y0 + cache[2*2 + 1];
-    f(*x1, *y1, h, &cache[3*2 + 0], &cache[3*2 + 1]);
+    *x1 = x0 + cache[2][0];
+    *y1 = y0 + cache[2][1];
+    f(*x1, *y1, h, &cache[3][0], &cache[3][1], P);
 
     // x = x + (xk1 + 2xk2 + 2xk3 + xk4)/6
     // y = y + (yk1 + 2yk2 + 2yk3 + yk4)/6
-    *x1 = x0 + (cache[0*2 + 0] + 2*cache[1*2 + 0] + 2*cache[2*2 + 0] + cache[3*2 + 0])/6.0;
-    *y1 = y0 + (cache[0*2 + 1] + 2*cache[1*2 + 1] + 2*cache[2*2 + 1] + cache[3*2 + 1])/6.0;
+    *x1 = x0 + (cache[0][0] + 2*cache[1][0] + 2.0*cache[2][0] + cache[3][0])/6.0;
+    *y1 = y0 + (cache[0][1] + 2*cache[1][1] + 2.0*cache[2][1] + cache[3][1])/6.0;
 }
 \end{minted}
 \end{listing}

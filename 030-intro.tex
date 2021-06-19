@@ -56,10 +56,13 @@ possible. Therefore, finding a system with 4 limit cycles or more will be quite
 an important result for the academic community.
 
 %???
-To find interesting systems several combinations of the equation parameters
-must be tried and evaluated, since each of this systems can be computed
-independently from the rest they can all be run in parallel, making it an ideal
-problem to compute in massively parallel GPU nodes.
+%
+%Do I remove this?
+%
+% To find interesting systems several combinations of the equation parameters
+% must be tried and evaluated, since each of this systems can be computed
+% independently from the rest they can all be run in parallel, making it an ideal
+% problem to compute in massively parallel GPU nodes.
 
 \subsubsection{Context}
 
@@ -110,7 +113,7 @@ advanced GPU graphic cards.
 
 \subsection{Computational complexity}
 
-The system of differential equations~\cref{eq:system} contains 5 free coefficients for $x$ and 5 more for $y$ which makes a total of 10 distinct parameters. Adding the initial point to calculate the trajectories ($x$ and $y$ coordinates) it makes a total of 12 free parameters. Thus the total space of parameters to be investigated is huge. Fortunately, the number of coefficients in the study can be reduced further to only 5 independent ones (parameters for $x$ are 1) as given in~\cref{eq:system2}. 
+The system of differential equations~\cref{eq:system} contains 5 free coefficients for $x$ and 5 more for $y$ which makes a total of 10 distinct parameters. Adding the initial point to calculate the trajectories ($x$ and $y$ coordinates) it makes a total of 12 free parameters. Thus the total space of parameters to be investigated is huge. Fortunately, the number of coefficients in the study can be reduced further to only 5 independent ones (parameters for $x$ are 1) as given in~\cref{eq:system2}.
 \begin{align}\label{eq:system2}
     \frac{dx}{dt} &= x^2 + xy + y^2 + x + y \nonumber \\
     \frac{dy}{dt} &= a_2x^2 + b_2xy + c_2y^2 + \alpha_2x + \beta_2y
@@ -137,16 +140,14 @@ the academician A.N.~Kolmogorov:
 To estimate the number of limit cycles of square vector fields on plane, A.N.~Kolmogorov had distributed several hundreds of initial parameters (with randomly chosen coefficients of quadratic expressions) among a few hundreds of students of Mech \& Math Faculty of Moscow State University as a mathematical practice. Each student had to find the number of limit cycles of a field. The result of this experiment was absolutely unexpected: not a single field had a limit cycle!
 \end{quote}
 
-This shows that the parallelizable nature of the problem and how difficult it is to find those cycles. Therefore it is important to implement a code that is both efficient on the calculation and have a big enough search space to find results. 
-{\bf In particular, in examples studied in this Thesis, the number of studied trajectories is $10^8$ ??? which far more as compared to $10^2$ as performed by Kolmogorov with his students.}
+This shows that the parallelizable nature of the problem and how difficult it is to find those cycles. Therefore it is important to implement a code that is both efficient on the calculation and have a big enough search space to find results.
+% {\bf In particular, in examples studied in this Thesis, the number of studied trajectories is $10^8$ ??? which far more as compared to $10^2$ as performed by Kolmogorov with his students.}
 
 \subsubsection{Previous studies}
 
 There has been a number of studies relying on numerical methods to find limit cycles in two dimensional vector fields
 \cite{leonov_hidden_2013,van_der_hoff_numerical_2013,casades_computation_2013,gasull_effective_2015}.
 Papadimitriou and Vishnoi showed that the computation of a limit cycle is
-% todo
-% PSPACE??
 PSPACE-complete~\cite{papadimitriou_computational_2015}.
 The maximal known number of limit cycles is reported in Kuznetsov et al.~\cite{kuznetsov_visualization_2013} where an example of specific conditions for which \textbf{4 limit cycles} is provided.
 

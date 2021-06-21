@@ -4,5 +4,31 @@
 \section{Conclusions}%
 \label{sec:conclusions}
 
-With this project we were able to develop and implement a fast method to assist in the detection of limit cycles by leveraging the computational power of modern GPUs. Although it is written in \emph{C}, it integrated with other programing languages such as \emph{Python} or \emph{Julia} allowing to visualize and further process the data
-obtained.
+With this project we were able to develop and implement a fast method to assist
+in the detection of limit cycles by leveraging the computational power of modern
+GPUs.  The program is much faster than finding limit cycles by integrating a
+trajectory until it converges, which can take a lot of time depending on the
+initial conditions and the system.
+
+Initially the program was implemented in the \emph{Julia} programming language,
+but the \emph{CUDA} part of the program was finally implemented in \emph{C} do
+to the limited documentation and capabilities of \emph{Julia}'s \emph{CUDA} API.
+Despite being written in \emph{C}, its was integrated into \emph{Julia} through
+an \emph{ABI} which allows the user to use the advanced abstraction and libraries
+of \emph{Julia} to visualize and further process the data obtained.
+
+The program can also be used with a powerful GPU to perform a parameter search
+to find interesting systems. The parameter search performed has been tiny
+compared to the initial objective due to the limited resources and time
+available but can be easily scaled to use multiple GPUs as shown in
+\cref{sub:multi-gpu}. The nature of the algorithm and its simplicity allows
+to scale it indefinitely.
+
+Unfortunately, not all limit cycles on a system are found
+reliably, there are a couple improvements that could be made in the future to
+fix this issue. In \cref{sec:future} there is a discussion on the future of the
+project.
+
+All in all, the project is an initial proof of concept on how the processing power
+of a GPU can be used in the study of limit cycles. This opens the door for further research
+of the topic using more advanced methods.

@@ -4,14 +4,18 @@
 \section{Further work}%
 \label{sec:future}
 
-Despite obtaining promising results, many improvements can be made. In particular,  possible analytical methods that can help narrowing down locations of possible limit cycles might be developed. Another area of the project that could be improved is the integrator methods for stiff equations. There are hundreds of well studied and documented integration methods that far outperform the simple \emph{Runge Kutta} methods used in the project. Porting the implicit integrators from GNU Scientific Library to \emph{CUDA} as some researchers have done with other parts of the library \cite{rodrigo_gnu_2019} could enable much better integration for stiff systems.
+Despite obtaining promising results, many improvements can be made. In particular,  possible analytical methods that can help narrow down locations of possible limit cycles might be developed. Another area of the project that could be improved is the integrator methods for stiff equations. There are hundreds of well studied and documented integration methods that far outperform the simple \emph{Runge Kutta} methods used in the project. Porting the implicit integrators from GNU Scientific Library to \emph{CUDA} as some researchers have done with other parts of the library \cite{rodrigo_gnu_2019} could enable much better integration for stiff systems.
 
 The \emph{UAB} (Universitat Autonoma de Barcelona) has an open source program
-named \emph{P4} \cite{saleta_oscarsaletap4_2018,saleta_computer_2018} to analyze ODE systems numerically and analytically. It has the ability to find limit cycles by computing trajectories between two points given by the user until it reaches a cycle. This method is quite slow, in fact in ref.~\cite{dumortier_examples_2006} there is a explicit mention on how you should specify points very close by and reduce the precision of the computation since otherwise the limit cycle detection may take a lot of time. The following quote
+named \emph{P4} \cite{saleta_oscarsaletap4_2018,saleta_computer_2018} to analyze ODE systems numerically and analytically. It has the ability to find limit cycles by computing trajectories between two points given by the user until it reaches a cycle. This method is quite slow, in fact in ref.~\cite{dumortier_examples_2006} there is an explicit mention on how you should specify points very close by and reduce the precision of the computation since otherwise the limit cycle detection may take a lot of time. The following quote
 from page 267 illustrates the issue:
 
 \begin{quote}
 A \emph{Searching for limit cycles} window  appears  with  a  time  bar which  should show the time left for computing but whose most useful application is to stop searching, since it may easily delay a lot before or after finding a limit cycle.
 \end{quote}
 
-Maybe our approach could be added as an alternative to assist in finding limit cycles. Combining our program with the various analytical techniques of \emph{P4} may open new possibilities for GPU computation of other constructs a part from limit cycles. 
+Maybe our approach could be added as an alternative to assist in finding limit cycles. Combining our program with the various analytical techniques of \emph{P4} may open new possibilities for GPU computation of other constructs a part from limit cycles.
+
+Other possible improvements could be the analysis of systems of higher degree
+and dimensionality which are much more difficult to visualize and investigate analytically.
+For example, there have been found systems of degree 3 with 11 limit cycles \cite{han_lower_2012}.

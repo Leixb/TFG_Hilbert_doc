@@ -38,8 +38,8 @@ cycles, as shown in \cref{fig:kuznetsov2}.
 
 \pagebreak
 \Cref{fig:kuznetsov_cuda} shows a visualization of the points we obtain with a rate of change of extrema equal to 1 ($\pm 10^{-6}$). The coefficients are chosen to be equal to these of Ref.~\cite{kuznetsov_visualization_2013} and their results are reproduced. The computation of this data took 250ms on a grid of $1024 \times 1024$ (i.e. approximately one million of trajectories) using \emph{Runge Kutta} of third order with a step size of $10^{-3}$.
-Notice that some of the points from the left part ($x < 0$) of biggest cycle are not found.
-% {\bf ??? not clear, rephrase}
+Notice that some points from the left part ($x < 0$) of the biggest cycle are not found.
+
 Nevertheless, three limit cycles are clearly identified. Notice that the
 4th limit cycle which is expected to be present in the left of our plot cannot be found by the program due to the stiffness of the system on that area. This problem is discussed in more detail in~\cref{sub:stiffness}. For the rest of the analysis we will only consider these 3 limit cycles.
 \begin{figure}[H]
@@ -134,7 +134,7 @@ If we compute the \emph{K-means} for 3 clusters we obtain the cluster centers sh
 \end{figure}
 
 \pagebreak
-\subsection{Changing window range}%
+\subsection{Changing the window range}%
 \label{sub:window_range}
 
 One of the important issue is a possible dependence of the number of the limit cycles on the size of the area which is used for searching them. The previous figures were obtained by searching for limit cycles inside a rectangle bound by $x \in (-5, 20), y \in (-60, 40)$. In the following section an analysis on the capacity of the program to find the cycles with different windows will be performed.

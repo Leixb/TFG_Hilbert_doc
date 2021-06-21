@@ -39,11 +39,11 @@ Given the nature of this thesis it is fundamental to have a solid understanding
 of modern numerical computation techniques applied to solving Ordinary
 Differential Equations and finding limit cycles. It is also primordial to know
 how these techniques can be applied to CUDA and how to benchmark the programs to
-detect bottlenecks and find whether or not the processing power of the GPU is
+detect bottlenecks and find whether the processing power of the GPU is
 being used in its full potential.
 
 \begin{itemize}
-    \item \textbf{Research ODE solvers} There are lots of algorithm to solve
+    \item \textbf{Research ODE solvers} There are lots of algorithms to solve
         ODEs which will have to be tried to find the ones that give the best
         results in our case.
     \item \textbf{Research how to find limit cycles} Find the best approach to
@@ -74,30 +74,30 @@ with them and find the best ones to solve the problem.
 
 \paragraph{Experimentation, analysis and conclusions}
 
-Once there is a working prototype of the code the experimentation can begin.
+Once there is a working prototype of the code, the experimentation can begin.
 There will be two major parts of the experimentation, the first one when the
 various methods are tested with a relatively small number of cases to find the
 best one (taking into account both the speed and accuracy of the calculations)
 and the final experiment when the best method is run with a much bigger search
-space and from which the results can be analysed.
+space and from which the results can be analyzed.
 
 \begin{itemize}
     \item \textbf{Comparison experiment}
         \begin{itemize}
-            \item \textbf{Select search space} Decide how many different
+            \item \textbf{Select search space} Decide how many
                 parameters will be used on the experiment. It should be a big
                 enough search space so as to have variety on the systems but not
                 big enough that it takes too much time to benchmark and slows
                 down the development.
             \item \textbf{Select benchmarks} The benchmarks must be run in
-                similar conditions and we must decide what metrics will be
+                similar conditions, and we must decide what metrics will be
                 considered (execution time, FLOPS\footnote{Floating Point Operations
                 Per Second}, accuracy, memory usage, \dots).
             \item \textbf{Further optimize the methods} When running the
                 benchmarks we may find some possible improvements on the
                 original implementations which can then be improved and tested
                 again.
-            \item \textbf{Analyse results and decide best method} With the
+            \item \textbf{Analyze results and decide the best method} With the
                 results of the experiments we can decide on which method is the
                 best and should therefore be used in the final experiment.
         \end{itemize}
@@ -107,11 +107,11 @@ space and from which the results can be analysed.
                 experiments, estimate the runtime as a function of the search
                 space and select a search space as big as possible given the
                 available computing time.
-            \item \textbf{Analyse results} Once the final experiment finishes
-                the results can be analysed in search of systems with
+            \item \textbf{Analyze results} Once the final experiment finishes
+                the results can be analyzed in search of systems with
                 interesting number of limit cycles.
         \end{itemize}
-    \item \textbf{Conclusions} Analyse the results of both experiments and
+    \item \textbf{Conclusions} Analyze the results of both experiments and
         provide a conclusion.
 \end{itemize}
 
@@ -119,10 +119,10 @@ space and from which the results can be analysed.
 
 It is quite difficult to estimate the time needed for each of the proposed tasks
 since there is no clear reference of how long they can potentially take. To
-account for possible delays I will take an upper bound on the ours needed for
+account for possible delays I will take an upper bound on the hours needed for
 each task.
 
-The \textbf{project planning} should be fairly quick so I estimate around 30
+The \textbf{project planning} should be fairly quick, so I estimate around 30
 hours of work for the first tasks. There will be 18 meetings of 1 hour and the
 integration into the final document should take around 12 hours taking into
 account all changes and corrections that may arise.
@@ -134,12 +134,12 @@ to ensure I can get a deep understanding of the topic.
 The \textbf{implementation} is the part that should take most time given that
 there are multiple different methods to try and test. The implementation of the
 methods should take around a month ($\sim100$ hours) and the adaptation to CUDA 2
-weeks ($\sim 50$ hours). While doing the different methods testing should be performed
-which should add up to around 50 hours of testing.
+weeks ($\sim 50$ hours). While doing the different methods, testing should be performed
+this should add up to around 50 hours of testing.
 
 Regarding the \textbf{comparison experimentation} the optimization of methods
 should take between 50 and 100 hours given that the initial implementation may
-require a lot of tweaking and fine tuning to adapt to the hardware. The analysis
+require a lot of tweaking and fine-tuning to adapt to the hardware. The analysis
 of results should be fairly quick if the code produces proper metrics. In the
 \textbf{final experimentation} most of the time will be spent on the computing
 and the work should be around 20 hours of monitoring the execution and analyzing
@@ -223,7 +223,7 @@ the code there following resources will be used:
         and due to the fact that it provides \emph{github} integration.
     \item \textbf{Atenea}: To communicate with the GEP tutor.
     \item \textbf{Computers}: My own personal computer with an \emph{RTX2060} will be
-        used to develop the code and test it. The final versions will will run
+        used to develop the code and test it. The final versions will run
         on a server from the department of physics at UPC with a \emph{Nvidia
         Titan V} and \emph{Nvidia Titan Xp} GPUs.
     \item \textbf{Julia}: The Julia programming language will be used to write
@@ -234,7 +234,6 @@ the code there following resources will be used:
 
 \subsection{Risk Management}
 
-% todo link with intro section
 As explained in~\cref{ssub:intro_risks} there are several potential risks that
 may occur during the development of the project. In this section we plan how
 this risks will be mitigated and the steps that will be taken if they happen.

@@ -57,7 +57,7 @@
     %\setcounter{tocdepth}{2}
     \tableofcontents \pagebreak
 
-    \listoffigures %\pagebreak
+    \listoffigures \pagebreak
     \listoftables
     \listoflistings
     \clearpage
@@ -72,9 +72,21 @@
     \setlength{\parskip}{1em plus 0.5em minus 0.2em}
     %\setlength{\parindent}{0pt}
 
+\null\vfill
+\vspace{-5em}
+\begin{abstract}
+    A high performance program to find limit cycles in quadratic ordinary systems of
+    equations (ODEs) using the computational power of GPUs (Graphical Processing Units)
+    was developed. The program is able to find limit cycles on a quadratic system
+    in seconds, allowing for a quick visualization of the cycles or to perform a massive
+    parameter search to find systems with interesting limit cycle configurations.
+\end{abstract}
+\vfill\null
+\pagebreak
+
     \pagestyle{fancy}
     \fancyhf{}
-    
+
 
     \makeatletter
         \fancyhead[L]{\@title}
@@ -93,24 +105,20 @@
 
     \include{060-initial-seq}
     \include{060-convergence-analysis}
+
     \include{090-metrics}
+
     \include{070-initial-cuda}
     \include{075-results}
-
-
     \include{080-performance-analysis}
-
-
     \include{100-stiffness-compact}
-
     \include{110-julia}
-
-    % \include{120-final-benchmarks}
+    \include{120-parameter-search}
 
     \include{130-conclusions}
-
     \include{140-further-work}
 
+    \include{150-sustainability-final}
 
 
 

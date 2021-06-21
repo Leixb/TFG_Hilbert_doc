@@ -11,7 +11,7 @@ To do so we have to detect special points in the trajectory that we can use to d
 \paragraph{Zero crossings:} can be computed by detecting the change of sign
 during the computation. Although they are really cheap and are commonly used on complex ODE systems, there is no guarantee that cycles will cross axis.
 
-\paragraph{Inflection points:} these correspond to the points where the ratio of change of the function changes sign (maxima, minima or stationary points). Given that the integration methods used compute the result as the previous value plus a change, we can easily detect changes in sign with almost no overhead. Moreover, all cycles will have at least a four local extrema.
+\paragraph{Inflection points:} these correspond to the points where the ratio of change of the function changes sign (maxima, minima or stationary points). Given that the integration methods used compute the result as the previous value plus a change, we can easily detect changes in sign with almost no overhead. Moreover, all cycles will have at least four local extrema.
 
 \paragraph{Interpolation:} although we can detect if we passed an inflection point with almost no overhead, we must perform some kind of interpolation to obtain an accurate value within our tolerances. To do so, we can perform interpolation using 3 neighbouring points or perform additional integration steps to find the inflection point numerically. Applying polynomial interpolation requires saving at least 3 point for each trajectory, interpolating them and computing the vertex. The second option (root finding) is potentially more costly since it involves additional integration steps but should produce better results.
 
@@ -24,21 +24,20 @@ Comparing the value of the initial 4 local extrema with the local extrema of the
 
 There is one small caveat with this approach which is that the ratios between the 4 different extrema are not comparable, that is, in some cases the maxima or minima are various orders of magnitude apart. This has to be taken into consideration when evaluating the values used for the tolerance when searching the points with ratio 1.
 
-Traditionally with CPU computation one initial point is taken and evaluated through many steps until the trajectory reaches an stable cycle. Instead, the advantage of GPU computation is that one can take a massive amount of points, evaluate only the very few first steps (until 2 loops are completed) and quickly find limit cycle candidates.
+Traditionally with CPU computation one initial point is taken and evaluated through many steps until the trajectory reaches a stable cycle. Instead, the advantage of GPU computation is that one can take a massive amount of points, evaluate only the very few first steps (until 2 loops are completed) and quickly find limit cycle candidates.
 
 \subsection{Other metrics}
 
-A part from the rate of change in local extrema, an evaluation of the rate of
-change in the loop period was also attempted but it did not give satisfying
+Apart from the rate of change in local extrema, an evaluation of the rate of
+change in the loop period was also attempted, but it did not give satisfying
 results.
 
 \subsection{Distinguishing different cycles}
 
 The rate of change of extrema allows us to find areas in the function with
 trajectories with a rate of change of their extrema of 1 (\cref{sub:roc}),
-% {\bf not clear which ratio is meant, a way out is to introduce an equation with the definition of the ratio ???}
 which are candidates to be limit cycles. Now the problem is how we can classify
-this areas into different limit cycle trajectories. The following approaches
+these areas into different limit cycle trajectories. The following approaches
 were tested:
 
 \subsubsection*{Connected component labelling}
@@ -69,7 +68,7 @@ The runtime complexity of \emph{Kmeans} method of $n$ points with $k$ clusters a
 
 With \emph{Kmeans} we must specify the number of clusters the search, it does not say how many clusters there are in the data. To do so we must compute the algorithm with 2, 3, 4 and 5 clusters and use a metric that indicates which partition is better.
 
-We will use the silhouette metric, defined in~\cref{eq:silhouette}. Here $s(i)$ is the silhouette coefficient of the point $p_i$. It is calculated from the average distance $a(i)$ from the point $p_i$ to all the points in the cluster to which $p_i$ belongs and $b(i)$ which is the minimum average distance to all the clusters in which $p_i$ does not belong. 
+We will use the silhouette metric, defined in~\cref{eq:silhouette}. Here $s(i)$ is the silhouette coefficient of the point $p_i$. It is calculated from the average distance $a(i)$ from the point $p_i$ to all the points in the cluster to which $p_i$ belongs and $b(i)$ which is the minimum average distance to all the clusters in which $p_i$ does not belong.
 If the silhouette value is $s(i) = 1$, it indicates that the point $p_i$ is close to all the points in his cluster and far away from the others. The worst value is $s(i) = -1$. We compare the mean of the silhouette coefficient for the different number of clusters and find which gives the best result.
 {\bf check the paragraph, I edited it ???}
 

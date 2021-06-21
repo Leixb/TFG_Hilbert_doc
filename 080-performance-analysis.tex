@@ -2,6 +2,7 @@
 % vim: spell spelllang=en:
 
 \section{Performance analysis}
+\label{sec:performance}
 
 
 In this section we analyze the runtime performance of the CUDA part of
@@ -23,7 +24,7 @@ performed using the \emph{Runge Kutta} of order 3 with a step size of 0.0001 and
     \label{fig:time_overhead}
 \end{figure}
 
-\Cref{fig:time_overhead} shows the execution time of the CUDA version of the code with separate measurements of the time spent in the kernel (i.e. useful time of the actual calculation). Total time is the time spent in the kernel plus the additional time for input/output operations and CUDA synchronization directives. For grid sizes of 1 and 2, most of the time is spent outside the kernel. We can observe that the time is roughly the same from grid sizes $1$ to $2^14 (16384)$ but after that there is a notable increase. This is due to the fact the GPU used has 10240 CUDA cores so
+\Cref{fig:time_overhead} shows the execution time of the CUDA version of the code with separate measurements of the time spent in the kernel (i.e. useful time of the actual calculation). Total time is the time spent in the kernel plus the additional time for input/output operations and CUDA synchronization directives. For grid sizes of 1 and 2, most of the time is spent outside the kernel. We can observe that the time is roughly the same from grid sizes $1$ to $2^14 (16384)$ but after that there is a notable increase. This is due to the fact the GPU used has 10240 CUDA cores, so
 we are using all cores and reaching the parallelization limit of the device.
 
 If we now add the execution time of the \emph{C} sequential implementation of the
@@ -38,7 +39,21 @@ program we obtain data shown in ~\cref{fig:time_cuda}. The CUDA version outperfo
 
 % {\bf define speedup ???}
 
-By computing the ratio between the execution time of the sequential version and the CUDA version, we obtain the \emph{Speedup}, which indicates how much faster the CUDA computation is compared to the sequential version. As stated before the GPU used has 10240 cores so the theoretical maximum speedup is 10240. Obviously such speedup is not feasible, both due to the fact that a CPU core runs faster than a CUDA core and that there are additional operations of communication between CPU and GPU that increase the execution time. The dependence of the speedup on the number of trajectories is shown in \cref{fig:speedup}.
+\paragraph{Speedup}
+
+By computing the ratio between the execution time of the sequential version and
+the CUDA version, we obtain the \emph{Speedup} (defined in \cref{eq:speedup}),
+which indicates how much faster the CUDA computation is compared to the
+sequential version. As stated before the GPU used has 10240 cores so the
+theoretical maximum speedup is 10240. Obviously such speedup is not feasible,
+both due to the fact that a CPU core runs faster than a CUDA core and that there
+are additional operations of communication between CPU and GPU that increase the
+execution time. The dependence of the speedup on the number of trajectories is
+shown in \cref{fig:speedup}.
+
+\begin{equation}\label{eq:speedup}
+    S = \frac{T_{\text{original}}}{T_{\text{improved}}}
+\end{equation}
 
 \begin{figure}[H]
     \centering
@@ -47,15 +62,29 @@ By computing the ratio between the execution time of the sequential version and 
     \label{fig:speedup}
 \end{figure}
 
-The overhead for starting CUDA processes make the GPU code slower for calculation of small number of trajectories. For $\approx 2^4 = 16$ trajectories the parallel and the serial codes require a similar execution time. The parallel code runs faster (speedup larger than one) for larger number of trajectories. The theoretical maximum for speedup is limited by the number of cores in GPU (10240 in the present case) while here we observe $5239$ at maximum. There is still an order of magnitude from the maximum achievable speedup which gives room for improvement. Specially if we use additional GPUs. For reference, the computation of $2^{26} \approx 6\times 10^7$ trajectories took 3.202s on the GPU while the sequential version of the program would take approximately 4 hours and 40 minutes. Such a massive computation of $2^{26}$ trajectories requires around 7~Gb of GPU memory if using and polynomial interpolation (although there is only 550Mb of data to needed for the final result). Given that the GPU has 12 Gb of memory, higher resolutions cannot be performed with this kernel.
+The overhead for starting CUDA processes make the GPU code slower for
+calculation of small number of trajectories. For $\approx 2^4 = 16$ trajectories
+the parallel and the serial codes require a similar execution time. The parallel
+code runs faster (speedup larger than one) for larger number of trajectories.
+The theoretical maximum for speedup is limited by the number of cores in GPU
+(10240 in the present case) while here we observe $5239$ at maximum. There is
+still a factor of 2 to reach the maximum achievable speedup which gives room
+for improvement. With additional GPUs the factor will be different. For reference, the
+computation of $2^{26} \approx 6\times 10^7$ trajectories took 3.202s on the GPU
+while the sequential version of the program would take approximately 4 hours and
+40 minutes. Such a massive computation of $2^{26}$ trajectories requires around
+7~Gb of GPU memory if using and polynomial interpolation (although there is only
+550Mb of data to needed for the final result). Given that the GPU has 12 Gb of
+memory, higher resolutions cannot be performed with this kernel.
 
 \subsection{Multi GPU}
+\label{sub:multi-gpu}
 
 As discussed in the previous section, the limitation on memory on the GPU makes it impossible to compute easily the phase portrait with higher resolutions. One solution is to employ various GPUs for the task. To demonstrate the capability, the code was adapted dividing the area to compute into sectors of equal size and computing each part on one GPU, then merging the results. The server used in the other experiments only has 2 GPUs and the second one has much lower capabilities than the first so the benefits of using the 2 GPUs were outweighed by the overhead of passing data to the GPUs and the fact that the grid had to be split unevenly giving most of the work to the faster GPU. Thanks to the department of computer architecture of the FIB, the code was run in their \emph{boada} server with 4 GPUs. These GPUs only have 2880 CUDA cores (as opposed to the 10240 of the Titan V) \footnote{See \cref{lst:gpu_info_boada} for the details on \emph{boada} hardware} therefore, with the combined power of 4 GPUs the theoretical maximum is 11520 which is the same order of magnitude
 as the Titan V.
 
-\Cref{fig:speedup_boada} shows the speedup obtained in \emph{boada} using 1 and 4 GPUs. We can observe that even with 4 GPUs they still don't match the speedup obtained with the Titan V. The overhead of using multiple GPUs is quite significant so there is no benefit until grid sizes $2^{20}$. The speedup of using 4 GPUs in the case of
-$2^{26}$ is $2981/750 \approx 3$. Using that as a reference using 4 Titan GPUs we could expect an speedup of $\approx 15700$. This was just done as a proof of concept that it is technically possible.
+\Cref{fig:speedup_boada} shows the speedup obtained in \emph{boada} using 1 and 4 GPUs. We can observe that even with 4 GPUs they still don't match the speedup obtained with the Titan V. The overhead of using multiple GPUs is quite significant, so there is no benefit until grid sizes $2^{20}$. The speedup of using 4 GPUs in the case of
+$2^{26}$ is $2981/750 \approx 3$. Using that as a reference using 4 Titan GPUs we could expect a speedup of $\approx 15700$. This was just done as a proof of concept that it is technically possible.
 
 \begin{figure}[H]
     \centering

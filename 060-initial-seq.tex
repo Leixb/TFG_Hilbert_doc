@@ -4,7 +4,7 @@
 \section{Program structure}%
 \label{sec:structure}
 
-Initially, all the program was to be implemented in pure \emph{Julia} since there are libraries to interface with \emph{CUDA} \cite{noauthor_juliagpu_nodate} that should be able to handle the tasks needed. However there were some complications with the \emph{Nvidia} drivers and compiling the \emph{Julia} \emph{CUDA} kernels and some features are not yet available in \emph{CUDA.jl}.
+Initially, all the program was to be implemented in pure \emph{Julia} since there are libraries to interface with \emph{CUDA} \cite{noauthor_juliagpu_nodate} that should be able to handle the tasks needed. However, there were some complications with the \emph{Nvidia} drivers and compiling the \emph{Julia} \emph{CUDA} kernels and some features are not yet available in \emph{CUDA.jl}.
 
 Therefore, the main program in \emph{CUDA} will be implemented in \emph{C} and expose the relevant method through an \emph{ABI} (Application Binary Interface) so that it can be compiled into a shared binary and interface with \emph{Julia} or any other language capable of using \emph{C} shared libraries. With this approach we can achieve seamless interoperation between \emph{CUDA} and \emph{Julia} while having full control of how \emph{CUDA} kernels behave and manage the resources. All the analysis on the data obtained from the \emph{CUDA} computation can then be processed using all the available \emph{Julia} libraries offering great flexibility.
 
@@ -35,7 +35,7 @@ to \emph{C}.
 \section{Initial implementation}%
 \label{sec:initial_implementation}
 
-Before implementing the program in CUDA we first need to implement a sequential version of the program. This sequential code allows easier debugging of the implementation and provides a basis to compare the speedup obtained with CUDA.
+Before implementing the program in CUDA, we first need to implement a sequential version of the program. This sequential code allows easier debugging of the implementation and provides a basis to compare the speedup obtained with CUDA.
 
 The main steps that the program must perform are:
 
@@ -54,7 +54,11 @@ To compute the trajectory, a numerical method to integrate an ODE must be used. 
 
 There is no need to save the complete trajectory in order to detect the presence of the limit cycles since the relevant metrics can be computed at the same time as the integration is being performed. This reduces not only the amount of memory needed to compute and store the results but also allows the early termination of a trajectory computation if we detect that it is a cycle, point or it goes out of bounds before the last step is reached.
 
-In~\cref{sec:metrics} there is an in-depth discussion of the metrics used and how they are used to detect limit cycle candidates. For the moment the relevant point is that for each trajectory we only need to compute 2 \emph{loops} and measure the ratio between the maximum and minimum points of each loop. If this ratio is equal to 1 (within a tolerance margin), the trajectory is a cycle.
+In~\cref{sec:metrics} there is an in-depth discussion of the metrics used and
+how they are employed to detect limit cycle candidates. For the moment the relevant
+point is that for each trajectory we only need to compute 2 \emph{loops} and
+measure the ratio between the maximum and minimum points of each loop. If this
+ratio is equal to 1 (within a tolerance margin), the trajectory is a cycle.
 
 \paragraph{Julia}
 For the very first prototyping, the various methods where implemented in \emph{Julia} to check the correctness of the algorithm and then manually translated into \emph{C} and checked again.

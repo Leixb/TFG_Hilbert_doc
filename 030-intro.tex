@@ -29,7 +29,7 @@ partially solved. There are however some which are still unsolved to this day.
 One of the still unsolved problems is the 16th problem. This problem consists of
 two separate problems, the first one regarding the relative positions of the
 branches of real algebraic curves and the second one about the upper limit of
-{\em limit cycles} on two dimensional vector fields and their relative positions. In
+{\em limit cycles} on two-dimensional vector fields and their relative positions. In
 this project we are going to study the second part of this 16th problem.
 
 In particular, we study the number of limit cycles for vector fields of
@@ -39,7 +39,7 @@ polynomials of second degree:
     \frac{dy}{dt} &= a_2x^2 + b_2xy + c_2y^2 + \alpha_2x + \beta_2y
 \end{align}
 
-Solving the system of differential equations~(\ref{eq:system}) results in a trajectory $x(t), y(t)$ which represents some curve on $(x,y)$ plane. There are different possibilities for how this curve looks like. One of the most interesting cases is when it results in an {\it attractor}. An attractor is defined as a compact subset of the phase space of a dynamical system, such that all trajectories from some neighborhood of it tend to it at infinite time. An attractor can be an attracting fixed point or as well a periodic trajectory (limit cycle).
+Solving the system of differential equations~(\ref{eq:system}) results in a trajectory $x(t), y(t)$ which represents some curve on $(x, y)$ plane. There are different possibilities for how this curve looks like. One of the most interesting cases is when it results in an {\it attractor}. An attractor is defined as a compact subset of the phase space of a dynamical system, such that all trajectories from some neighborhood of it tend to it at infinite time. An attractor can be an attracting fixed point or as well a periodic trajectory (limit cycle).
 
 \begin{itemize}
 \item the trajectory goes away to infinity
@@ -50,7 +50,7 @@ Solving the system of differential equations~(\ref{eq:system}) results in a traj
 It is unknown whether there exists an upper limit on the number of limit cycles
 for systems with polynomials of degree greater than
 one~\cite{christopher_hilberts_2007,ilyashenko_centennial_2002,llibre_sobre_2015}.
-Nowadays, the largest number of limit cycles found is equal to four and it is
+Nowadays, the largest number of limit cycles found is equal to four. It is
 still an open question whether or not a larger number of limit cycles is
 possible. Therefore, finding a system with 4 limit cycles or more will be quite
 an important result for the academic community.
@@ -60,8 +60,8 @@ an important result for the academic community.
 %Do I remove this?
 %
 % To find interesting systems several combinations of the equation parameters
-% must be tried and evaluated, since each of this systems can be computed
-% independently from the rest they can all be run in parallel, making it an ideal
+% must be tried and evaluated, since each of these systems can be computed
+% independently of the rest they can all be run in parallel, making it an ideal
 % problem to compute in massively parallel GPU nodes.
 
 \subsubsection{Context}
@@ -71,6 +71,7 @@ Computing, done in the \textcatalan{Facultat Inform\`atica de Barcelona (FIB)}
 of the \textcatalan{Universitat Polit\'ecnica de Catalunya (UPC)}. The project
 is directed by Grigori Astrakharchik.
 
+\pagebreak
 \subsubsection{Concepts}
 
 Below are some concepts needed to understand the project.
@@ -113,14 +114,14 @@ advanced GPU graphic cards.
 
 \subsection{Computational complexity}
 
-The system of differential equations~\cref{eq:system} contains 5 free coefficients for $x$ and 5 more for $y$ which makes a total of 10 distinct parameters. Adding the initial point to calculate the trajectories ($x$ and $y$ coordinates) it makes a total of 12 free parameters. Thus the total space of parameters to be investigated is huge. Fortunately, the number of coefficients in the study can be reduced further to only 5 independent ones (parameters for $x$ are 1) as given in~\cref{eq:system2}.
+The system of differential equations~\cref{eq:system} contains 5 free coefficients for $x$ and 5 more for $y$ which makes a total of 10 distinct parameters. Adding the initial point to calculate the trajectories ($x$ and $y$ coordinates) it makes a total of 12 free parameters. Thus, the total space of parameters to be investigated is huge. Fortunately, the number of coefficients in the study can be reduced further to only 5 independent ones (parameters for $x$ are 1) as given in~\cref{eq:system2}.
 \begin{align}\label{eq:system2}
     \frac{dx}{dt} &= x^2 + xy + y^2 + x + y \nonumber \\
     \frac{dy}{dt} &= a_2x^2 + b_2xy + c_2y^2 + \alpha_2x + \beta_2y
 \end{align}
 This ends up in a total of 7 independent parameters.
 
-If we consider $n$ different values for each of those parameters we have a total of $n^7$ different trajectories to calculate. For example, for $n=100$ different values for each parameter, $10^{14}$ trajectories has to be calculated in order to sample the space of available parameters. If we were to compute the trajectories sequentially it would take an exceedingly long time even for moderately sized values of $n$. Calculating a trajectory on a typical desktop machine takes 0.01 seconds. This means that for $n=10$ it would take approximately 28 hours to compute all the trajectories and taking $n=30$ the time increases to 7 years. If we use a GPU with 5000 CUDA cores (Tesla K90) it would only take 20 seconds (assuming perfect parallelization). And for $n=30$ it would take 12 and a half hours. Thus, the use of CUDA clusters, like Minotauro in Barcelona Supercomputing Center, looks very promising. If we consider the usage of a cluster composed of 39 servers with 2 Tesla K90 GPUs the computation time for $n=30$ is estimated to be a mere 9 minutes. \footnote{All these calculations are based on a very rough estimate of the computing time needed to determine the limit cycle of a trajectory which may vary a lot depending on the system and the implementation of the code}
+If we consider $n$ different values for each of those parameters we have a total of $n^7$ different trajectories to calculate. For example, for $n=100$ different values for each parameter, $10^{14}$ trajectories has to be calculated in order to sample the space of available parameters. If we were to compute the trajectories sequentially it would take an exceedingly long time even for moderately sized values of $n$. Calculating a trajectory on a typical desktop machine takes 0.01 seconds. This means that for $n=10$ it would take approximately 28 hours to compute all the trajectories and taking $n=30$ the time increases to 7 years. If we were to use a GPU with 5000 CUDA cores (Tesla K90) it would only take 20 seconds (assuming perfect parallelization). And for $n=30$ it would take 12 and a half hours. Thus, the use of CUDA clusters, like Minotauro in Barcelona Supercomputing Center, looks very promising. If we consider the usage of a cluster composed of 39 servers with 2 Tesla K90 GPUs the computation time for $n=30$ is estimated to be a mere 9 minutes. \footnote{All these calculations are based on a very rough estimate of the computing time needed to determine the limit cycle of a trajectory which may vary a lot depending on the system and the implementation of the code}
 
 \subsubsection{Stakeholders}
 
@@ -140,18 +141,18 @@ the academician A.N.~Kolmogorov:
 To estimate the number of limit cycles of square vector fields on plane, A.N.~Kolmogorov had distributed several hundreds of initial parameters (with randomly chosen coefficients of quadratic expressions) among a few hundreds of students of Mech \& Math Faculty of Moscow State University as a mathematical practice. Each student had to find the number of limit cycles of a field. The result of this experiment was absolutely unexpected: not a single field had a limit cycle!
 \end{quote}
 
-This shows that the parallelizable nature of the problem and how difficult it is to find those cycles. Therefore it is important to implement a code that is both efficient on the calculation and have a big enough search space to find results.
-% {\bf In particular, in examples studied in this Thesis, the number of studied trajectories is $10^8$ ??? which far more as compared to $10^2$ as performed by Kolmogorov with his students.}
+This shows that the parallelizable nature of the problem and how difficult it is to find those cycles. Therefore, it is important to implement a code that is both efficient on the calculation and have a big enough search space to find results.
+% {\bf In particular, in examples studied in this Thesis, the number of studied trajectories is $10^8$ ??? Which far more as compared to $10^2$ as performed by Kolmogorov with his students.}
 
 \subsubsection{Previous studies}
 
-There has been a number of studies relying on numerical methods to find limit cycles in two dimensional vector fields
+There has been a number of studies relying on numerical methods to find limit cycles in two-dimensional vector fields
 \cite{leonov_hidden_2013,van_der_hoff_numerical_2013,casades_computation_2013,gasull_effective_2015}.
 Papadimitriou and Vishnoi showed that the computation of a limit cycle is
 PSPACE-complete~\cite{papadimitriou_computational_2015}.
 The maximal known number of limit cycles is reported in Kuznetsov et al.~\cite{kuznetsov_visualization_2013} where an example of specific conditions for which \textbf{4 limit cycles} is provided.
 
-All the previous studies have relied on standard analytical methods to calculate trajectories and find limit cycles, there has not been a research on developing efficient parallel code to solve ODE trajectories on GPUs with the aim of finding limit cycles. This projects aims to develop a highly efficient method to aid the search of limit cycles using modern computational capabilities. At best, we will be able to find systems with 4 or more limit cycles on our search, at worst the developed code will still be useful to quickly analyze systems in search of limit cycles.
+All the previous studies have relied on standard analytical methods to calculate trajectories and find limit cycles, there has not been research on developing efficient parallel code to solve ODE trajectories on GPUs with the aim of finding limit cycles. This projects aims to develop a highly efficient method to aid the search of limit cycles using modern computational capabilities. At best, we will be able to find systems with 4 or more limit cycles on our search, at worst the developed code will still be useful to quickly analyze systems in search of limit cycles.
 
 \pagebreak
 \subsubsection{CUDA and Julia}
@@ -184,7 +185,7 @@ solving~\cite{rackauckas_comparison_2017}.
 \subsection{Scope}
 \subsubsection{Objectives and sub-objectives}
 
-The main objective of this Thesis is to develop a highly-efficient code capable of determining the possible existence of limit cycles for a system. This code must also be capable of being executed in parallel in a GPU cluster making full use of its computing power to simulate a wide variety of systems with different parameters. Furthermore, the results must be processed to find interesting systems to visualize and analyse in more detail. These objectives can be divided in sub-objectives:
+The main objective of this Thesis is to develop a highly-efficient code capable of determining the possible existence of limit cycles for a system. This code must also be capable of being executed in parallel in a GPU cluster making full use of its computing power to simulate a wide variety of systems with different parameters. Furthermore, the results must be processed to find interesting systems to visualize and analyze in more detail. These objectives can be divided in sub-objectives:
 
 \paragraph{Theoretical part}
 
@@ -208,7 +209,7 @@ best performance.
     \item Implement the algorithms in an efficient code.
     \item Benchmark the performance and compare different approaches to achieve the best performance.
     \item Run the code on a dedicated GPU server.
-    \item Analyse the results and visualize them.
+    \item Analyze the results and visualize them.
     \item Present and discuss the obtained results in the Thesis.
 \end{itemize}
 
@@ -241,7 +242,7 @@ There are several risks that may have to be dealt with during the development of
         have to be reevaluated.
     \item \textbf{Inexperience on the field}: I have very limited experience
         with CUDA programming and just the basics of numerical computation
-        techniques so there is a lot of research to be done, specially regarding
+        techniques, so there is a lot of research to be done, specially regarding
         dynamical systems.
 \end{itemize}
 
@@ -263,9 +264,9 @@ To manage the different iterations of the code \texttt{git} will be used,
 this will allow to have a complete history of the different changes to the code
 made during the project. Different branches will be used during the development
 of the code: a \emph{master} branch with the current working code, a
-\emph{development} branch in which newest features are added. When the work done
+\emph{development} branch in which the newest features are added. When the work done
 in the \emph{development} branch is properly tested and proved to be working the
-changes will merge into the \emph{master} branch. Additionally some
+changes will merge into the \emph{master} branch. Additionally, some
 other branches may be created with experimental changes.
 
 The \texttt{git} repository will be hosted on \href{github.com}{GitHub} and

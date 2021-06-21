@@ -1,0 +1,98 @@
+%! TEX root = **/010-main.tex
+% vim: spell spelllang=en:
+
+\section{Final sustainability report}
+\label{sec:sustainability-final}
+
+\subsection{Environmental Impact}
+
+\paragraph{PPP (project put into production)}
+
+The environmental impact can be quantified in the number of hours of usage of
+the server used to run the program.  According to the server logs, there have
+been around 170 hours of server usage from the account I used. It is difficult
+to estimate accurately how this translates to energy usage, but most of the time
+was spent developing the program and running tests on a single system. The two
+parameter searches performed where also quite small and ran for around 5 and 12
+hours each using around 200 Watts on the GPU. All these estimates do not take
+into account the computing time spent on my own machine or the multi-GPU
+execution on the \emph{boada} server, but overall the environmental impact was
+quite small.
+
+If I were to carry the project out again, I would probably be able to use less computing
+resources in the initial stages of the development of the program. During the first
+iterations of the development cycle, I ran various tests that didn't really work and
+took quite some time to compute.
+
+\paragraph{Exploitation}
+
+The main resources needed to use the project are the GPUs needed. As of now, there are
+two possible use cases for the program: helping find limit cycles of a unique
+system, or performing a parameter search
+to find systems with interesting configurations of limit cycles.
+The former can done with a simple \emph{CUDA} capable GPU and requires \emph{minimal}
+resources. The latter is much more costly depending on the number of parameters to search,
+it could require a powerful GPU or even a bunch of GPUs.
+
+The program makes good use of the GPU resources, as such, it should be more energy
+efficient than running the same method on a CPU or the method of computing a single trajectory
+from a point until convergence used to find limit cycles with a CPU.
+
+\paragraph{Risks}
+
+The program is unable to find limit cycles in some cases, so it may have to be improved
+in the future. If the proposed
+new integrators to be able to find those cycles are implemented, there could
+be a change in the resources needed to run the program. Nonetheless, it will probably
+have minimal impact, since now there is still a need to run inefficient CPU code
+to search stiff areas of a system.
+
+\subsection{Economic Impact}
+
+\paragraph{PPP}
+
+Overall, the initial budget outlined in \cref{sec:budget} was a good estimation of the
+cost of the project, there were no major problems that required modifications to the
+budget nor was there any need for the contingency budget.
+
+\paragraph{Exploitation}
+
+As we pointed out in the \emph{PPP} section, the main cost of the project is the
+computational resources to run it (what GPUs and how many are needed) as well as their
+power consumption.
+
+Right now the project needs some polishing to reach its full potential, therefore an
+update may be needed in the future, probably to address the improvements
+discussed in \cref{sec:future}. This will require human resources to work on the program
+and maintain it.
+
+\paragraph{Risks}
+
+Currently, the program has been tested with a very few systems. A rigorous test on the
+numerical stability of the integrators used was performed, but that is not enough to
+guarantee there may not be issues with some systems.
+
+
+\subsection{Social Impact}
+
+\paragraph{PPP}
+
+Undertaking this project I have learned a lot about general purpose graphics
+processing unit programming (GPGPU) and scientific computing.
+
+\paragraph{Exploitation}
+
+As we mentioned on \cref{sec:future} there are researchers using similar tools
+to explore constructs on ODEs and quick identification of limit cycles could
+help speedup their research.
+
+The program developed in the project does identify limit cycles quickly, but has trouble
+when dealing with some trajectories. It can assist on finding limit cycles, but it is not
+a complete replacement to other methods. Some parameter searches were performed but all of
+them only managed to find 3 limit cycles.
+
+\paragraph{Risks}
+
+This project uses the proprietary \emph{CUDA} platform. Therefore, it can only be executed
+on \emph{Nvidia} GPU. This makes the users dependent on this vendor since they cannot
+run the program on other GPUs.

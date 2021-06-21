@@ -4,7 +4,10 @@
 \section{Convergence analysis}%
 \label{sec:convergence}
 
-Once the sequential code is implemented we must analyze the results obtained to verify the correctness of the program. Therefore a convergence analysis was performed in which we compared the results obtained with our implementation to the theoretical results of a well known ODE.
+Once the sequential code is implemented, we must analyze the results obtained to
+verify the correctness of the program. Therefore, a convergence analysis was
+performed in which we compared the results obtained with our implementation to
+the theoretical results of a well known ODE.
 
 \begin{align}\label{eq:circle}
     \frac{dx}{dt} &= -y \nonumber \\
@@ -20,7 +23,6 @@ The error is calculated as the absolute value of the displacement after one peri
 \varepsilon = |{\bf r}(T)-{\bf r}(0)|
 \label{Eq:epsilon:T}
 \end{equation}
-%{\bf correct???} yes
 
 In \cref{fig:error_cycle} we show how the error depends on the timestep $\Delta t$ and on the specific integration scheme.
 This allows to verify the consistency in the order of the integration scheme. For order $p$ of accuracy, the error scales as

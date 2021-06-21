@@ -43,74 +43,35 @@ were tested:
 
 \subsubsection*{Connected component labelling}
 
-% {\bf the title is not clear in its relation to the text??? change the title or explain better}
+Connected component labelling is a technique often used in the field of computer vision. It consists of finding connected components in a graph and labeling each pixel according to the component in which they belong \cite{shapiro_connected_1996}.
 
-Connected component labelling is an technique often used in the field of computer
-vision. It consists on finding connected components in a graph and labeling each pixel
-according to the component in which they belong \cite{shapiro_connected_1996}.
-
-Since the final result of our computation is a matrix with ones and zeros
-indicating the coordinates close to trajectories with rate of change 1, we have
-a binary image in which we can apply this technique. Ideally the connected
-components found will match the limit cycles, but there are 2 main caveats:
-there may be areas where there is not enough resolution (the discretization of
-the section was too big to and the points sampled missed the trajectory) and the
-line can be partially broken, thus splitting a cycle into two or more parts.
-Additionally some cycles may pass really close to each other and be classified
-as the same group. Therefore, this technique requires very small discretization
-of the area studied which requires computing lots of points.
+Since the final result of our computation is a matrix with ones and zeros indicating the coordinates close to trajectories with rate of change 1, we have a binary image in which we can apply this technique. Ideally the connected components found will match the limit cycles, but there are two main caveats: there may be areas where resolution is not high enough (the discretization of the section was too big to and the points sampled missed the trajectory) and the line can be partially broken, thus splitting a cycle into two or more parts. The second problem appears when two cycles pass really close to each other and be classified as the same group. Therefore, this technique requires very small discretization of the area studied which requires computing lots of points.
 
 \subsubsection*{Clustering}
-Given that we are computing the ratio of 4 local extrema points, we can use
-these same extrema values to analyse the characteristics of the trajectory. To
-do so, a part from returning the ratio of the extrema points, the 4 extrema
-points themselves will also be returned. With this information we have 4 points
-defining a cycle which we can classify using any clustering technique. Three
-different clustering methods where tested:
+Given that we are computing the ratio of four local extrema points, we can use these same extrema values to analyse the characteristics of the trajectory. To do so, a part from returning the ratio of the extrema points, the four extrema points themselves will also be returned. With this information we have four points defining a cycle which we can classify using any clustering technique. Three different clustering methods where tested:
 
 \paragraph{Hierarchical clustering}
 
-Using hierarchical clustering we obtained correct clusters with the system of
-\cite{kuznetsov_visualization_2013}. However, the this algorithm does not scale
-well when lots of points are used. It has a runtime complexity of
-($\mathcal{O}(n^3)$) where $n$ is the number of points analyzed, this makes it
+Using hierarchical clustering we obtained correct clusters in the reference system of \cite{kuznetsov_visualization_2013}. However, the this algorithm does not scale well when large number of points is used. It has a runtime complexity of ($\mathcal{O}(n^3)$) where $n$ is the number of points analyzed, this makes it
 impractical for moderate to larger cases.
 
 \paragraph{Kmeans clustering}
 
-As with hierarchical clustering, with \emph{Kmeans} we can use the 4 values of
-local extrema when computing the clustering. It minimizes the square distance of
-the points in the clusters with their centers as shown in \cref{eq:kmeans}
-where $k$ is the number of clusters, $n$ the number of points,
-$x^{(j)}$ is a point belonging to cluster $j$, $c_j$ is the center of
-cluster $j$ and $\| \|$ the normal of a vector.
-
+As with hierarchical clustering, with \emph{Kmeans} we can use the four values of local extrema when computing the clustering. The algorithm minimizes the square distance of the points in the clusters with their centers as shown in \cref{eq:kmeans} where $k$ is the number of clusters, $n$ the number of points, $x^{(j)}$ is a point belonging to cluster $j$, $c_j$ is the center of cluster $j$ and $\| \|$ the normal of a vector.
 \begin{equation}\label{eq:kmeans}
-    J = \sum_{j=1}^k \sum_{j=1}^n \| x_i^{(j)} - c_j \|^2
+J = \sum_{j=1}^k \sum_{j=1}^n \| x_i^{(j)} - c_j \|^2
 \end{equation}
+{\bf ??? what is J? add it to the text}
 
-% {\bf provide an equation and refer to it later ???}
+The runtime complexity of \emph{Kmeans} method of $n$ points with $k$ clusters and $d$ dimensions is $\mathcal{O}(knd)$ as shown in ref.~\cite{arthur_k-means_2009}.  It is exponential in the worst case, but since we know that if there are limit cycles the algorithm should converge quickly (the clusters will be clear
+{\bf ??? rephrase}
+), we can limit the number of iterations to small values.
 
-The
-runtime complexity of \emph{Kmeans} method of $n$ points with $k$ clusters and
-$d$ dimensions is $\mathcal{O}(knd)$ as shown in
-ref.~\cite{arthur_k-means_2009}.  It is exponential in the worst case, but since
-we know that if there are limit cycles the algorithm should converge quickly
-(the clusters will be clear), we can limit the number of iterations to small
-values.
+With \emph{Kmeans} we must specify the number of clusters the search, it does not say how many clusters there are in the data. To do so we must compute the algorithm with 2, 3, 4 and 5 clusters and use a metric that indicates which partition is better.
 
-With \emph{Kmeans} we must specify the number of clusters the search, it does not
-say how many clusters there are in the data. To do so we must compute the algorithm
-with 2, 3, 4 and 5 clusters and use a metric that indicates which partition is better.
-
-We will use the silhouette metric, defined in~\cref{eq:silhouette}. $s(i)$ is
-the silhouette coefficient of the point $p_i$. It is calculated from $a(i)$ which
-is the average distance from $p_i$ to all the points in the cluster in which $p_i$ belongs
-and $b(i)$ which is the minimum average distance to all the clusters in which $p_i$ does
-not belong. A value of $s(i) = 1$ which indicates that the point $p_i$ is close to
-all the points in his cluster and far away from the others. The worst value is $-1$.
-We can compare the mean of the silhouette coefficient for the different number of clusters
-and find which gives the best result.
+We will use the silhouette metric, defined in~\cref{eq:silhouette}. Here $s(i)$ is the silhouette coefficient of the point $p_i$. It is calculated from the average distance $a(i)$ from the point $p_i$ to all the points in the cluster to which $p_i$ belongs and $b(i)$ which is the minimum average distance to all the clusters in which $p_i$ does not belong. 
+If the silhouette value is $s(i) = 1$, it indicates that the point $p_i$ is close to all the points in his cluster and far away from the others. The worst value is $s(i) = -1$. We compare the mean of the silhouette coefficient for the different number of clusters and find which gives the best result.
+{\bf check the paragraph, I edited it ???}
 
 \begin{align}\label{eq:silhouette}
     a(i) &= \frac{1}{|C_i| - 1} \sum_{j \in C_i, i \neq j} d(i, j) \nonumber \\

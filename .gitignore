@@ -1,3 +1,5 @@
+# nix build output
+result
 ## PDF output (but not in figures/)
 *.pdf
 !figures/*.pdf
